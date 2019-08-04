@@ -9,15 +9,15 @@ module.exports = {
     app: {
       entry: 'src/main.ts',
       template: 'public/app.html',
-      filename: 'app/index.html'
+      filename: 'app.html'
     },
   },
-  // devServer: {
-  //   historyApiFallback: {
-  //     rewrites: [
-  //       { from: /\/index/, to: '/index.html' }, // index.html に飛ばす
-  //       { from: /\/app/, to: '/app.html' }
-  //     ]
-  //   }
-  // },
+  devServer: {
+    historyApiFallback: {
+      rewrites: [
+        { from: /\/index/, to: '/index.html' },
+        { from: /\/app/, to: '/app.html' }
+      ]
+    }
+  },
 }
