@@ -26,7 +26,7 @@ export default class App extends Vue {
       // 404.html からリダイレクトした場合
       this.$router.push(localStorage.redirect);
       localStorage.removeItem('redirect');
-    }else if (localStorage.login === 'login') {
+    } else if (localStorage.login === 'login') {
       // ログイン済みの場合
       this.$router.push('/app');
     }

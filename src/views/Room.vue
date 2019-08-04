@@ -2,8 +2,8 @@
 
   <Nav />
 
-  <main>
-    <h1>This is Room page.</h1>
+  <main id="content">
+    <h1 class="headline">Room</h1>
   </main>
 
 </div></template>

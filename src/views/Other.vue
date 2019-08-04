@@ -2,8 +2,8 @@
 
   <Nav />
 
-  <main>
-    <h1>This is Other page.</h1>
+  <main id="content">
+    <h1 class="headline">Other</h1>
     <button @click="logout">LOGOUT</button>
   </main>
 

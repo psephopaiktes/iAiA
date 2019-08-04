@@ -2,8 +2,8 @@
 
   <Nav />
 
-  <main>
-    <h1>This is Dice page.</h1>
+  <main id="content">
+    <h1 class="headline">Dice Roll</h1>
   </main>
 
 </div></template>

@@ -10,7 +10,7 @@ module.exports = {
     app: {
       entry: 'src/app.ts',
       template: 'public/app.html',
-      filename: 'app/index.html'
+      filename: 'app.html'
     },
   },
   // devServer: {

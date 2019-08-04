@@ -13,7 +13,7 @@ export default new Router({
     },
     {
       path: '/app',
-      component: () => import('./views/Dice.vue'),
+      redirect: '/app/dice',
     },
     {
       path: '/app/dice',

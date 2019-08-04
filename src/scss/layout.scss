@@ -1,0 +1,14 @@
+main{
+  padding: 0 0 56px;
+  @media (min-width: $WIDTH_SP){
+    padding: 56px 0 0;
+  }
+  @media (min-width: $WIDTH_TAB){
+    padding: 0 0 0 240px;
+  }
+}
+#content{
+  margin: 0 auto;
+  width: calc(100% - 64px);
+  max-width: 45em;
+}

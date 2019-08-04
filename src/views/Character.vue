@@ -2,8 +2,8 @@
 
   <Nav />
 
-  <main>
-    <h1>This is Charcter page.</h1>
+  <main id="content">
+    <h1 class="headline">Charcter</h1>
   </main>
 
 </div></template>
