@@ -22,8 +22,13 @@ import { Component, Vue } from 'vue-property-decorator';
 export default class App extends Vue {
   // lifecycle hook
   private mounted() {
-    if (localStorage.login !== 'login') {
-      this.$router.push('/app/login');
+    if (localStorage.redirect) {
+      // 404.html からリダイレクトした場合
+      this.$router.push(localStorage.redirect);
+      localStorage.removeItem('redirect');
+    }else if (localStorage.login === 'login') {
+      // ログイン済みの場合
+      this.$router.push('/app');
     }
   }
 }

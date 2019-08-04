@@ -1,5 +1,6 @@
 module.exports = {
   productionSourceMap: false,
+  // SEO対策としてLPはソースを分ける
   pages: {
     index: {
       entry: 'src/index.ts',
@@ -12,12 +13,12 @@ module.exports = {
       filename: 'app/index.html'
     },
   },
-  devServer: {
-    historyApiFallback: {
-      rewrites: [
-        { from: /\/index/, to: '/index.html' },
-        { from: /\/app/, to: '/app.html' }
-      ]
-    }
-  },
+  // devServer: {
+  //   historyApiFallback: {
+  //     rewrites: [
+  //       { from: /\/index/, to: '/index.html' },
+  //       { from: /\/app/, to: '/app.html' }
+  //     ]
+  //   }
+  // },
 }
