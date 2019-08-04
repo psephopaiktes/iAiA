@@ -1,5 +1,5 @@
 module.exports = {
-  outputDir: 'docs',
+  productionSourceMap: false,
   pages: {
     index: {
       entry: 'src/main.ts',
@@ -9,7 +9,7 @@ module.exports = {
     app: {
       entry: 'src/main.ts',
       template: 'public/app.html',
-      filename: 'app.html'
+      filename: 'app/index.html'
     },
   },
   devServer: {
