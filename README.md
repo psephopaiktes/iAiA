@@ -1,6 +1,11 @@
-# iaia
+# iAiA
 TRPG Support App for Call of Cthulfu.  
 URL: [iaia.app](http://iaia.app/)
+
+# Quick  Start
+1. `$ npm i`
+2. `$ npm start`
+3. Access [http://localhost:8080/](http://localhost:8080/)
 
 # Command
 Action | Command
