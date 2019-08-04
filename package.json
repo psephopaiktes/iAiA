@@ -6,9 +6,6 @@
     "type": "git",
     "url": "https://github.com/psephopaiktes/iaia"
   },
-  "vue": {
-    "outputDir": "docs"
-  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "start": "vue-cli-service serve",

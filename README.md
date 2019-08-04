@@ -18,7 +18,7 @@ Build | `$ npm runn Build`
 # Directory Info
 Directory | Puropose
 --|--
-`/src` | source files
-`/docs` | Release files for GitHub Pages 
-`/design` | designn files
+`/src` | Source files
+`/dist` | Build files
+`/design` | Design files
 `/public` | Static files
