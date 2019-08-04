@@ -2,12 +2,12 @@ module.exports = {
   productionSourceMap: false,
   pages: {
     index: {
-      entry: 'src/main.ts',
+      entry: 'src/index.ts',
       template: 'public/index.html',
       filename: 'index.html'
     },
     app: {
-      entry: 'src/main.ts',
+      entry: 'src/app.ts',
       template: 'public/app.html',
       filename: 'app/index.html'
     },

@@ -1,0 +1,44 @@
+.en{
+  font-family: "Avenir Next", "Avenir Neue", "Avenir", Futura, "Century Gothic",
+    "Helvetica Neue", Helvetica, Roboto, Arial, Sans-serif;
+  font-weight: 500;
+}
+
+.headline{
+  // text-align: center;
+  margin: 96px auto 0;
+  padding-bottom: 24px;
+  font-size: 56px;
+  line-height: 1;
+  font-weight: 700;
+  color: darken($COLOR_THEME, 10%);
+  position: relative;
+  &::after{
+    content: "";
+    display: block;
+    width: 120px;
+    height: 8px;
+    background: darken($COLOR_THEME, 10%);
+    position: absolute;
+    bottom: 0;
+  }
+}
+.subHeadline{
+  margin: 64px 0 0;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: .2em;
+}
+
+.content{
+  width: 40em;
+  max-width: calc(100% - 64px);
+  margin: 0 auto;
+  p{
+    margin-top: 12px;
+  }
+  a{ color: $COLOR_THEME }
+  a:visited{ color: darken($COLOR_THEME, 8%) }
+  a:hover{ color: lighten($COLOR_THEME, 4%) }
+  a:active{ color: darken($COLOR_THEME, 8%) }
+}

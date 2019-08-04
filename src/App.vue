@@ -1,29 +1,30 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/app/">Home</router-link> |
-      <router-link to="/app/about">About</router-link>
-    </div>
     <router-view/>
   </div>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+@import "@/scss/common.scss";
+@import "@/scss/foundation.scss";
+@import "@/scss/utility.scss";
+@import "@/scss/layout.scss";
+</style>
+
+
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+
+@Component({
+  components: {
+  },
+})
+export default class App extends Vue {
+  // lifecycle hook
+  private mounted() {
+    if (!this.$store.state.login) {
+      this.$router.push('/app/login');
     }
   }
 }
-</style>
+</script>

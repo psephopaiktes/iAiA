@@ -10,16 +10,30 @@ export default new Router({
   routes: [
     {
       path: '/app',
-      name: 'home',
-      component: Home,
+      component: () => import('./views/Dice.vue'),
     },
     {
-      path: '/app/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
+      path: '/app/dice',
+      component: () => import('./views/Dice.vue'),
+    },
+    {
+      path: '/app/character',
+      component: () => import('./views/Character.vue'),
+    },
+    {
+      path: '/app/room',
+      component: () => import('./views/Room.vue'),
+    },
+    {
+      path: '/app/other',
+      component: () => import('./views/Other.vue'),
+    },
+    {
+      path: '/app/login',
+      component: () => import('./views/Login.vue'),
     },
   ],
+  scrollBehavior(to, from, savedPosition) {
+    return { x: 0, y: 0 };
+  },
 });

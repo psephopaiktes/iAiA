@@ -15,10 +15,10 @@ Unit Test | `$ npm test:unit`
 E2E Test | `$ npm test:e2e`
 Build | `$ npm runn Build`
 
-# Directory Info
+# File Info
 Directory | Puropose
 --|--
 `/src` | Source files
-`/dist` | Build files
+`/dist` | Deploy files
 `/design` | Design files
 `/public` | Static files
