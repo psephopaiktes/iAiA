@@ -1,5 +1,8 @@
 html {
-  background-color: $COLOR_BASE;
+  background-color: rgba($COLOR_BASE,.9);
+  background-image: url(/img/bg-paper.png);
+  background-size: 200px;
+  background-blend-mode: color-dodge;
 }
 body {
   scroll-behavior: smooth;

@@ -10,17 +10,7 @@
   font-size: 56px;
   line-height: 1;
   font-weight: 700;
-  color: darken($COLOR_THEME, 10%);
-  position: relative;
-  &::after{
-    content: "";
-    display: block;
-    width: 120px;
-    height: 8px;
-    background: darken($COLOR_THEME, 10%);
-    position: absolute;
-    bottom: 0;
-  }
+  color: $COLOR_THEME;
 }
 .subHeadline{
   margin: 64px 0 0;
@@ -29,15 +19,19 @@
   letter-spacing: .2em;
 }
 
-.content{
-  width: 40em;
-  max-width: calc(100% - 64px);
-  margin: 0 auto;
-  p{
+.list-view{
+  margin-top: 24px;
+  li{
     margin-top: 12px;
   }
-  a{ color: $COLOR_THEME }
-  a:visited{ color: darken($COLOR_THEME, 8%) }
-  a:hover{ color: lighten($COLOR_THEME, 4%) }
-  a:active{ color: darken($COLOR_THEME, 8%) }
+  a{
+    display: block;
+    height: 48px;
+    line-height: 48px;
+    background: rgba($COLOR_MAIN,.05);
+    color: $COLOR_MAIN;
+    text-decoration: none;
+    border-radius: 12px;
+    padding: 0 24px;
+  }
 }
