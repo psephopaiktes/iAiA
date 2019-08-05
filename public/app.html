@@ -1,17 +1,39 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
+
+  <head prefix="og: http://ogp.me/ns#">
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="favicon.ico">
     <title>iAiA</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <meta name="theme-color" content="#002233">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- OGP -->
+    <meta property="og:type" content="game">
+    <meta property="og:title" content="iAiA | TPRGサポーター">
+    <meta property="og:site_name" content="iAiA | TPRGサポーター">
+    <meta property="og:description" content="クトゥルフTRPGのセッションを完璧にサポート。ダイスもキャラシも不要です。">
+    <meta property="og:image" content="/img/ogp.png">
+    <meta property="og:url" content="/">
+    <meta property="og:locale" content="ja_JP">
   </head>
+
   <body>
-    <noscript>
-      <strong>We're sorry but iaia doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
+
+    <noscript><strong>Javascriptがサポートされていません。</strong></noscript>
     <div id="app"></div>
-    <!-- built files will be auto injected -->
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="/__/firebase/6.3.4/firebase-app.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#reserved-urls -->
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-50842673-7"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-50842673-7');</script>
+
   </body>
 </html>

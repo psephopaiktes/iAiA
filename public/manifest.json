@@ -1,5 +1,5 @@
 {
-  "name": "iAiA",
+  "name": "iAiA | TRPGサポーター",
   "short_name": "iAiA",
   "icons": [
     {
@@ -13,8 +13,9 @@
       "type": "image/png"
     }
   ],
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#4DBA87"
+  "start_url": "/",
+  "display": "fullscreen",
+  "background_color": "#002233",
+  "theme_color": "#002233",
+  "lang": "ja-jp"
 }
