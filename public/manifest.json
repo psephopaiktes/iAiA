@@ -14,8 +14,9 @@
     }
   ],
   "start_url": "/",
-  "display": "fullscreen",
+  "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#002233",
   "theme_color": "#002233",
-  "lang": "ja-jp"
+  "lang": "ja"
 }

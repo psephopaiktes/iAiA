@@ -11,7 +11,7 @@
       <li><a href="">利用規約</a></li>
       <li><a href="">ご連絡</a></li>
     </ul>
-    <button @click="logout">LOGOUT</button>
+    <button @click="$store.commit('logout')">LOGOUT</button>
 
   </main>
 
@@ -28,11 +28,6 @@ import Nav from '@/components/Nav.vue';
   },
 })
 export default class Other extends Vue {
-  // method
-  private logout(): void {
-    this.$store.commit('logout');
-    this.$router.push('/');
-  }
 }
 </script>
 

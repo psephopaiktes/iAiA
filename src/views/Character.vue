@@ -3,7 +3,7 @@
   <Nav />
 
   <main id="content">
-    <h1 class="headline">Charcter</h1>
+    <h1 class="headline">Charcter Sheet</h1>
   </main>
 
 </div></template>

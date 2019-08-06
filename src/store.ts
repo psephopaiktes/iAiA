@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import router from './router';
 
 Vue.use(Vuex);
 
@@ -13,11 +14,14 @@ export default new Vuex.Store({
       localStorage.login = 'login';
     },
     logout(state) {
-      state.login = false;
-      localStorage.login = '';
+      const confirm: boolean = window.confirm('ログアウトしますか？');
+      if ( confirm === true ) {
+        state.login = false;
+        localStorage.login = '';
+        router.push('/');
+      }
     },
   },
   actions: {
-
   },
 });
