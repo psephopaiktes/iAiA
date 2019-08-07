@@ -1,18 +1,18 @@
 <template><nav>
   <h1 class="logo">
-    <router-link to="/app/dice"><LogoShort /></router-link>
+    <router-link to="/dice"><LogoShort /></router-link>
   </h1>
   <ul>
-    <li><router-link to="/app/dice">
+    <li><router-link to="/dice">
       <IconDice /><p>DICE</p>
     </router-link></li>
-    <li><router-link to="/app/character">
+    <li><router-link to="/character">
       <IconCharacter /><p>CHAR</p>
     </router-link></li>
-    <li><router-link to="/app/room">
+    <li><router-link to="/room">
       <IconRoom /><p>ROOM</p>
     </router-link></li>
-    <li><router-link to="/app/other">
+    <li><router-link to="/other">
       <IconOther /><p>OTHER</p>
     </router-link></li>
   </ul>

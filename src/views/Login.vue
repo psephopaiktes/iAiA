@@ -2,7 +2,8 @@
 
   <main>
     <h1>Login</h1>
-    <button @click="login">LOGIN</button>
+    <button @click="$store.commit('login')">LOGIN</button>
+    <router-link to="/dice">ログインせずに試す</router-link>
   </main>
 
 </div></template>
@@ -16,10 +17,11 @@ import { Component, Vue } from 'vue-property-decorator';
   },
 })
 export default class Login extends Vue {
-  // method
-  private login(): void {
-    this.$store.commit('login');
-    this.$router.push('/app/');
+  // lifecycle hook
+  private beforeCreate() {
+    if (localStorage.user) { // ログイン済みの場合
+      this.$router.push('/dice');
+    }
   }
 }
 </script>

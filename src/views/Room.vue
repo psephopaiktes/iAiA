@@ -4,6 +4,7 @@
 
   <main id="content">
     <h1 class="headline">Room</h1>
+    <p>開発中の機能です。更新情報はTwitterでお知らせします。</p>
   </main>
 
 </div></template>

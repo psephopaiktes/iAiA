@@ -12,37 +12,29 @@ export default new Router({
       component: () => import('./views/LP.vue'),
     },
     {
-      path: '/term',
-      component: () => import('./views/other/Term.vue'),
-    },
-    {
-      path: '/app',
-      redirect: '/app/dice',
-    },
-    {
-      path: '/app/dice',
+      path: '/dice',
       component: () => import('./views/Dice.vue'),
     },
     {
-      path: '/app/character',
+      path: '/character',
       component: () => import('./views/Character.vue'),
     },
     {
-      path: '/app/room',
+      path: '/room',
       component: () => import('./views/Room.vue'),
     },
     {
-      path: '/app/other',
+      path: '/other',
       component: () => import('./views/Other.vue'),
-      children: [
-        {
-          path: '/app/other/term',
-          component: () => import('./views/other/Term.vue'),
-        },
-      ],
+      // children: [
+      //   {
+      //     path: '/other/term',
+      //     component: () => import('./views/other/Term.vue'),
+      //   },
+      // ],
     },
     {
-      path: '/app/login',
+      path: '/login',
       component: () => import('./views/Login.vue'),
     },
     {

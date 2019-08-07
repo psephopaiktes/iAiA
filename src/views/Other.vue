@@ -7,13 +7,12 @@
     <h1 class="headline">Other</h1>
 
     <ul class="list-view">
-      <li><a href="">あそびかた</a></li>
-      <li><a href="">利用規約</a></li>
-      <li><router-link to='/term' append>ご連絡</router-link></li>
+      <!-- <li><router-link to='/term' append>利用規約</router-link></li> -->
     </ul>
-    <button @click="$store.commit('logout')">LOGOUT</button>
+    <button v-if="user" @click="$store.commit('logout')">LOGOUT</button>
+    <router-link v-else to="/login">LOGIN</router-link>
 
-    <router-view class="PageView" />
+    <!-- <router-view class="PageView" /> -->
 
   </main>
 
@@ -30,6 +29,8 @@ import Nav from '@/components/Nav.vue';
   },
 })
 export default class Other extends Vue {
+  // data
+  private user: string = localStorage.user;
 }
 </script>
 

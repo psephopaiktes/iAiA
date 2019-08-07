@@ -13,7 +13,7 @@ new Vue({
 }).$mount('#app');
 
 window.console.log(
-  '%c 🐙 iAiA 🐙 %c\nhttps://github.com/psephopaiktes/iAiA',
+  '%c iAiA 🐙 %c\nhttps://github.com/psephopaiktes/iAiA',
   `
     background: #023;
     padding: 20px 40px;
