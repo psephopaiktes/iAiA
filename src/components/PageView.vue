@@ -1,12 +1,15 @@
-<template><section>
-  <h2>This is modal view container</h2>
-</section></template>
+<template><main>
+
+  <header>←</header>
+  <slot></slot>
+
+</main></template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
-export default class Modal extends Vue {}
+export default class PageView extends Vue {}
 </script>
 
 <style scoped lang="scss">

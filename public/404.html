@@ -4,8 +4,14 @@
   <meta http-equiv="refresh" content="0;URL=/">
   <meta name="robots" content="noindex">
   <title>リダイレクト中...</title>
-  <link rel="canonical" href="/">
-  <script>localStorage.redirect = location.pathname;</script>
+  <script>
+    localStorage.redirect = location.pathname;
+    if( /^\/app/.test(location.pathname) ){
+      location.href = '/app.html'
+    }else{
+      location.href = '/';
+    }
+  </script>
 </head>
 <body>リダイレクト中...</body>
 </html>

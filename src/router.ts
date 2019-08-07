@@ -12,6 +12,10 @@ export default new Router({
       component: () => import('./views/LP.vue'),
     },
     {
+      path: '/term',
+      component: () => import('./views/other/Term.vue'),
+    },
+    {
       path: '/app',
       redirect: '/app/dice',
     },
@@ -30,6 +34,12 @@ export default new Router({
     {
       path: '/app/other',
       component: () => import('./views/Other.vue'),
+      children: [
+        {
+          path: '/app/other/term',
+          component: () => import('./views/other/Term.vue'),
+        },
+      ],
     },
     {
       path: '/app/login',

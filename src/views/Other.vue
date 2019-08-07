@@ -9,9 +9,11 @@
     <ul class="list-view">
       <li><a href="">あそびかた</a></li>
       <li><a href="">利用規約</a></li>
-      <li><a href="">ご連絡</a></li>
+      <li><router-link to='/term' append>ご連絡</router-link></li>
     </ul>
     <button @click="$store.commit('logout')">LOGOUT</button>
+
+    <router-view class="PageView" />
 
   </main>
 
@@ -36,5 +38,8 @@ export default class Other extends Vue {
 @import "@/scss/common.scss";
 button{
   color: $COLOR_MAIN;
+}
+.PageView{
+  background: #fff;
 }
 </style>

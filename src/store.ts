@@ -21,6 +21,9 @@ export default new Vuex.Store({
         router.push('/');
       }
     },
+    backParentPage(state) {
+      router.push('/');
+    },
   },
   actions: {
   },
