@@ -6,3 +6,11 @@
 <style scoped lang="scss">
 @import "@/scss/common.scss";
 </style>
+
+
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+
+@Component
+export default class LoginMessage extends Vue {}
+</script>

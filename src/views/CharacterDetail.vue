@@ -4,14 +4,13 @@
 
   <main id="content">
 
-    <h1 class="headline">Charcter Sheet</h1>
     <LoginMessage v-if="!user" />
     <div v-else>
-      <ul>
-        <li v-for="(item,i) in CharList" :key="i">
-          <router-link :to="'/character/'+item.id">{{ item.name }}</router-link>
-        </li>
-      </ul>
+      <router-link to="/character">←</router-link>
+      <h1 class="headline">{{ CharData.name }}</h1>
+      <img :src="CharData.iconUrl" alt="キャラクターアイコン">
+      <p>{{ $route.params.charId }}</p>
+      <p>{{ CharData.idDead }}</p>
     </div>
 
   </main>
@@ -32,23 +31,14 @@ import LoginMessage from '@/components/LoginMessage.vue';
 })
 export default class Character extends Vue {
   // data
-  // TODO Fetch from Firebase by UserId
-  private CharList: any = [
-    {
-      id: 'aaa',
-      name: 'aaa',
-      iconUrl: '',
-      modifiedDate: '',
-      isDead: '',
-    },
-    {
-      id: 'bbb',
-      name: 'bbb',
-      iconUrl: '',
-      modifiedDate: '',
-      isDead: '',
-    },
-  ];
+  // TODO Fetch from Firebase by charId
+  // CharId = this.$route.params.charId
+  private CharData: any = {
+      name: 'AAA',
+      iconUrl: 'aaa',
+      modifiedDate: '20190802',
+      isDead: 'aaa',
+  };
   // computed
   get user(): string {
     return localStorage.user;

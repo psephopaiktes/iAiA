@@ -1,6 +1,6 @@
 <template><nav>
   <h1 class="logo">
-    <router-link to="/dice"><LogoShort /></router-link>
+    <router-link to="/"><LogoShort /></router-link>
   </h1>
   <ul>
     <li><router-link to="/dice">

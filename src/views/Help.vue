@@ -1,5 +1,5 @@
 <template><PageView>
-    <template #title>利用規約</template>
+    <template #title>あそびかた</template>
     <p>aaaa</p>
 </PageView></template>
 

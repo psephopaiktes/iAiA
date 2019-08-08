@@ -7,12 +7,11 @@
     <h1 class="headline">Other</h1>
 
     <ul class="list-view">
-      <!-- <li><router-link to='/term' append>利用規約</router-link></li> -->
+      <li><router-link to='/term'>利用規約</router-link></li>
+      <li><router-link to='/help'>あそびかた</router-link></li>
     </ul>
     <button v-if="user" @click="$store.commit('logout')">LOGOUT</button>
     <router-link v-else to="/login">LOGIN</router-link>
-
-    <!-- <router-view class="PageView" /> -->
 
   </main>
 

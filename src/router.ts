@@ -12,6 +12,14 @@ export default new Router({
       component: () => import('./views/LP.vue'),
     },
     {
+      path: '/term',
+      component: () => import('./views/Term.vue'),
+    },
+    {
+      path: '/help',
+      component: () => import('./views/Help.vue'),
+    },
+    {
       path: '/dice',
       component: () => import('./views/Dice.vue'),
     },
@@ -20,18 +28,16 @@ export default new Router({
       component: () => import('./views/Character.vue'),
     },
     {
+      path: '/character/:charId',
+      component: () => import('./views/CharacterDetail.vue'),
+    },
+    {
       path: '/room',
       component: () => import('./views/Room.vue'),
     },
     {
       path: '/other',
       component: () => import('./views/Other.vue'),
-      // children: [
-      //   {
-      //     path: '/other/term',
-      //     component: () => import('./views/other/Term.vue'),
-      //   },
-      // ],
     },
     {
       path: '/login',
