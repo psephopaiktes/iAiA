@@ -6,9 +6,10 @@
 
     <h1 class="headline">Other</h1>
 
-    <ul class="list-view">
-      <li><router-link to='/term'>利用規約</router-link></li>
+    <ul>
       <li><router-link to='/help'>あそびかた</router-link></li>
+      <li><router-link to='/term'>利用規約</router-link></li>
+      <li><a href="https://twitter.com/iAiAapp" target="_brank">連絡先（Twitter）<i class="material-icons">open_in_new</i></a></li>
     </ul>
     <button v-if="$store.state.login" @click="$store.commit('logout')">LOGOUT</button>
     <router-link v-else to="/login">LOGIN</router-link>
@@ -20,6 +21,31 @@
       <li><a href="">LINE</a></li>
       <li><a href="">はてブ</a></li>
     </ul>
+
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
 
   </main>
 

@@ -1,15 +1,12 @@
 html {
-  background-color: rgba($COLOR_BASE,.9);
-  background-image: url(/img/bg-paper.png);
-  background-size: 200px;
-  background-blend-mode: color-dodge;
+  background-color: darken($COLOR_BASE,2%);
 }
 body {
   scroll-behavior: smooth;
   margin: 0;
   padding: 0;
   font-size: 16px;
-  color: rgba($COLOR_MAIN,.8);
+  color: rgba($COLOR_MAIN,.9);
   line-height: 1.6;
   font-weight: 500;
   font-family:  -apple-system, BlinkMacSystemFont, "Noto Sans JP", "Noto Sans CJK JP", "ヒラギノ角ゴ Pro W3", "游ゴシック", "Yu Gothic", YuGothic, Meiryo, "メイリオ", "Segoe UI", Roboto, "Helvetica Neue", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", Arial, sans-serif;
@@ -39,6 +36,9 @@ img {
 }
 b{
   font-weight: 700;
+}
+a{
+  color: rgba($COLOR_MAIN,.6);
 }
 a,area,button,[role="button"],
 input:not([type="range"]),

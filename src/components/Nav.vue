@@ -42,7 +42,8 @@ export default class Nav extends Vue {}
 <style scoped lang="scss">
 @import "@/scss/common.scss";
 nav{
-  background: rgba($COLOR_BASE,.5);
+  background: rgba($COLOR_BASE,.9);
+  backdrop-filter: blur(6px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,16 +52,20 @@ nav{
   left: 0; bottom: 0;
   width: 100%;
   height: 56px;
+  box-sizing: content-box;
   padding-bottom: env(safe-area-inset-bottom);
   @media (min-width: $WIDTH_SP){
     bottom: auto;
     top: 0;
+    height: 72px;
+    justify-content: flex-end;
     padding-top: env(safe-area-inset-top);
     padding-bottom: 0;
   }
   @media (min-width: $WIDTH_TAB){
     width: 240px;
     height: 100vh;
+    justify-content: center;
   }
   @media (min-width: $WIDTH_PC){
     width: 320px;
@@ -146,7 +151,6 @@ li a{
     font-weight: bold;
     svg{
       transform: scale(1.1);
-      transform-origin: center 100%;
       fill: $COLOR_THEME;
     }
     p{

@@ -18,20 +18,3 @@
   font-size: 20px;
   letter-spacing: .2em;
 }
-
-.list-view{
-  margin-top: 24px;
-  li{
-    margin-top: 12px;
-  }
-  a{
-    display: block;
-    height: 48px;
-    line-height: 48px;
-    background: rgba($COLOR_MAIN,.05);
-    color: $COLOR_MAIN;
-    text-decoration: none;
-    border-radius: 12px;
-    padding: 0 24px;
-  }
-}
