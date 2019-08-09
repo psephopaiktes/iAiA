@@ -1,4 +1,4 @@
-<h1 style="padding-bottom: 20px"><a href="iaia.app" target="brank_"><img src="design/logo.svg" alt="iAiA"></a></h1>
+<h1 style="padding-bottom: 20px"><a href="iaia.app" target="_brank"><img src="design/logo.svg" alt="iAiA"></a></h1>
 
 TRPG Support App for Call of Cthulfu.  
 URL: [iaia.app](http://iaia.app/)

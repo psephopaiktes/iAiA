@@ -5,7 +5,7 @@
   <main id="content">
 
     <h1 class="headline">Charcter Sheet</h1>
-    <LoginMessage v-if="!user" />
+    <LoginMessage v-if="!$store.state.login" />
     <div v-else>
       <ul>
         <li v-for="(item,i) in CharList" :key="i">
@@ -33,7 +33,7 @@ import LoginMessage from '@/components/LoginMessage.vue';
 export default class Character extends Vue {
   // data
   // TODO Fetch from Firebase by UserId
-  private CharList: any = [
+  public CharList: any = [
     {
       id: 'aaa',
       name: 'aaa',
@@ -49,10 +49,6 @@ export default class Character extends Vue {
       isDead: '',
     },
   ];
-  // computed
-  get user(): string {
-    return localStorage.user;
-  }
 }
 </script>
 

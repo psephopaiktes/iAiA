@@ -18,8 +18,8 @@ import { Component, Vue } from 'vue-property-decorator';
 })
 export default class Login extends Vue {
   // lifecycle hook
-  private beforeCreate() {
-    if (localStorage.user) { // ログイン済みの場合
+  public beforeCreate() {
+    if (this.$store.state.login) { // ログイン済みの場合
       this.$router.push('/dice');
     }
   }

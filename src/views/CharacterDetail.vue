@@ -4,7 +4,7 @@
 
   <main id="content">
 
-    <LoginMessage v-if="!user" />
+    <LoginMessage v-if="!$store.state.login" />
     <div v-else>
       <router-link to="/character">←</router-link>
       <h1 class="headline">{{ CharData.name }}</h1>
@@ -33,16 +33,12 @@ export default class Character extends Vue {
   // data
   // TODO Fetch from Firebase by charId
   // CharId = this.$route.params.charId
-  private CharData: any = {
+  public CharData: any = {
       name: 'AAA',
       iconUrl: 'aaa',
       modifiedDate: '20190802',
       isDead: 'aaa',
   };
-  // computed
-  get user(): string {
-    return localStorage.user;
-  }
 }
 </script>
 

@@ -6,19 +6,30 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    login: false,
+    user: '',
   },
   mutations: {
-    login() {
+    init(state) {
+      if ( localStorage.user ) {
+        state.login = true;
+        state.user = localStorage.user;
+      }
+    },
+    login(state) {
+      state.login = true;
       // TODO fetch USERID from firebase
-      localStorage.user = 'USERID';
+      state.user = 'USERID';
+      localStorage.user = state.user;
       router.go(-1);
     },
-    logout() {
+    logout(state) {
       const confirm: boolean = window.confirm('ログアウトしますか？');
-      if ( confirm === true ) {
-        localStorage.user = '';
-        router.push('/');
-      }
+      if ( confirm !== true ) { return; }
+      state.login = false;
+      state.user = '';
+      localStorage.user = state.user;
+      router.push('/');
     },
   },
   actions: {

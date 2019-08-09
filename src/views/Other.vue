@@ -10,8 +10,16 @@
       <li><router-link to='/term'>利用規約</router-link></li>
       <li><router-link to='/help'>あそびかた</router-link></li>
     </ul>
-    <button v-if="user" @click="$store.commit('logout')">LOGOUT</button>
+    <button v-if="$store.state.login" @click="$store.commit('logout')">LOGOUT</button>
     <router-link v-else to="/login">LOGIN</router-link>
+
+    <h2>iAiAをシェア</h2>
+    <ul>
+      <li><a href="">Twitter</a></li>
+      <li><a href="">Facebook</a></li>
+      <li><a href="">LINE</a></li>
+      <li><a href="">はてブ</a></li>
+    </ul>
 
   </main>
 
@@ -27,10 +35,7 @@ import Nav from '@/components/Nav.vue';
     Nav,
   },
 })
-export default class Other extends Vue {
-  // data
-  private user: string = localStorage.user;
-}
+export default class Other extends Vue {}
 </script>
 
 
