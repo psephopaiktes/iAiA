@@ -20,6 +20,10 @@ export default new Router({
       component: () => import('./views/Help.vue'),
     },
     {
+      path: '/share',
+      component: () => import('./views/Share.vue'),
+    },
+    {
       path: '/dice',
       component: () => import('./views/Dice.vue'),
     },
