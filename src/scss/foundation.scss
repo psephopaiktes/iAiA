@@ -6,7 +6,7 @@ body {
   margin: 0;
   padding: 0;
   font-size: 16px;
-  color: rgba($COLOR_MAIN,.9);
+  color: rgba($COLOR_MAIN,.8);
   line-height: 1.6;
   font-weight: 500;
   font-family:  -apple-system, BlinkMacSystemFont, "Noto Sans JP", "Noto Sans CJK JP", "ヒラギノ角ゴ Pro W3", "游ゴシック", "Yu Gothic", YuGothic, Meiryo, "メイリオ", "Segoe UI", Roboto, "Helvetica Neue", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", Arial, sans-serif;
@@ -38,7 +38,7 @@ b{
   font-weight: 700;
 }
 a{
-  color: rgba($COLOR_MAIN,.6);
+  color: $COLOR_MAIN;
 }
 a,area,button,[role="button"],
 input:not([type="range"]),
