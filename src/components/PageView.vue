@@ -51,12 +51,12 @@ header{
   padding-bottom: env(safe-area-inset-top);
   box-shadow: 0 2px 24px rgba($COLOR_BASE,.1);
   background: $COLOR_MAIN;
-  z-index: 9998;
+  z-index: 9980;
   button{
     width: 44px;
     height: 44px;
     margin: 10px;
-    color: rgba($COLOR_BASE,.6);
+    color: $COLOR_THEME;
   }
   h1{
     display: inline-block;

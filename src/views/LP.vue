@@ -12,6 +12,7 @@
       <h1><Logo /></h1>
       <router-link to="/login" id="cta" class="en"><div>START</div></router-link>
     </div>
+    <p class="en">Cthulhu TRPG Supporter</p>
   </section>
 
   <!-- 概要 -->
@@ -128,7 +129,7 @@ section{
   }
   #buttons svg{
     width: 180px;
-    fill: rgba($COLOR_MAIN,.9);
+    fill: rgba($COLOR_MAIN,.8);
     position: absolute;
     bottom: 26px; left: -74px;
   }
@@ -158,6 +159,9 @@ section{
     &:hover,&:active{
       transform: scale(1.04) skewX(-30deg);
     }
+  }
+  >p{
+    margin-top: 64px;
   }
 }
 </style>
