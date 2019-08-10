@@ -1,34 +1,30 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import router from './router';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     login: false,
-    user: '',
   },
   mutations: {
     init(state) {
-      if ( localStorage.user ) {
-        state.login = true;
-        state.user = localStorage.user;
-      }
+      firebase.auth().onAuthStateChanged((user) => {
+        window.console.log('auth state changed');
+        if (user) {
+          state.login = true;
+        } else {
+          state.login = false;
+        }
+      });
     },
-    login(state) {
-      state.login = true;
-      // TODO fetch USERID from firebase
-      state.user = 'USERID';
-      localStorage.user = state.user;
-      router.go(-1);
-    },
+
     logout(state) {
-      const confirm: boolean = window.confirm('ログアウトしますか？');
-      if ( confirm !== true ) { return; }
+      firebase.auth().signOut().catch((err) => window.console.log(err));
       state.login = false;
-      state.user = '';
-      localStorage.user = state.user;
       router.push('/');
     },
   },

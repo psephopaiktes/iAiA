@@ -7,8 +7,8 @@
     "url": "https://github.com/psephopaiktes/iaia"
   },
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "start": "vue-cli-service serve",
+    "serve": "vue-cli-service serve & firebase serve",
+    "start": "vue-cli-service serve & firebase serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:e2e": "vue-cli-service test:e2e",

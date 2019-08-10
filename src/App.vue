@@ -14,6 +14,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import firebaseConfig from '../firebase-config';
 
 @Component({
   components: {
@@ -21,7 +24,8 @@ import { Component, Vue } from 'vue-property-decorator';
 })
 export default class App extends Vue {
   // lifecycle hook
-  public beforeCreate() {
+  public created() {
+    firebase.initializeApp(firebaseConfig);
     this.$store.commit('init');
     if (localStorage.redirect) {
       // 404.html からリダイレクトした場合
