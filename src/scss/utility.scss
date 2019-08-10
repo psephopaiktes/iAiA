@@ -5,12 +5,17 @@
 }
 
 .headline{
-  margin: 64px auto 0;
-  padding-bottom: 24px;
+  position: relative;
+  display: inline-block;
+  font-family: "Avenir Next", "Avenir Neue", "Avenir", Futura, "Century Gothic",
+    "Helvetica Neue", Helvetica, Roboto, Arial, Sans-serif;
+  margin: 96px auto 0;
   font-size: 48px;
-  line-height: 1;
-  font-weight: 400;
-  color: rgba($COLOR_MAIN,.8);
+  line-height: 1.2;
+  letter-spacing: .15em;
+  font-weight: 500;
+  z-index: 999;
+  color: rgba($COLOR_THEME,.8);
 }
 .subHeadline{
   margin: 64px 0 0;

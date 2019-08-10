@@ -81,7 +81,7 @@ import PageView from '@/components/PageView.vue';
     PageView,
   },
 })
-export default class Other extends Vue {
+export default class Term extends Vue {
 }
 </script>
 
