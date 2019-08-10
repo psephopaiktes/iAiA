@@ -4,7 +4,8 @@
 
   <main id="content">
     <h1 class="headline">Room</h1>
-    <p>開発中の機能です。更新情報はTwitterでお知らせします。</p>
+    <p><b>現在開発中の機能です。</b></p>
+    <p>更新情報は<a href="https://twitter.com/iAiAapp" target="_brank">Twitter</a>にてお知らせします。</p>
   </main>
 
 </div></template>
@@ -25,4 +26,9 @@ export default class Room extends Vue {}
 
 <style scoped lang="scss">
 @import "@/scss/common.scss";
+p{
+  font-size: 20px;
+  margin-top: 12px;
+  opacity: .9;
+}
 </style>
