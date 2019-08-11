@@ -75,7 +75,16 @@ header{
   max-width: 40em;
   margin: 72+32px auto 0;
   h2{
-    margin-top: 32px;
+    margin-top: 48px;
+    &::after{
+      content: "";
+      display: block;
+      height: 1px;
+      background: $COLOR_BASE;
+    }
+  }
+  h3{
+    margin-top: 24px;
   }
   p{
     margin-top: 12px;
@@ -102,9 +111,8 @@ header{
   }
 }
 footer{
-  background: rgba($COLOR_BASE,.05);
   text-align: center;
-  margin-top: 80px;
-  padding: 32px 0;
+  margin: 64px auto 48px;
+  opacity: .6;
 }
 </style>

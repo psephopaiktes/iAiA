@@ -11,4 +11,7 @@ main{
   margin: 0 auto;
   width: calc(100% - 64px);
   max-width: 45em;
+  @media (min-width: $WIDTH_PC){
+    max-width: 55em;
+  }
 }

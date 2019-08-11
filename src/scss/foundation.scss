@@ -5,14 +5,16 @@ body {
   scroll-behavior: smooth;
   margin: 0;
   padding: 0;
-  font-size: 16px;
+  font-size: 14px;
   color: rgba($COLOR_MAIN,.8);
   line-height: 1.6;
   font-weight: 500;
   font-family:  -apple-system, BlinkMacSystemFont, "Noto Sans JP", "Noto Sans CJK JP", "ヒラギノ角ゴ Pro W3", "游ゴシック", "Yu Gothic", YuGothic, Meiryo, "メイリオ", "Segoe UI", Roboto, "Helvetica Neue", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", Arial, sans-serif;
   font-smoothing: antialiased;
   font-feature-settings : "pkna";
-  @media ( max-width: $WIDTH_TAB ){ }
+  @media ( max-width: $WIDTH_TAB ){
+    font-size: 16px;
+  }
 }
 
 *:hover{
