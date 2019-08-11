@@ -34,11 +34,10 @@
     </ul>
   </section>
 
-  <section>
+  <!-- <section>
     <h2>支援</h2>
-  </section>
-
-
+    <p>iAiAはエンジニア1人とデザイナー1人で、趣味で作成されているアプリです。ご支援いただけると開発スピードがあがります。</p>
+  </section> -->
 
   <footer>
     <nav><ul>
