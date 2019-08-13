@@ -101,13 +101,14 @@ export default class Other extends Vue {}
   }
 }
 .logInButton{
-  background: linear-gradient(120deg, $COLOR_THEME, rgba($COLOR_MAIN,.9));
+  background: rgba($COLOR_THEME,.9);
   color: rgba($COLOR_BASE,.8);
   &::after{
     content: "input";
     color: inherit;
   }
   &:hover,&:active{
+    background: $COLOR_THEME;
   }
 }
 
