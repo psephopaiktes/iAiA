@@ -14,14 +14,12 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
-import firebaseConfig from '../firebase-config';
 
 @Component({
   components: {
   },
 })
+
 export default class App extends Vue {
   // lifecycle hook
   public beforeCreate() {
@@ -33,7 +31,6 @@ export default class App extends Vue {
     }
   }
   public created() {
-    firebase.initializeApp(firebaseConfig);
     this.$store.commit('checkFirebaseLogin');
   }
   public mounted() {

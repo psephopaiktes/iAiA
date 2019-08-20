@@ -8,10 +8,10 @@ service cloud.firestore {
       return request.auth.uid == userId;
     }
 
-	  match /users/{userId}/characters/{characterId} {
+    match /users/{userId}/characters/{characterId} {
       allow get, create, write: if isUserAuthenticated(userId);
     }
- 	  match /users/{userId}/characters/{characterId} {
+    match /users/{userId}/characters/{characterId} {
       allow read: if isAuthenticated();
     }
     match /users/{userId} {
