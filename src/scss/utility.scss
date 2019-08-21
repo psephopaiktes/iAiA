@@ -18,10 +18,11 @@
   color: rgba($COLOR_THEME,.8);
 }
 .subHeadline{
-  margin: 64px 0 0;
+  margin: 32px 0 0;
   font-weight: 700;
   font-size: 20px;
-  letter-spacing: .2em;
+  letter-spacing: .05em;
+  color: rgba($COLOR_MAIN,.6);
 }
 
 a.buttonStyle,button.buttonStyle,
