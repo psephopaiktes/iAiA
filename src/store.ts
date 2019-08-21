@@ -9,6 +9,7 @@ export default new Vuex.Store({
 
   state: {
     login: false,
+    loading: true,
   },
 
   mutations: {
@@ -21,6 +22,7 @@ export default new Vuex.Store({
     checkFirebaseLogin(state) {
       window.console.log('checkFirebaseLogin called');
       firebaseApp.auth().onAuthStateChanged((user) => {
+        state.loading = false;
         if (user) {
           window.console.log('login:' + user.displayName);
           state.login = true;
@@ -54,7 +56,13 @@ export default new Vuex.Store({
       window.console.log('logout');
       router.push('/');
     },
+
+    startLoading(state) {
+      state.loading = true;
+    },
+
   },
+
 
   actions: {},
 
