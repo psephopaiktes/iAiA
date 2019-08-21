@@ -7,8 +7,8 @@
 
 <script lang="ts">
   import {Component, Vue} from 'vue-property-decorator';
-  import * as firebase from 'firebase/app';
-  import 'firebase/auth';
+  import firebaseApp from '@/firebase';
+  import * as firebase from 'firebase';
 
   @Component({
     components: {},
@@ -24,7 +24,7 @@
 
     // methods
     public redirectGoogleAuth() {
-      firebase.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider())
+      firebaseApp.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider())
         .catch((reason) => {
           alert(reason);
         });
