@@ -24,6 +24,7 @@ export default new Vuex.Store({
         if (user) {
           window.console.log('login:' + user.displayName);
           state.login = true;
+          localStorage.uid = user.uid;
 
           window.console.log('set ' + user.uid);
           firebaseApp.firestore().collection('users').doc(user.uid).set({
@@ -49,6 +50,7 @@ export default new Vuex.Store({
       }
       firebaseApp.auth().signOut().catch((err) => window.console.log(err));
       state.login = false;
+      localStorage.removeItem('uid');
       window.console.log('logout');
       router.push('/');
     },
