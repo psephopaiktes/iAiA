@@ -84,7 +84,7 @@ section{
 }
 
 #hero{
-  height: 400px;
+  height: 480px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -94,12 +94,12 @@ section{
   position: relative;
   overflow: hidden;
   #keyart{
-    width: 600px;
+    width: 300px;
     position: absolute;
-    left: calc(50% - 400px);
+    left: calc(50% - 150px);
     opacity: .2;
     @media (min-width: $WIDTH_SP){
-      width: 800px;
+      /* width: 800px; */
     }
   }
   #buttons{
