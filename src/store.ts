@@ -47,10 +47,6 @@ export default new Vuex.Store({
     },
 
     logout(state) {
-      const confirm: boolean = window.confirm('ログアウトしますか？');
-      if (!confirm) {
-        return;
-      }
       firebaseApp.auth().signOut().catch((err) => window.console.log(err));
       state.login = false;
       localStorage.removeItem('uid');

@@ -23,10 +23,10 @@ export default new Router({
       path: '/share',
       component: () => import('./views/Share.vue'),
     },
-    // {
-    //   path: '/account',
-    //   component: () => import('./views/Account.vue'),
-    // },
+    {
+      path: '/account',
+      component: () => import('./views/Account.vue'),
+    },
     {
       path: '/dice',
       component: () => import('./views/Dice.vue'),
