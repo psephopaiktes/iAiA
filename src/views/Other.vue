@@ -6,19 +6,19 @@
 
     <h1 class="headline">Other</h1>
 
-    <ul class="listView buttonStyle">
+    <ul class="listView">
       <!-- <li v-if="$store.state.login"><router-link to=''>アカウント設定</router-link></li> -->
-      <li><router-link to='/help'>あそびかた</router-link></li>
-      <li><router-link v-if="$store.state.login" to='/account'>アカウント設定</router-link></li>
-      <li><router-link to='/share'>iAiAを共有</router-link></li>
-      <li><router-link to='/term'>利用規約</router-link></li>
-      <li><a href="https://twitter.com/iAiAapp" target="_brank" class="open-in-new">連絡先・更新情報（Twitter）</a></li>
+      <li><router-link class="btn" to='/help'>あそびかた</router-link></li>
+      <li><router-link class="btn" v-if="$store.state.login" to='/account'>アカウント設定</router-link></li>
+      <li><router-link class="btn" to='/share'>iAiAを共有</router-link></li>
+      <li><router-link class="btn" to='/term'>利用規約</router-link></li>
+      <li><a href="https://twitter.com/iAiAapp" target="_brank" class="open-in-new btn">連絡先・更新情報（Twitter）</a></li>
     </ul>
 
-    <button v-if="$store.state.login" class="logOutButton buttonStyle" @click="$store.commit('logout')">ログアウト</button>
-    <router-link v-else class="logInButton buttonStyle" to="/login">ログイン</router-link>
+    <button v-if="$store.state.login" class="logOutButton btn-main" @click="$store.commit('logout')">ログアウト</button>
+    <router-link v-else class="logInButton btn-theme" to="/login">ログイン</router-link>
 
-    <p class="ver"></p>
+    <p class="ver">ver. 0.5.0 alpha</p>
 
   </main>
 
@@ -43,6 +43,7 @@ export default class Other extends Vue {}
 .listView{
   margin-top: 48px;
   a{
+    display: block;
     position: relative;
     line-height: 48px;
     margin-top: 10px;
@@ -74,7 +75,6 @@ export default class Other extends Vue {}
   margin-top: 24px;
   position: relative;
   font-weight: 800;
-  letter-spacing: .1em;
   &::after{
     font-size: 22px;
     transition: .2s ease-out;
@@ -84,40 +84,20 @@ export default class Other extends Vue {}
     right: 16px;
     color: $COLOR_THEME;
   }
-  &:hover,&:active{
-    letter-spacing: .2em;
-    &::after{
-      right: 12px;
-    }
+  &:hover::after,&:active::after{
+    right: 12px;
   }
 }
-.logOutButton{
-  background: rgba($COLOR_MAIN,.1);
-  color: rgba($COLOR_MAIN,.7);
-  &::after{
-    content: "directions_run";
-  }
-  &:hover,&:active{
-    background: rgba($COLOR_MAIN,.08);
-  }
+.logOutButton::after{
+  content: "directions_run";
 }
-.logInButton{
-  background: rgba($COLOR_THEME,.9);
-  color: rgba($COLOR_BASE,.8);
-  &::after{
-    content: "input";
-    color: inherit;
-  }
-  &:hover,&:active{
-    background: $COLOR_THEME;
-  }
+.logInButton::after{
+  content: "input";
+  color: inherit;
 }
 
 .ver{
   margin: 32px auto;
   color: rgba($COLOR_MAIN,.2);
-  &::after{
-    content: 'ver. 0.5.0'
-  }
 }
 </style>

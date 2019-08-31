@@ -53,7 +53,7 @@ export default new Router({
     },
     {
       path: '/*',
-      component: () => import('./views/404.vue'),
+      component: () => import('./views/Error.vue'),
     },
   ],
   scrollBehavior(to, from, savedPosition) {

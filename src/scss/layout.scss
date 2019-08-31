@@ -1,16 +1,14 @@
-main{
-  padding: 0 0 56px;
-  @media (min-width: $WIDTH_SP){
-    padding: 56px 0 0;
-  }
-  @media (min-width: $WIDTH_TAB){
-    padding: 0 0 0 240px;
-  }
-}
 #content{
   margin: 0 auto;
-  width: calc(100% - 64px);
+  width: calc(100% - 80px);
   max-width: 45em;
+  padding: 0 0 56px+32px;
+  @media (min-width: $WIDTH_SP){
+    padding: 56px 0 64px;
+  }
+  @media (min-width: $WIDTH_TAB){
+    padding: 0 0 64px 240px;
+  }
   @media (min-width: $WIDTH_PC){
     max-width: 55em;
   }

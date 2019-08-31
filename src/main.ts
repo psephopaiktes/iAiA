@@ -15,6 +15,8 @@ new Vue({
 
 Vue.use(firestorePlugin);
 
+window.document.title = 'iAiA';
+
 window.console.log(
   '%c iAiA 🐙 %c\nhttps://github.com/psephopaiktes/iAiA',
   `
