@@ -3,8 +3,9 @@
   <Nav />
 
   <main id="content">
-    <img src="" alt="404 image">
-    <h1><span>404</span> NOT FOUND</h1>
+    <h1>エラーが発生しました</h1>
+    <ErrorArt />
+    <p class="en">404 PAGE NOT FOUND</p>
   </main>
 
 </div></template>
@@ -13,13 +14,15 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import Nav from '@/components/Nav.vue';
+import ErrorArt from '@/assets/error.vue';
 
 @Component({
   components: {
     Nav,
+    ErrorArt,
   },
 })
-export default class Page404 extends Vue {}
+export default class Error extends Vue {}
 </script>
 
 
@@ -32,13 +35,18 @@ export default class Page404 extends Vue {}
   align-items: center;
   flex-direction: column;
   h1{
+    font-size: 28px;
     letter-spacing: .05em;
-    opacity: .8;
-    span{
-      padding-right: 16px;
-      margin-right: 16px;
-      border-right: 1px solid $COLOR_MAIN;
-    }
+  }
+  svg{
+    margin-top: 24px;
+    width: 320px;
+    height: 240px;
+  }
+  p{
+    margin-top: 32px;
+    font-weight: bold;
+    opacity: .5;
   }
 }
 </style>

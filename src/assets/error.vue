@@ -1,0 +1,1 @@
+<template><svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"><path d="m67.5 256.5 120.31-64.78 126.69-68.22-5 85-44 57"/><path d="m39.5 183.5 111-40 26.88 53.83"/><path d="m177.5 29.5-98 66h44l-65 55"/><path d="m213.5 29.5-23 55h53l-21 71"/></g></svg></template>
