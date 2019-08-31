@@ -1,12 +1,15 @@
 <template><main>
 
+  <Logo class="logo" />
+  <h1>ログイン / 新規登録</h1>
+
   <div v-if="loading">
     <h1 style="color:#fff;text-align:center;">LOADING...</h1>
   </div>
-
   <div v-else>
-    <button @click="redirectGoogleAuth">Googleアカウントでログイン</button>
-    <router-link to="/dice">ログインせずに試す</router-link>
+    <button class="button" @click="redirectGoogleAuth">Googleアカウントでログイン</button>
+    <router-link class="button" to="/dice">ログインせずに試す</router-link>
+    <p><router-link to='/term'>利用規約</router-link>に同意の上ご利用ください</p>
   </div>
 
 </main></template>
@@ -15,9 +18,13 @@
   import {Component, Vue, Watch} from 'vue-property-decorator';
   import firebaseApp from '@/firebase';
   import * as firebase from 'firebase';
+  import Logo from '@/assets/logo.vue';
+
 
   @Component({
-    components: {},
+    components: {
+      Logo,
+    },
   })
 
   export default class Login extends Vue {
@@ -56,9 +63,8 @@
 
 
 <style scoped lang='scss'>
-  @import '@/scss/common.scss';
-
-  button {
-    color: $COLOR_MAIN;
-  }
+@import '@/scss/common.scss';
+.logo{
+  fill: $COLOR_THEME;
+}
 </style>
