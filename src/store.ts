@@ -21,22 +21,24 @@ export default new Vuex.Store({
     },
 
     checkFirebaseLogin(state) {
-      window.console.log('checkFirebaseLogin called');
       firebaseApp.auth().onAuthStateChanged((user) => {
         state.loading = false;
         if (user) {
           state.login = true;
           state.user = Object.assign({}, user);
           localStorage.uid = user.uid;
-          firebaseApp.firestore().collection('users').doc(user.uid).set({
-              uid: user.uid,
-              displayName: user.displayName,
-            },
-          ).then(() => {
-            window.console.log('Document successfully written!');
+          const docRef = firebaseApp.firestore().collection('users').doc(user.uid);
+          docRef.get().then((doc) => {
+            if (!doc.exists) {
+              docRef.set({
+                uid: user.uid,
+                displayName: user.displayName,
+              }).catch((error) => {
+                throw error;
+              });
+            }
           }).catch((error) => {
-            window.console.log('failed to write document: ', error);
-            window.console.error('Error writing document: ', error);
+            throw error;
           });
         } else {
           state.login = false;
@@ -59,10 +61,7 @@ export default new Vuex.Store({
     startLoading(state) {
       state.loading = true;
     },
-
   },
 
-
   actions: {},
-
 });
