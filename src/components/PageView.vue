@@ -109,6 +109,30 @@ header{
       }
     }
   }
+  button{
+    display: block;
+    margin-top: 16px;
+    min-width: 80px;
+    padding: 0 16px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    border-radius: 8px;
+    color: $COLOR_BASE;
+    background: rgba($COLOR_THEME,.6);
+    font-weight: bold;
+    font-size: 14px;
+    &:hover,&:active{
+      background: rgba($COLOR_THEME,.8);
+    }
+    &.caution{
+      background: $COLOR_CAUTION;
+    }
+    &:disabled {
+      opacity: .6;
+      background: rgba($COLOR_BASE,.2);
+    }
+  }
 }
 footer{
   text-align: center;

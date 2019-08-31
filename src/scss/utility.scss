@@ -3,6 +3,10 @@
     "Helvetica Neue", Helvetica, Roboto, Arial, Sans-serif;
   font-weight: 500;
 }
+.mt-8{ margin-top: 8px; }
+.mt-16{ margin-top: 16px; }
+.mt-24{ margin-top: 24px; }
+.fc-theme{ color: $COLOR_THEME }
 
 .headline{
   position: relative;
@@ -37,4 +41,21 @@ a.buttonStyle,button.buttonStyle,
   text-align: center;
   font-weight: 600;
   transition: .2s ease-out;
+}
+
+.inputText{
+  min-width: 280px;
+  height: 40px;
+  padding: 0 12px;
+  line-height: 40px;
+  border: 2px solid rgba($COLOR_BASE,.1);
+  border-radius: 1px;
+  font-size: 14px;
+  outline: none;
+  &:focus{
+    border: 2px solid rgba($COLOR_BASE,.2);
+  }
+  &::placeholder{
+    color: rgba($COLOR_BASE,.2);
+  }
 }

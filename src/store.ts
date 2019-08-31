@@ -10,6 +10,7 @@ export default new Vuex.Store({
   state: {
     login: false,
     loading: true,
+    user: {},
   },
 
   mutations: {
@@ -24,11 +25,9 @@ export default new Vuex.Store({
       firebaseApp.auth().onAuthStateChanged((user) => {
         state.loading = false;
         if (user) {
-          window.console.log('login:' + user.displayName);
           state.login = true;
+          state.user = Object.assign({}, user);
           localStorage.uid = user.uid;
-
-          window.console.log('set ' + user.uid);
           firebaseApp.firestore().collection('users').doc(user.uid).set({
               uid: user.uid,
               displayName: user.displayName,
