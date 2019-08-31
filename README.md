@@ -11,10 +11,10 @@ URL: [iaia.app](http://iaia.app/)
 ## Command
 Action | Command
 --|--
-Start Dev | `$ npm start`
+Start Dev | `$ npm start` or `$ npm run serve`
 Unit Test | `$ npm test:unit`
 E2E Test | `$ npm test:e2e`
-Build | `$ npm runn Build`
+Build | `$ npm run Build`
 
 ## File Info
 Directory | Puropose
