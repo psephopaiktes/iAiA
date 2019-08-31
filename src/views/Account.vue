@@ -20,8 +20,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
+import firebaseApp from '@/firebase';
 import PageView from '@/components/PageView.vue';
 
 @Component({
@@ -48,7 +47,7 @@ export default class Account extends Vue {
   // methods
   public updateName() {
     const $this = this;
-    const user = firebase.auth().currentUser;
+    const user = firebaseApp.auth().currentUser;
     if ( !user ) { return; }
     user.updateProfile({
       displayName: $this.newName,
@@ -61,11 +60,15 @@ export default class Account extends Vue {
   public deleteAccount() {
     const $this = this;
     const confirm: boolean = window.confirm('アカウントを削除すると元には戻せません。削除しますか？');
-    const user = firebase.auth().currentUser;
+    const user = firebaseApp.auth().currentUser;
     if ( !user || !confirm ) { return; }
     user.delete().then( () => {
       // User deleted.
       $this.$store.commit('logout');
+      firebaseApp.firestore().collection('users').doc(user.uid).delete().catch((error) => {
+        $this.msg.deleteAccount = 'エラーが発生しました。';
+        throw error;
+      });
     }).catch( (error) => {
       // An error happened.
       $this.msg.deleteAccount = 'エラーが発生しました。';
