@@ -34,7 +34,7 @@
       this.$store.commit('startLoading');
       firebaseApp.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider())
         .catch((reason) => {
-          alert(reason);
+          throw reason;
         });
     }
 
