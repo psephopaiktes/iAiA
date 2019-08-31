@@ -4,13 +4,6 @@
   </div>
 </template>
 
-<style lang="scss">
-@import "@/scss/common.scss";
-@import "@/scss/foundation.scss";
-@import "@/scss/utility.scss";
-@import "@/scss/layout.scss";
-</style>
-
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
@@ -42,3 +35,11 @@ export default class App extends Vue {
   }
 }
 </script>
+
+
+<style lang="scss">
+@import "@/scss/common.scss";
+@import "@/scss/foundation.scss";
+@import "@/scss/utility.scss";
+@import "@/scss/layout.scss";
+</style>
