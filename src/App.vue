@@ -19,15 +19,19 @@ import { Component, Vue } from 'vue-property-decorator';
   components: {
   },
 })
+
 export default class App extends Vue {
   // lifecycle hook
   public beforeCreate() {
-    this.$store.commit('init');
+    this.$store.commit('checkLocalStorageLogin');
     if (localStorage.redirect) {
-      // 404.html からリダイレクトした場合
+      // 404.html からリダイレクトしてきた場合
       this.$router.push(localStorage.redirect);
       localStorage.removeItem('redirect');
     }
+  }
+  public created() {
+    this.$store.commit('checkFirebaseLogin');
   }
   public mounted() {
     window.addEventListener('load', () => {
