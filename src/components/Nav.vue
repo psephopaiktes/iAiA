@@ -42,8 +42,8 @@ export default class Nav extends Vue {}
 <style scoped lang="scss">
 @import "@/scss/common.scss";
 nav{
-  background: rgba($COLOR_BASE,.9);
-  backdrop-filter: blur(6px);
+  background: rgba($COLOR_BASE,.8);
+  backdrop-filter: blur(24px);
   display: flex;
   justify-content: center;
   align-items: center;

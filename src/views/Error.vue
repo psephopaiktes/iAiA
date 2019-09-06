@@ -4,8 +4,9 @@
 
   <main id="content">
     <h1>エラーが発生しました</h1>
-    <ErrorArt />
     <p class="en">404 PAGE NOT FOUND</p>
+    <ErrorArt />
+    <router-link to='/' class="btn-theme">TOPへ</router-link>
   </main>
 
 </div></template>
@@ -36,17 +37,23 @@ export default class Error extends Vue {}
   flex-direction: column;
   h1{
     font-size: 28px;
+    letter-spacing: .1em;
+  }
+  p{
+    margin-top: 8px;
+    font-weight: bold;
+    opacity: .5;
     letter-spacing: .05em;
   }
   svg{
-    margin-top: 24px;
-    width: 320px;
-    height: 240px;
-  }
-  p{
     margin-top: 32px;
-    font-weight: bold;
-    opacity: .5;
+    max-width: 360px;
+    height: auto;
+    opacity: .8;
+  }
+  a{
+    margin-top: 32px;
+    max-width: 240px;
   }
 }
 </style>
