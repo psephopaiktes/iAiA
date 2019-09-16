@@ -15,7 +15,9 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@types/mersenne-twister": "^1.1.2",
     "firebase": "^6.4.0",
+    "mersenne-twister": "^1.1.0",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
