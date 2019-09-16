@@ -6,16 +6,16 @@
 
     <h1 class="headline">Dice Roll</h1>
 
-    <section id="template">
+    <section id="template" class="en">
       <ul>
-        <!-- TODO なかやまに相談 -->
-        <li><button>1D100</button></li>
-        <li><button>1D10</button></li>
-        <li><button>3D6</button></li>
-        <li><button>1D6</button></li>
-        <li><button>1D4</button></li>
-        <li><button>2D3</button></li>
-        <li><button>2D3</button></li>
+        <!-- TODO Button Desingn -->
+        <li><button @click="$store.commit('diceRoll',{n:1,ub:100})">1D100</button></li>
+        <li><button @click="$store.commit('diceRoll',{n:1,ub:10})">1D10</button></li>
+        <li><button @click="$store.commit('diceRoll',{n:1,ub:6})">1D6</button></li>
+        <li><button @click="$store.commit('diceRoll',{n:1,ub:4})">1D4</button></li>
+        <li><button @click="$store.commit('diceRoll',{n:1,ub:3})">1D3</button></li>
+        <li><button @click="$store.commit('diceRoll',{n:1,ub:8})">1D8</button></li>
+        <li><button @click="$store.commit('diceRoll',{n:1,ub:20})">1D20</button></li>
       </ul>
     </section>
 
@@ -23,54 +23,56 @@
       <h2 class="subHeadline">カスタムダイス</h2>
       <ul>
         <li>
-          <button><i class="material-icons">arrow_drop_up</i></button>
-          <input type="number" value="1" min="1" max="999" required>
-          <button><i class="material-icons">arrow_drop_down</i></button>
+          <button @click="customFormN++"><i class="material-icons">arrow_drop_up</i></button>
+          <input v-model="customFormN" type="number" value="1" min="1" max="999" required>
+          <button  @click="customFormN--"><i class="material-icons">arrow_drop_down</i></button>
         </li>
         <li>
           <p>D</p>
         </li>
         <li>
-          <button><i class="material-icons">arrow_drop_up</i></button>
-          <input type="number" value="10" min="1" max="999" required>
-          <button><i class="material-icons">arrow_drop_down</i></button>
+          <button  @click="customFormUb++"><i class="material-icons">arrow_drop_up</i></button>
+          <input v-model="customFormUb" type="number" value="10" min="1" max="999" required>
+          <button  @click="customFormUb--"><i class="material-icons">arrow_drop_down</i></button>
         </li>
         <li>
           <p>+</p>
         </li>
         <li>
-          <button><i class="material-icons">arrow_drop_up</i></button>
-          <input type="number" value="0" min="1" max="999" required>
-          <button><i class="material-icons">arrow_drop_down</i></button>
+          <button  @click="customFormAdd++"><i class="material-icons">arrow_drop_up</i></button>
+          <input v-model="customFormAdd" type="number" value="0" min="1" max="999" required>
+          <button  @click="customFormAdd--"><i class="material-icons">arrow_drop_down</i></button>
         </li>
       </ul>
-      <button class="btn-theme">実行</button>
+      <button @click="customRoll" class="btn-theme">実行</button>
     </section>
 
     <section id="log">
       <h2 class="subHeadline">ダイスログ</h2>
-      <button class="btn-main">消去</button>
-      <!-- <p>ダイスのロール記録がありません。</p> -->
-      <table>
-        <tr><th>1D100 → 88</th><td>08/14 14:02</td></tr>
-        <tr><th>1D100 → 88</th><td>08/14 14:02</td></tr>
-        <tr><th>1D100 → 88</th><td>08/14 14:02</td></tr>
+      <button @click="$store.commit('clearDiceLog')" class="btn-main">消去</button>
+      <p v-if="$store.state.dice.log.length==0" class="mt-16">ダイスのロール記録がありません。</p>
+      <table v-else>
+        <tr v-for="item in $store.state.dice.log" :key="item">
+          <th>{{item.dice}}</th><td>{{item.date}}</td>
+        </tr>
       </table>
     </section>
 
+    <section id="modal" v-if="$store.state.dice.showModal">
+      <div class="overlay" @click="$store.commit('diceClose')"></div>
+      <div class="container">
+        <h2 class="en">
+          {{ $store.state.dice.n+'D'+$store.state.dice.ub }}
+          <span v-if="$store.state.dice.add">{{'+ '+$store.state.dice.add}}</span>
+          <i class="material-icons">play_arrow</i>
+        </h2>
+        <output class="en">{{$store.state.dice.result}}</output>
+        <button @click="$store.commit('diceRoll',{n:$store.state.dice.n,ub:$store.state.dice.ub,add:$store.state.dice.add})" class="btn">もう一度</button>
+        <button @click="$store.commit('diceClose')" class="btn">閉じる</button>
+      </div>
+    </section>
+
   </main>
-
-  <!-- <section id="modal" v-show="showModal">
-
-    <div class="overlay"></div>
-
-    <h2>{{'1D4'}}の結果</h2>
-    TODO: ダイス画像がほしい
-    <output>{{'24'}}</output>
-    <button @click="">もう一度</button>
-    <button @click="">閉じる</button>
-
-  </section> -->
 
 </div></template>
 
@@ -79,12 +81,36 @@
 import { Component, Vue } from 'vue-property-decorator';
 import Nav from '@/components/Nav.vue';
 
+
 @Component({
   components: {
     Nav,
   },
 })
-export default class Dice extends Vue {}
+export default class Dice extends Vue {
+  // data
+  public customFormN: number = 1;
+  public customFormUb: number = 1;
+  public customFormAdd: number = 1;
+
+  // methods
+  public customRoll(): void {
+    if ( !this.customFormN || !this.customFormUb || !this.customFormAdd ) {
+      window.alert('入力に間違いがあります。');
+      return;
+    }
+    this.$store.commit('diceRoll', {
+      n: Number(this.customFormN),
+      ub: Number(this.customFormUb),
+      add: Number(this.customFormAdd),
+    });
+  }
+
+  // lifecycle hook
+  public mounted(): void {
+    this.$store.commit('restoreDiceLog');
+  }
+}
 </script>
 
 
@@ -101,7 +127,7 @@ export default class Dice extends Vue {}
   grid-gap: 16px;
   margin-top: 56px;
   @media (min-width: $WIDTH_TAB){
-  grid-auto-rows: 96px;
+    grid-auto-rows: 96px;
   }
   button {
     display: block;
@@ -206,6 +232,64 @@ export default class Dice extends Vue {}
       text-align: right;
       padding-right: 8px;
       opacity: .5;
+    }
+  }
+}
+
+#modal{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0; right: 0;
+  .overlay{
+    position: absolute;
+    width: 100%; height: 100%;
+    top: 0; right: 0;
+    background: rgba(#000,.2);
+    backdrop-filter: blur(12px) grayscale(.6);
+    z-index: 9998;
+  }
+  .container{
+    position: absolute;
+    top: 10vh;
+    left: 16px;
+    width: calc(100% - 32px);
+    padding: 24px;
+    z-index: 9999;
+    border-radius: 8px;
+    text-align: center;
+    background: $COLOR_THEME;
+    color: $COLOR_BASE;
+    @media (min-width: $WIDTH_TAB){
+      top: 20vh;
+      left: calc(50% - 240px);
+      width: 480px;
+    }
+    h2{
+      font-size: 24px;
+      .material-icons{
+        vertical-align: -.15em;
+        font-size: 1.1em;
+        opacity: .5;
+      }
+    }
+    output{
+      display: block;
+      font-size: 120px;
+      font-weight: bold;
+      margin: 48px 0;
+      line-height: 1;
+    }
+    button{
+      margin-top: 16px;
+      font-size: 16px;
+    }
+    button:first-of-type{
+      background: $COLOR_BASE;
+      color: $COLOR_THEME;
+    }
+    button:last-of-type{
+      border: 2px solid $COLOR_BASE;
     }
   }
 }

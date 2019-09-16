@@ -2,13 +2,14 @@ import MersenneTwister from 'mersenne-twister';
 
 const generator = new MersenneTwister();
 
-export function throwDice(nDice: number, maxNumber: number): number {
-    if (maxNumber === 100) {
-        return nDice * getRandomInt(1, 99);
-    }
-    return nDice * getRandomInt(1, maxNumber);
+export function throwDice(n: number, ub: number): number {
+  let result = 0;
+  for ( let i = 0; i < n; i++ ) {
+    result += getRandomInt(1, ub);
+  }
+  return result;
 }
 
-function getRandomInt(min: number, max: number) {
-  return generator.random_int() % (max - min) + min + 1;
+function getRandomInt(lb: number, ub: number) {
+  return generator.random_int() % (ub - lb + 1) + lb;
 }

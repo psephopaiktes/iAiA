@@ -8,11 +8,4 @@ describe('Dice', () => {
       expect(res).toBeLessThanOrEqual(30);
     }
   });
-  it('returns random int 1-99 if maxNumber=100', () => {
-    for (let i = 0; i < 100; i++) {
-      const res = throwDice(1, 100);
-      expect(res).toBeGreaterThanOrEqual(1);
-      expect(res).toBeLessThanOrEqual(99);
-    }
-  });
 });
