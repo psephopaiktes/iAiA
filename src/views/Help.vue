@@ -1,18 +1,29 @@
-<template><PageView>
-    <template #title>あそびかた</template>
-    <p>本サービスはクトゥルフ神話TRPGのセッションをサポートするアプリです。クトゥルフ神話TRPGを知っていることを前提にしており、キーパーができる方が1人いることをオススメします。</p>
+<template>
+  <PageView>
+    <template #title>
+      あそびかた
+    </template>
+    <p>
+      本サービスはクトゥルフ神話TRPGのセッションをサポートするアプリです。クトゥルフ神話TRPGを知っていることを前提にしており、キーパーができる方が1人いることをオススメします。
+    </p>
 
     <h2>基本機能</h2>
     <p><b>iAiA</b>は以下の4つの基本画面から構成されています。</p>
 
     <h3>ダイス</h3>
-    <p>セッションで使用するダイスを振ることができます。よく使うテンプレートから使用することも、自由にカスタマイズしたダイスを振ることもできます。</p>
+    <p>
+      セッションで使用するダイスを振ることができます。よく使うテンプレートから使用することも、自由にカスタマイズしたダイスを振ることもできます。
+    </p>
 
     <h3>キャラクターシート</h3>
-    <p>キャラクターを作成し、管理することができます。<!-- サンプルキャラが用意されており、コピーしてすぐに使うことも可能です。--></p>
+    <p>
+      キャラクターを作成し、管理することができます。<!-- サンプルキャラが用意されており、コピーしてすぐに使うことも可能です。-->
+    </p>
 
     <h3>ルーム</h3>
-    <p>現在開発中の機能です。複数アカウントを紐付けてオンラインで管理するための機能になる予定です。</p>
+    <p>
+      現在開発中の機能です。複数アカウントを紐付けてオンラインで管理するための機能になる予定です。
+    </p>
 
     <h3>その他</h3>
     <p>メニューやその他のページをまとめた画面です。</p>
@@ -36,23 +47,20 @@
       <li>マップやモンスターの画像を共有する</li>
       <li>テキストチャットでメモなどを共有する</li>
     </ol> -->
-
-</PageView></template>
-
+  </PageView>
+</template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import PageView from '@/components/PageView.vue';
+import { Component, Vue } from "vue-property-decorator";
+import PageView from "@/components/PageView.vue";
 
 @Component({
   components: {
-    PageView,
-  },
+    PageView
+  }
 })
-export default class Help extends Vue {
-}
+export default class Help extends Vue {}
 </script>
-
 
 <style scoped lang="scss">
 @import "@/scss/common.scss";

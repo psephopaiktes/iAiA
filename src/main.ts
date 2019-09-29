@@ -1,24 +1,24 @@
-import Vue from 'vue';
-import App from './App.vue';
-import router from './router';
-import store from './store';
-import './registerServiceWorker';
-import {firestorePlugin} from 'vuefire';
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
+import "./registerServiceWorker";
+import { firestorePlugin } from "vuefire";
 
 Vue.config.productionTip = false;
 
 new Vue({
   router,
   store,
-  render: (h) => h(App),
-}).$mount('#app');
+  render: h => h(App)
+}).$mount("#app");
 
 Vue.use(firestorePlugin);
 
-window.document.title = 'iAiA';
+window.document.title = "iAiA";
 
 window.console.log(
-  '%c iAiA 🐙 %c\nhttps://github.com/psephopaiktes/iAiA',
+  "%c iAiA 🐙 %c\nhttps://github.com/psephopaiktes/iAiA",
   `
     background: #023;
     padding: 20px 40px;
@@ -31,5 +31,5 @@ window.console.log(
   `,
   `
     padding: 20px 0 40px;
-  `,
+  `
 );

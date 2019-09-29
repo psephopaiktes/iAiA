@@ -1,3 +1,20 @@
 {
   "extensions.showRecommendationsOnlyOnDemand": false,
+  "files.associations": {
+    "*.vue": "vue"
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    { "language": "vue", "autoFix": true },
+    { "language": "typescript", "autoFix": true }
+  ],
+  "eslint.autoFixOnSave": true,
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.run": "onSave",
+  "vetur.format.defaultFormatter.js": "none",
+  "vetur.format.enable": false
 }
