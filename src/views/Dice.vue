@@ -146,9 +146,6 @@ export default class Dice extends Vue {
     grid-row: 1 / 2;
     grid-column: 1 / 3;
   }
-  li:first-child button{
-    background: rgba($COLOR_THEME,.9);
-  }
 }
 
 #custom{
