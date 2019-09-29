@@ -1,41 +1,39 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
-
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue } from "vue-property-decorator";
 
 @Component({
-  components: {
-  },
+  components: {}
 })
-
 export default class App extends Vue {
   // lifecycle hook
   public beforeCreate() {
-    this.$store.commit('checkLocalStorageLogin');
+    this.$store.commit("checkLocalStorageLogin");
     if (localStorage.redirect) {
       // 404.html からリダイレクトしてきた場合
       this.$router.push(localStorage.redirect);
-      localStorage.removeItem('redirect');
+      localStorage.removeItem("redirect");
     }
   }
   public created() {
-    this.$store.commit('checkFirebaseLogin');
+    this.$store.commit("checkFirebaseLogin");
   }
   public mounted() {
-    window.addEventListener('load', () => {
-      const elm = document!.getElementById('loading');
-      if (!elm) { return; }
-      elm.classList.add('hide');
+    window.addEventListener("load", () => {
+      const elm = document!.getElementById("loading");
+      if (!elm) {
+        return;
+      }
+      elm.classList.add("hide");
     });
   }
 }
 </script>
-
 
 <style lang="scss">
 @import "@/scss/common.scss";
