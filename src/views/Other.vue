@@ -12,7 +12,7 @@
       <li><router-link class="btn" v-if="$store.state.login" to='/account'>アカウント設定</router-link></li>
       <li><router-link class="btn" to='/share'>iAiAを共有</router-link></li>
       <li><router-link class="btn" to='/term'>利用規約</router-link></li>
-      <li><a href="https://twitter.com/iAiAapp" target="_brank" class="open-in-new btn">連絡先・更新情報（Twitter）</a></li>
+      <li><a href="https://twitter.com/iAiAapp" target="_brank" class="open-in-new btn">連絡先・更新情報</a></li>
     </ul>
 
     <button v-if="$store.state.login" class="logOutButton btn-main" @click="$store.commit('logout')">ログアウト</button>

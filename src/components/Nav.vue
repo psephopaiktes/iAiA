@@ -66,6 +66,8 @@ nav{
     width: 240px;
     height: 100vh;
     justify-content: center;
+    background: $COLOR_BASE;
+    backdrop-filter: blur(0);
   }
   @media (min-width: $WIDTH_PC){
     width: 320px;
