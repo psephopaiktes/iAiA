@@ -42,6 +42,7 @@ main {
   background: $COLOR_MAIN;
   color: $COLOR_BASE;
   overflow: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 header {
   position: fixed;
