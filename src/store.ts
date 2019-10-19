@@ -3,7 +3,6 @@ import Vuex from "vuex";
 import router from "./router";
 import firebaseApp from "./firebase";
 import { throwDice } from "./lib/dice";
-import { User } from "firebase";
 
 Vue.use(Vuex);
 

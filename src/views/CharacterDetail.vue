@@ -59,15 +59,20 @@ export default class Character extends Vue {
       return;
     }
     const storageRef = firebase.storage().ref();
-
-    window.console.log(this.storageReference(user.uid, f.name));
     const ref = storageRef.child(this.storageReference(user.uid, f.name));
     ref
       .put(f)
-      .then(function(snapshot) {})
-      .catch(function(e) {
+      .catch(e => {
         window.alert("画像のアップロードに失敗しました");
-        window.console.log(e);
+        window.console.error(e);
+      })
+      .then(() => ref.getDownloadURL())
+      .then(url => {
+        this.CharData.iconUrl = url;
+      })
+      .catch(e => {
+        window.alert("画像の更新に失敗しました");
+        window.console.error(e);
       });
   }
 
