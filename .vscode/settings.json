@@ -16,5 +16,8 @@
   },
   "eslint.run": "onSave",
   "vetur.format.defaultFormatter.js": "none",
-  "vetur.format.enable": false
+  "vetur.format.enable": false,
+  "search.exclude": {
+    "/dist": true
+  }
 }
