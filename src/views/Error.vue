@@ -4,9 +4,12 @@
 
     <main id="content">
       <h1>エラーが発生しました</h1>
-      <p class="en">404 PAGE NOT FOUND</p>
+      <p class="en">{{ errorCode }}</p>
       <ErrorArt />
       <router-link to="/" class="btn-theme">TOPへ</router-link>
+      <a href="https://twitter.com/iAiAapp" target="_brank">
+        お問い合わせ（Twitter）
+      </a>
     </main>
   </div>
 </template>
@@ -22,7 +25,18 @@ import ErrorArt from "@/assets/error.vue";
     ErrorArt
   }
 })
-export default class Error extends Vue {}
+export default class Error extends Vue {
+  // data
+  errorCode: string = "404 PAGE NOT FOUND";
+
+  // lifecycle hook
+  public beforeCreate() {
+    if (localStorage.errorCode) {
+      this.errorCode = localStorage.errorCode;
+      localStorage.removeItem("errorCode");
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

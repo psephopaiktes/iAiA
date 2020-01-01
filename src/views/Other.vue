@@ -20,8 +20,9 @@
             href="https://twitter.com/iAiAapp"
             target="_brank"
             class="open-in-new btn"
-            >連絡先・更新情報</a
           >
+            連絡先・更新情報
+          </a>
         </li>
       </ul>
 
