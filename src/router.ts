@@ -9,7 +9,7 @@ export default new Router({
   routes: [
     {
       path: "/",
-      component: () => import("./views/LP.vue")
+      redirect: "/dice"
     },
     {
       path: "/term",

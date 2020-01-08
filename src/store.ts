@@ -76,7 +76,7 @@ export default new Vuex.Store({
       state.login = false;
       localStorage.removeItem("uid");
       window.console.log("logout");
-      router.push("/");
+      location.href = "/";
     },
 
     startLoading(state) {
