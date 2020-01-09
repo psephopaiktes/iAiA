@@ -1,178 +1,110 @@
-<template>
-  <div>
-    <Nav />
+<template lang="pug">
+main#l-content
 
-    <main id="content">
-      <h1 class="headline">Dice Roll</h1>
+  h1.c-headline DICE
 
-      <section id="template" class="en">
-        <ul>
-          <!-- TODO Button Desingn -->
-          <li>
-            <button @click="$store.commit('diceRoll', { n: 1, ub: 100 })">
-              1D100
-            </button>
-          </li>
-          <li>
-            <button @click="$store.commit('diceRoll', { n: 1, ub: 10 })">
-              1D10
-            </button>
-          </li>
-          <li>
-            <button @click="$store.commit('diceRoll', { n: 1, ub: 6 })">
-              1D6
-            </button>
-          </li>
-          <li>
-            <button @click="$store.commit('diceRoll', { n: 1, ub: 4 })">
-              1D4
-            </button>
-          </li>
-          <li>
-            <button @click="$store.commit('diceRoll', { n: 1, ub: 3 })">
-              1D3
-            </button>
-          </li>
-          <li>
-            <button @click="$store.commit('diceRoll', { n: 1, ub: 8 })">
-              1D8
-            </button>
-          </li>
-          <li>
-            <button @click="$store.commit('diceRoll', { n: 1, ub: 20 })">
-              1D20
-            </button>
-          </li>
-        </ul>
-      </section>
+  section#preset
+    h2.c-subHeadline プリセット
+    ul
+      li.c-panel
+        button(@click="$store.commit('diceRoll', { n: 1, ub: 100 })")
+          | 1D100 <img svg-inline src="@/assets/1D100.svg" />
+      li.c-panel
+        button(@click="$store.commit('diceRoll', { n: 1, ub: 10 })")
+          | 1D10 <img svg-inline src="@/assets/1D10.svg" />
+      li.c-panel
+        button(@click="$store.commit('diceRoll', { n: 1, ub: 6 })")
+          | 1D6 <img svg-inline src="@/assets/1D6.svg" />
+      li.c-panel
+        button(@click="$store.commit('diceRoll', { n: 1, ub: 4 })")
+          | 1D4 <img svg-inline src="@/assets/1D4.svg" />
+      li.c-panel
+        button(@click="$store.commit('diceRoll', { n: 1, ub: 3 })")
+          | 1D3 <img svg-inline src="@/assets/1D3.svg" />
+      li.c-panel
+        button(@click="$store.commit('diceRoll', { n: 1, ub: 8 })")
+          | 1D8 <img svg-inline src="@/assets/1D8.svg" />
+      li.c-panel
+        button(@click="$store.commit('diceRoll', { n: 1, ub: 20 })")
+          | 1D20 <img svg-inline src="@/assets/1D20.svg" />
 
-      <section id="custom">
-        <h2 class="subHeadline">カスタムダイス</h2>
-        <ul>
-          <li>
-            <button @click="customFormN++">
-              <i class="material-icons">arrow_drop_up</i>
-            </button>
-            <input
-              v-model="customFormN"
-              type="number"
-              value="1"
-              min="1"
-              max="999"
-              required
-            />
-            <button @click="customFormN--">
-              <i class="material-icons">arrow_drop_down</i>
-            </button>
-          </li>
-          <li>
-            <p>D</p>
-          </li>
-          <li>
-            <button @click="customFormUb++">
-              <i class="material-icons">arrow_drop_up</i>
-            </button>
-            <input
-              v-model="customFormUb"
-              type="number"
-              value="10"
-              min="1"
-              max="999"
-              required
-            />
-            <button @click="customFormUb--">
-              <i class="material-icons">arrow_drop_down</i>
-            </button>
-          </li>
-          <li>
-            <p>+</p>
-          </li>
-          <li>
-            <button @click="customFormAdd++">
-              <i class="material-icons">arrow_drop_up</i>
-            </button>
-            <input
-              v-model="customFormAdd"
-              type="number"
-              value="0"
-              min="1"
-              max="999"
-              required
-            />
-            <button @click="customFormAdd--">
-              <i class="material-icons">arrow_drop_down</i>
-            </button>
-          </li>
-        </ul>
-        <button @click="customRoll" class="btn-theme">実行</button>
-      </section>
+  section#custom
+    h2.c-subHeadline カスタムダイス
+    ul
+      li
+        button(@click='customFormN++')
+          <img svg-inline src="@/assets/icon/add.svg" />
+        input(v-model='customFormN' type='number' value='1' min='1' max='999' required)
+        button(@click='customFormN--')
+          <img svg-inline src="@/assets/icon/remove.svg" />
+      li
+        button(@click='customFormUb++')
+          <img svg-inline src="@/assets/icon/add.svg" />
+        input(v-model='customFormUb' type='number' value='10' min='1' max='999' required)
+        button(@click='customFormUb--')
+          <img svg-inline src="@/assets/icon/remove.svg" />
+      li
+        button(@click='customFormAdd++')
+          <img svg-inline src="@/assets/icon/add.svg" />
+        input(v-model='customFormAdd' type='number' value='0' min='1' max='999' required)
+        button(@click='customFormAdd--')
+          <img svg-inline src="@/assets/icon/remove.svg" />
+    button.c-btn.u-mt16(@click='customRoll')
+      | 実行
+      <img svg-inline src="@/assets/icon/play_arrow.svg" />
 
-      <section id="log">
-        <h2 class="subHeadline">ダイスログ</h2>
-        <button @click="$store.commit('clearDiceLog')" class="btn-main">
-          消去
-        </button>
-        <p v-if="$store.state.dice.log.length == 0" class="mt-16">
-          ダイスのロール記録がありません。
-        </p>
-        <table v-else>
-          <tr v-for="item in $store.state.dice.log" :key="item">
-            <th>{{ item.dice }}</th>
-            <td>{{ item.date }}</td>
-          </tr>
-        </table>
-      </section>
+  section#log
+    h2.c-subHeadline ダイスログ
+    button.c-subBtn.u-mt16(v-if='$store.state.dice.log.length !== 0' @click="$store.commit('clearDiceLog')")
+      | 消去
+      <img svg-inline src="@/assets/icon/delete.svg" />
+    p.u-mt16(v-if='$store.state.dice.log.length == 0')
+      | ダイスのロール記録がありません。
+    table(v-else='')
+      tbody
+        tr(v-for='item in $store.state.dice.log', :key='item')
+          th {{ item.dice }}
+          td {{ item.date }}
 
-      <section id="modal" v-if="$store.state.dice.showModal">
-        <div class="overlay" @click="$store.commit('diceClose')"></div>
-        <div class="container">
-          <h2 class="en">
-            {{ $store.state.dice.n + "D" + $store.state.dice.ub }}
-            <span v-if="$store.state.dice.add">{{
-              "+ " + $store.state.dice.add
-            }}</span>
-            <i class="material-icons">play_arrow</i>
-          </h2>
-          <output class="en">{{ $store.state.dice.result }}</output>
-          <button
-            @click="
-              $store.commit('diceRoll', {
-                n: $store.state.dice.n,
-                ub: $store.state.dice.ub,
-                add: $store.state.dice.add
-              })
-            "
-            class="btn"
-          >
-            もう一度
-          </button>
-          <button @click="$store.commit('diceClose')" class="btn">
-            閉じる
-          </button>
-        </div>
-      </section>
-    </main>
-  </div>
+  section#l-modal(v-if='$store.state.dice.showModal')
+    .c-scrim(@click="$store.commit('diceClose')")
+    .c-modal
+      h2
+        | {{ $store.state.dice.n + "D" + $store.state.dice.ub }}
+        span(v-if='$store.state.dice.add') {{ " + " + $store.state.dice.add }}
+      <img svg-inline src="@/assets/icon/arrow_drop_down.svg" />
+      output {{ $store.state.dice.result }}
+      button.c-btn.--dark.u-mt56(@click="$store.commit('diceRoll', {\
+        n: $store.state.dice.n,\
+        ub: $store.state.dice.ub,\
+        add: $store.state.dice.add\
+      })")
+        | もういちど
+        <img svg-inline src="@/assets/icon/play_arrow.svg" />
+      button.c-btn.--dark.u-mt12(@click="$store.commit('diceClose')")
+        | 閉じる
+        <img svg-inline src="@/assets/icon/close.svg" />
+
+
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import Nav from "@/components/Nav.vue";
+import { Component, Prop, Vue } from "vue-property-decorator";
 
-@Component({
-  components: {
-    Nav
-  }
-})
+@Component
 export default class Dice extends Vue {
   // data
   public customFormN: number = 1;
-  public customFormUb: number = 1;
-  public customFormAdd: number = 1;
+  public customFormUb: number = 10;
+  public customFormAdd: number = 0;
 
   // methods
   public customRoll(): void {
-    if (!this.customFormN || !this.customFormUb || !this.customFormAdd) {
+    if (
+      this.customFormN < 1 ||
+      this.customFormUb < 1 ||
+      this.customFormAdd < 0
+    ) {
       window.alert("入力に間違いがあります。");
       return;
     }
@@ -191,33 +123,36 @@ export default class Dice extends Vue {
 </script>
 
 <style scoped lang="scss">
-@import "@/scss/common.scss";
-
-#template ul {
+#preset ul {
   display: grid;
-  grid-auto-rows: 160px;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  grid-gap: 16px;
-  margin-top: 56px;
-  @media (min-width: $WIDTH_TAB) {
+  grid-auto-rows: 9.6rem;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  grid-gap: 1.6rem;
+  margin-top: 1.6rem;
+  @media (min-width: $MD) {
     grid-auto-rows: 96px;
+  }
+  li:first-child {
+    grid-row: 1 / 2;
+    grid-column: 1 / 3;
   }
   button {
     display: block;
     width: 100%;
     height: 100%;
-    background: rgba($COLOR_MAIN, 0.1);
-    border-radius: 8px;
-    transition: 0.4s ease;
-    &:hover {
-      transform: scale(1.02);
-      background: rgba($COLOR_MAIN, 0.15);
-      transition: 0.2s ease;
-    }
+    position: relative;
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-align: left;
+    padding-left: 3.2rem;
+    letter-spacing: 0.1em;
   }
-  li:first-child {
-    grid-row: 1 / 2;
-    grid-column: 1 / 3;
+  svg {
+    position: absolute;
+    bottom: 1.6rem;
+    right: 1.6rem;
+    height: 2.4rem;
+    width: auto;
   }
 }
 
@@ -225,33 +160,37 @@ export default class Dice extends Vue {
   & > ul {
     display: flex;
     justify-content: space-between;
-    margin-top: 16px;
+    margin-top: 1.6rem;
     li {
-      height: 128px;
-      border-radius: 8px;
+      height: 12.8rem;
+      border-radius: 0.4rem;
       overflow: hidden;
-    }
-    li:nth-child(odd) {
-      width: 28%;
+      width: calc((100% - 1.6rem) / 3);
       display: flex;
+      position: relative;
       flex-direction: column;
+      background: rgba($COLOR_MAIN, 0.05);
       button {
-        height: 32px;
-        background: rgba($COLOR_MAIN, 0.15);
-        i {
-          line-height: 32px;
-          color: rgba($COLOR_MAIN, 0.6);
+        height: 2.4rem;
+        background: rgba($COLOR_MAIN, 0.05);
+        svg {
+          width: 1.6rem;
+          height: 1.6rem;
+          margin-top: 0.4rem;
+        }
+        * {
+          fill: rgba($COLOR_MAIN, 0.5);
         }
       }
       input {
         appearance: none;
-        height: 64px;
-        border: 0;
-        outline: none;
+        margin: 0.4rem 0;
+        height: 7.2rem;
         text-align: center;
-        font-size: 36px;
+        font-size: 2.4rem;
         color: #fff;
-        background: rgba($COLOR_MAIN, 0.1);
+        outline: none;
+        letter-spacing: 0.1em;
         &::-webkit-inner-spin-button,
         &::-webkit-outer-spin-button {
           margin: 0;
@@ -259,111 +198,90 @@ export default class Dice extends Vue {
         }
       }
     }
-    li:nth-child(even) {
-      line-height: 128px;
-      font-size: 28px;
-      color: rgba($COLOR_MAIN, 0.8);
+    li:nth-child(2),
+    li:nth-child(3) {
+      input {
+        padding-left: 2.4rem;
+      }
+      &::before {
+        position: absolute;
+        line-height: 12.8rem;
+        left: 0.8rem;
+        font-size: 1.2em;
+        color: rgba($COLOR_MAIN, 0.5);
+      }
     }
-  }
-  & > button {
-    margin-top: 24px;
+    li:nth-child(2)::before {
+      content: "D";
+    }
+    li:nth-child(3)::before {
+      content: "+";
+    }
   }
 }
 
 #log {
-  > button {
-    width: 80px;
-    height: 32px;
-    line-height: 32px;
-    border-radius: 8px;
-    float: right;
-    position: relative;
-    bottom: 32px;
-  }
   table {
     table-layout: fixed;
-    margin-top: 16px;
-    border-collapse: collapse;
+    margin-top: 0.8rem;
+    border-collapse: separate;
+    border-spacing: 0 0.8rem;
     width: 100%;
     font-size: 16px;
     letter-spacing: 0.05em;
     tr {
-      height: 64px;
-      border-top: 1px solid rgba($COLOR_MAIN, 0.2);
-      @media (min-width: $WIDTH_TAB) {
-        height: 48px;
-      }
+      height: 2.4rem;
+      line-height: 2.4rem;
     }
     th {
       text-align: left;
-      padding-left: 8px;
+      font-size: 1.6rem;
+      letter-spacing: 0.05em;
+      font-weight: 600;
     }
     td {
+      font-size: 1rem;
       text-align: right;
-      padding-right: 8px;
       opacity: 0.5;
+      position: relative;
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 8rem;
+        height: 0.1rem;
+        top: 48%;
+        right: calc(100% - 4rem);
+        background: rgba($COLOR_MAIN, 0.3);
+      }
     }
   }
 }
 
-#modal {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  right: 0;
-  .overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    right: 0;
-    background: rgba(#000, 0.2);
-    backdrop-filter: blur(12px) grayscale(0.6);
-    z-index: 9998;
+.c-modal {
+  background: $COLOR_GRADIENT;
+  color: $COLOR_BASE;
+  text-align: center;
+  h2 {
+    margin-top: 3.2rem;
+    font-size: 2.4rem;
+    letter-spacing: 0.1em;
+    opacity: 0.5;
   }
-  .container {
-    position: absolute;
-    top: 10vh;
-    left: 16px;
-    width: calc(100% - 32px);
-    padding: 24px;
-    z-index: 9999;
-    border-radius: 8px;
-    text-align: center;
-    background: $COLOR_THEME;
-    color: $COLOR_BASE;
-    @media (min-width: $WIDTH_TAB) {
-      top: 20vh;
-      left: calc(50% - 240px);
-      width: 480px;
-    }
-    h2 {
-      font-size: 24px;
-      .material-icons {
-        vertical-align: -0.15em;
-        font-size: 1.1em;
-        opacity: 0.5;
-      }
-    }
-    output {
-      display: block;
-      font-size: 120px;
-      font-weight: bold;
-      margin: 48px 0;
-      line-height: 1;
-    }
-    button {
-      margin-top: 16px;
-      font-size: 16px;
-    }
-    button:first-of-type {
-      background: $COLOR_BASE;
-      color: $COLOR_THEME;
-    }
-    button:last-of-type {
-      border: 2px solid $COLOR_BASE;
-    }
+  > svg {
+    display: block;
+    margin: 0.8rem auto 0;
+    width: 3.2rem;
+    height: 3.2rem;
+    opacity: 0.5;
+  }
+  output {
+    display: block;
+    margin-top: 4.8rem;
+    font-size: 7.2rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-indent: 0.2em;
   }
 }
 </style>

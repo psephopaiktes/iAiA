@@ -1,0 +1,65 @@
+// const
+$COLOR_THEME: #0fe;
+$COLOR_THEME_DARK: #00ccbe;
+$COLOR_ACCE: #0cf;
+$COLOR_CAUTION: #fc2525;
+$COLOR_GRADIENT: linear-gradient(to right bottom, $COLOR_THEME, $COLOR_ACCE);
+$COLOR_BASE: #141b1e;
+$COLOR_MAIN: #fff;
+
+$SM: 480px;
+$MD: 960px;
+$LG: 1440px;
+
+$L-NAV_SM_H: 5.6rem;
+$L-NAV_MD_H: 6.4rem;
+$L-NAV_LG_W: 20rem;
+
+// mixin
+@mixin beforeAfter {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+@mixin min($breakpoint) {
+  @media screen and (min-width: $breakpoint) {
+    @content;
+  }
+}
+@mixin max($breakpoint) {
+  @media screen and (max-width: $breakpoint) {
+    @content;
+  }
+}
+@mixin  minmax($breakpoint1,$breakpoint2) {
+  @media screen and (min-width: $breakpoint1) and (max-width: $breakpoint2) {
+    @content;
+  }
+}
+@mixin btn { // 基本は transiton を使う
+  &:hover, &:active {
+    @content;
+  }
+}
+@mixin transition($property: all) {
+  transition: $property .1s ease-out;
+  @include btn {
+    transition: $property .2s ease-out;
+    @content;
+  }
+}
+/* usage: @include transition(opacity) {
+  opacity: 1;
+}; */
+@mixin textHidden {
+  overflow: hidden;
+  text-indent: 200%;
+  white-space: nowrap;
+}
+
+// function
+@function calcvw($num, $width: 375px) {
+  @return (1vw * $num / $width * 100);
+}

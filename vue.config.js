@@ -12,5 +12,19 @@ module.exports = {
     historyApiFallback: {
       rewrites: [{ from: /./, to: "/404.html" }]
     }
+  },
+  css: {
+    loaderOptions: {
+      scss: {
+        data: '@import "@/style/common.scss";'
+      }
+    }
+  },
+  chainWebpack: config => {
+    config.module
+      .rule("vue")
+      .use("vue-svg-inline-loader")
+      .loader("vue-svg-inline-loader")
+      .options({});
   }
 };

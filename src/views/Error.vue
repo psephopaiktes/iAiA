@@ -1,30 +1,21 @@
-<template>
-  <div>
-    <Nav />
+<template lang="pug">
+main#l-content
+  h1 {{ errorCode }}
+  <img svg-inline src="@/assets/error.svg" />
+  p.u-mt8 エラーが発生しました
+  router-link.c-btn.u-mt48(to='/dice')
+    | 再読み込み
+    <img svg-inline src="@/assets/icon/refresh.svg" />
+  a.c-link.u-mt24(href='https://twitter.com/iAiAapp', target='_brank')
+    | お問い合わせ（Twitter）
+    <img svg-inline src="@/assets/icon/open_in_new.svg" />
 
-    <main id="content">
-      <h1>エラーが発生しました</h1>
-      <p class="en">{{ errorCode }}</p>
-      <ErrorArt />
-      <router-link to="/" class="btn-theme">TOPへ</router-link>
-      <a href="https://twitter.com/iAiAapp" target="_brank">
-        お問い合わせ（Twitter）
-      </a>
-    </main>
-  </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import Nav from "@/components/Nav.vue";
-import ErrorArt from "@/assets/error.vue";
+import { Component, Prop, Vue } from "vue-property-decorator";
 
-@Component({
-  components: {
-    Nav,
-    ErrorArt
-  }
-})
+@Component
 export default class Error extends Vue {
   // data
   errorCode: string = "404 PAGE NOT FOUND";
@@ -40,32 +31,20 @@ export default class Error extends Vue {
 </script>
 
 <style scoped lang="scss">
-@import "@/scss/common.scss";
-#content {
+main {
   min-height: 100vh;
+  padding-bottom: $L-NAV_SM_H !important;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   h1 {
-    font-size: 28px;
+    font-weight: 800;
+    font-size: 4rem;
     letter-spacing: 0.1em;
   }
-  p {
-    margin-top: 8px;
-    font-weight: bold;
-    opacity: 0.5;
-    letter-spacing: 0.05em;
-  }
-  svg {
-    margin-top: 32px;
-    max-width: 360px;
-    height: auto;
-    opacity: 0.8;
-  }
-  a {
-    margin-top: 32px;
-    max-width: 240px;
+  > svg {
+    opacity: 0.9;
   }
 }
 </style>

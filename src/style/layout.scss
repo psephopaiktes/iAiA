@@ -1,0 +1,93 @@
+#l-nav{
+  position: fixed;
+  left: 0;
+  z-index: 800;
+  // SM
+  height: $L-NAV_SM_H;
+  width: 100vw;
+  bottom: 0;
+  box-sizing: content-box;
+  padding-bottom: env(safe-area-inset-bottom);
+  @include min($SM){
+    height: $L-NAV_MD_H;
+    bottom: auto;
+    top: 0;
+    padding-top: env(safe-area-inset-top);
+  }
+  @include min($MD){
+    width: $L-NAV_LG_W;
+    height: 100vh;
+    left: 0;
+  }
+  @include min($LG){}
+}
+
+#l-content{
+  // SM
+  padding: 1px 3.2rem $L-NAV_SM_H + 6.4rem;
+  @include min($SM){
+    padding: $L-NAV_MD_H 5.6rem 7.2rem;
+  }
+  @include min($MD){
+    padding: 1px 9.6rem 9.6rem 9.6rem + $L-NAV_LG_W;
+  }
+  @include min($LG){}
+}
+
+#l-loginContainer{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 900;
+}
+
+#l-modal{
+  z-index: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  width: 100vw; height: 100vh;
+  top: 0; left: 0;
+  overflow: scroll;
+  padding-bottom: $L-NAV_SM_H;
+  @include min($SM){
+    padding-top: $L-NAV_MD_H;
+    padding-bottom: 0;
+  }
+  @include min($MD){
+    padding: 0 0 0 $L-NAV_LG_W;
+  }
+  @include min($LG){}
+}
+
+#l-floatButton{
+  position: fixed;
+  max-width: 24rem;
+  left: calc(50% - 12rem);
+  bottom: $L-NAV_SM_H + 2.4rem;
+  z-index: 600;
+  @include min($SM){
+    bottom: 3.2rem;
+  }
+  @include min($MD){
+    left: calc(50% - 12rem + #{$L-NAV_LG_W} / 2);
+    // ↑(100% - #{$L-NAV_LG_W}) / 2 - 12rem + #{$L-NAV_LG_W}
+  }
+}
+
+.l-toast{
+  position: fixed;
+  width: calc(100vw - 3.2rem);
+  left: 1.6rem;
+  bottom: $L-NAV_SM_H + 1.6rem;
+  z-index: 800;
+  @include min($SM){
+    bottom: 1.6rem;
+  }
+  @include min($MD){
+  }
+  @include min($LG){}
+}
