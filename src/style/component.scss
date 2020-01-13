@@ -1,0 +1,250 @@
+.c-headline{
+  margin-top: 6.4rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  font-size: 4rem;
+  text-shadow: 0px 0px 16px rgba($COLOR_BASE, 0.2);
+  &::before{
+    @include beforeAfter;
+    height: calc(6.4rem + 1em);
+    clip-path: polygon(0 0, 100% 0, 100% 6.4rem, 0 100%);
+    left: 0;
+    top: 0;
+    z-index: -1;
+    background-size: cover;
+    background-position: center;
+    @import "base64-marble.scss";
+    background-image: linear-gradient($COLOR_THEME_DARK, rgba(#0cf, 0.4) 100%), url($BASE64_MARBLE);
+    @include minmax($SM,$MD - 1){
+      top: $L-NAV_MD_H
+    }
+  }
+}
+
+.c-subHeadline{
+  margin-top: 4.8rem;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: rgba($COLOR_MAIN,.6);
+}
+
+.c-pageHeader{
+  &::before{
+    @include beforeAfter;
+    top: 0; left: 0;
+    height: 10.6rem;
+    background: $COLOR_GRADIENT;
+    z-index: -1;
+    opacity: .5;
+    @include minmax($SM,$MD - 1){
+      top: $L-NAV_MD_H
+    }
+  }
+  &__close,&__back {
+    display: block;
+    margin-top: 3.2rem;
+    width: 2.4rem;
+    height: 2.4rem;
+    svg{
+      width: 100%;
+    }
+    * {
+      fill: $COLOR_MAIN;
+    }
+  }
+  h1 {
+    margin-top: 2.8rem;
+    font-size: 3.2rem;
+    letter-spacing: .1em;
+    font-weight: 600;
+  }
+  &__logo{
+    position: absolute;
+    width: 4.5rem; height: 2.4rem;
+    top: 3.2rem; right: 3.2rem;
+    opacity: .5;
+    * {
+      fill: $COLOR_MAIN;
+    }
+  }
+}
+
+.c-article{
+  margin-top: 1.6rem;
+  line-height: 1.5;
+  font-weight: 500;
+  font-family: "Hiragino Sans", -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Noto Sans CJK JP", "Meiryo", "メイリオ", "Avenir Next", "Avenir", "SF Pro Text", "Robot", "Helvetica Neue", "Helvetica", "Arial", "Segoe UI", sans-serif;
+  @include min($SM){
+    max-width: 40em;
+  }
+  h2 {
+    margin-top: 4.8rem;
+    &::after {
+      content: "";
+      display: block;
+      height: .1rem;
+      background: rgba($COLOR_MAIN,.4);
+    }
+  }
+  h3 {
+    margin-top: 2.4rem;
+  }
+  p {
+    margin-top: 1.2rem;
+  }
+  ul {
+    list-style: disc;
+  }
+  ol{
+    list-style: decimal;
+  }
+  > ul, > ol {
+    padding-left: 1.8rem;
+    > li {
+      margin-top: 1.2rem;
+      ul, ol {
+        padding-left: 2.4rem;
+        opacity: 0.8;
+        li {
+          margin-top: .6rem;
+          line-height: 1.4;
+        }
+      }
+    }
+  }
+  input[type=text]{
+    width: 100%;
+    height: 4rem;
+    line-height: 4rem;
+    padding: 0 .8rem;
+    border: 1px solid rgba($COLOR_MAIN,.5);
+  }
+}
+
+.c-btn{
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 4.8rem;
+  line-height: 4.8rem;
+  opacity: .9;
+  background: $COLOR_GRADIENT;
+  color: rgba($COLOR_BASE, 0.8);
+  border-radius: .2rem;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 8px rgba(#000, 0.2);
+  font-size: 1.6rem;
+  letter-spacing: .2em;
+  text-align: center;
+  svg{
+    position: absolute;
+    width: 2.4rem;
+    height: 2.4rem;
+    top: 1.2rem;
+    right: 1.6rem;
+  }
+  *{
+    fill: rgba($COLOR_BASE, 0.8);
+  }
+  &.--secondary{
+    background: rgba($COLOR_MAIN,.1);
+    color: $COLOR_MAIN;
+    *{
+      fill: $COLOR_MAIN;
+    }
+  }
+  &.--dark{
+    background: $COLOR_BASE;
+    color: $COLOR_THEME;
+    *{
+      fill: $COLOR_THEME;
+    }
+  }
+  &.--caution{
+    background: rgba($COLOR_MAIN,.1);
+    color: $COLOR_CAUTION;
+    *{
+      fill: rgba($COLOR_CAUTION, 0.8);
+    }
+  }
+  &:disabled{
+    opacity: .4;
+  }
+}
+
+.c-subBtn{
+  display: inline-block;
+  padding: 0 1.2rem;
+  height: 2.4rem;
+  line-height: 2.4rem;
+  background: rgba($COLOR_MAIN,.2);
+  color: rgba($COLOR_MAIN, 0.8);
+  border-radius: .2rem;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 8px rgba(#000, 0.1);
+  font-size: 1rem;
+  letter-spacing: .1em;
+  text-align: center;
+  vertical-align: middle;
+  svg{
+    width: 1.6rem;
+    height: 1.6rem;
+    margin: .4rem 0 0 .8rem;
+    vertical-align: text-bottom;
+  }
+  *{
+    fill: rgba($COLOR_MAIN, 0.8);
+  }
+}
+
+.c-link{
+  color: $COLOR_THEME;
+  text-decoration: underline;
+  svg {
+    vertical-align: bottom;
+    margin-left: 0.2em;
+  }
+  * {
+    fill: $COLOR_THEME;
+  }
+}
+
+.c-panel{
+  background: rgba($COLOR_MAIN,.05);
+  border-radius: .2rem;
+  box-shadow: 0 0 8px rgba(#000,.3);
+}
+
+.c-detail{
+  summary{}
+}
+
+.c-scrim{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(#000,.5);
+  backdrop-filter: blur(2px);
+  z-index: -1;
+}
+.c-modal{
+  margin: 4.8rem 2.4rem;
+  padding: 0 2.4rem 2.4rem;
+  width: 100%;
+  max-width: 56rem;
+  background: lighten($COLOR_BASE,5%);
+  border-radius: .4rem;
+  box-shadow: 0 .4rem 1.6rem rgba(#000,.7);
+}
+.c-toast{
+  background: lighten($COLOR_BASE, 30%);
+  padding: 1.2rem 1.6rem;
+  border-radius: .4rem;
+  animation: fadeOut .4s 3s ease-out forwards;
+}
+@keyframes fadeOut {
+  from{ opacity: 1; }
+  to{ opacity: 0; pointer-events: none; }
+}

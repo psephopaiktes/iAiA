@@ -1,38 +1,29 @@
-<template>
-  <div>
-    <Nav />
+<template lang="pug">
+main#l-content
 
-    <main id="content">
-      <h1 class="headline">Room</h1>
-      <p>
-        <b>現在開発中の機能です。</b><br />更新情報は<a
-          href="https://twitter.com/iAiAapp"
-          target="_brank"
-          >Twitter</a
-        >にてお知らせします。
-      </p>
-    </main>
-  </div>
+  h1.c-headline ROOM
+
+  #message
+    p 現在開発中の機能です
+    p: a.c-link(href="https://twitter.com/iAiAapp" target="_brank")
+      | 更新情報 (Twitter)
+      <img svg-inline src="@/assets/icon/open_in_new.svg" />
+
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import Nav from "@/components/Nav.vue";
+import { Component, Prop, Vue } from "vue-property-decorator";
 
-@Component({
-  components: {
-    Nav
-  }
-})
+@Component
 export default class Room extends Vue {}
 </script>
 
 <style scoped lang="scss">
-@import "@/scss/common.scss";
-p {
-  font-size: 20px;
-  margin-top: 32px;
-  line-height: 2;
-  opacity: 0.9;
+#message {
+  margin-top: 20vh;
+  text-align: center;
+  p + p {
+    margin-top: 2.4rem;
+  }
 }
 </style>

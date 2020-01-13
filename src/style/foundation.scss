@@ -1,0 +1,103 @@
+html {
+  background-color: $COLOR_BASE;
+  font-size: 10px;
+  @include min($SM) {
+    font-size: 11px;
+  }
+  @include min($MD) {
+    font-size: 12px;
+  }
+  @include min($LG) {
+    font-size: 14px;
+  }
+}
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  overscroll-behavior: none;
+  font-size: 1.6rem;
+  color: rgba($COLOR_MAIN, 0.9);
+  line-height: 1.4;
+  font-weight: 600;
+  font-family: "Avenir Next", "Avenir", "SF Pro Text", "Robot", "Helvetica Neue",
+    "Helvetica", "Arial", "Hiragino Sans", -apple-system, BlinkMacSystemFont,
+    "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Noto Sans CJK JP", "Meiryo",
+    "メイリオ", "Segoe UI", sans-serif;
+  font-smoothing: antialiased;
+  font-feature-settings: "pkna";
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+}
+ul, ol {
+  list-style: none;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+svg{
+  outline: none;
+}
+svg:not([fill]) {
+  fill: currentColor;
+}
+b, strong {
+  font-weight: bolder;
+}
+a{
+  text-decoration-skip-ink: none;
+  text-decoration: none;
+}
+p a {
+  text-decoration: underline;
+}
+
+a,
+area,
+button,
+[type="button"],
+[type="submit"],
+[role="button"],
+input:not([type="range"]),
+label,
+select,
+summary,
+textarea {
+  touch-action: manipulation;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+  background: none;
+  border-style: none;
+  border-radius: 0;
+}
+textarea{
+  resize: vertical;
+}
+[disabled] {
+  cursor: default;
+}
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: inherit;
+  color: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

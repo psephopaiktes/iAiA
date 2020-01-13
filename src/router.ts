@@ -9,23 +9,11 @@ export default new Router({
   routes: [
     {
       path: "/",
-      redirect: "/dice"
+      redirect: "/"
     },
     {
-      path: "/term",
-      component: () => import("./views/Term.vue")
-    },
-    {
-      path: "/help",
-      component: () => import("./views/Help.vue")
-    },
-    {
-      path: "/share",
-      component: () => import("./views/Share.vue")
-    },
-    {
-      path: "/account",
-      component: () => import("./views/Account.vue")
+      path: "/login",
+      component: () => import("./views/Login.vue")
     },
     {
       path: "/dice",
@@ -33,11 +21,15 @@ export default new Router({
     },
     {
       path: "/character",
-      component: () => import("./views/Character.vue")
+      component: () => import("./views/Character/Index.vue")
     },
     {
-      path: "/character/:charId",
-      component: () => import("./views/CharacterDetail.vue")
+      path: "/character/edit",
+      component: () => import("./views/Character/Edit.vue")
+    },
+    {
+      path: "/character/detail/:charId",
+      component: () => import("./views/Character/Detail.vue")
     },
     {
       path: "/room",
@@ -45,11 +37,27 @@ export default new Router({
     },
     {
       path: "/other",
-      component: () => import("./views/Other.vue")
+      component: () => import("./views/Other/Index.vue")
     },
     {
-      path: "/login",
-      component: () => import("./views/Login.vue")
+      path: "/app.html",
+      redirect: "/other"
+    },
+    {
+      path: "/other/help",
+      component: () => import("./views/Other/Help.vue")
+    },
+    {
+      path: "/other/account",
+      component: () => import("./views/Other/Account.vue")
+    },
+    {
+      path: "/other/term",
+      component: () => import("./views/Other/Term.vue")
+    },
+    {
+      path: "/other/share",
+      component: () => import("./views/Other/Share.vue")
     },
     {
       path: "/*",

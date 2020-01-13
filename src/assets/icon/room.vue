@@ -1,3 +1,0 @@
-<template>
-  <!-- eslint-disable --><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m18 1h-12a2 2 0 0 0 -2 2v18a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-18a2 2 0 0 0 -2-2zm-3 12.5a1.5 1.5 0 1 1 1.5-1.5 1.5 1.5 0 0 1 -1.5 1.5z"/></svg>
-</template>

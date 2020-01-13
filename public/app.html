@@ -1,155 +1,148 @@
 <!DOCTYPE html>
 <html lang="ja">
 
-  <head prefix="og: http://ogp.me/ns#">
-    <meta charset="utf-8">
-    <title>iAiA</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="icon" type="image/png" href="/img/favicon.png">
-    <link rel="canonical" href="https://iAiA.app">
-    <meta name="description" content="クトゥルフ神話TRPGをサポートするアプリです。スマホがあればダイスもキャラクターシートも必要ありません。完全無料。">
-    <meta name="theme-color" content="#002233">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- OGP -->
-    <meta property="og:type" content="game">
-    <meta property="og:title" content="iAiA | クトゥルフTRPGサポーター">
-    <meta property="og:site_name" content="iAiA">
-    <meta property="og:description" content="クトゥルフ神話TRPGをサポートするアプリです。スマホがあればダイスもキャラクターシートも必要ありません。完全無料。">
-    <meta property="og:image" content="/img/ogp.png">
-    <meta property="og:url" content="iAiA.app">
-    <meta property="og:locale" content="ja_JP">
-    <!-- CSS for Loading -->
-    <style>
-      @keyframes blink {
-        0% {
-          opacity: 1;
-        }
-        100% {
-          opacity: .2;
-        }
-      }
-      @keyframes roll {
-        0% {
-          transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-        }
-        50% {
-          transform: rotateX(40deg) rotateY(180deg) rotateZ(320deg);
-        }
-        100% {
-          transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
-        }
-      }
-      #loading.hide{
-        opacity: 0;
-        pointer-events: none;
-      }
-      #loading {
-        transition: .2s ease;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 9999;
-        width: 100vw;
-        height: 100vh;
-        perspective: 500;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        background: #023;
-        font-family: "Avenir Next", "Avenir Neue", "Avenir", Futura, "Century Gothic", "Helvetica Neue", Helvetica, Roboto, Arial, Sans-serif;
-        font-weight: bold;
-        text-align: center;
-      }
-      #loading p {
-        margin: 80px auto 0;
-        color: #0fe;
-        letter-spacing: 0.5em;
-        text-indent: 0.5em;
-        font-size: 18px;
-        animation: blink 1s ease-in-out infinite alternate;
-      }
-      #loading .dice {
-        background: #000;
-        width: 80px;
-        height: 80px;
-        position: relative;
-        transform-style: preserve-3d;
-        transition: 1s ease-out;
-        animation: roll 4s linear infinite;
-      }
-      #loading .dice div {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        box-sizing: border-box;
-        background: #0fe;
-        color: rgba(0, 34, 51, 0.2);
-        line-height: 80px;
-        font-size: 40px;
-      }
-      #loading .dice .front {
-        top: 0;
-        left: 0;
-        transform: translateZ(40px);
-      }
-      #loading .dice .back {
-        top: 0;
-        left: 0;
-        transform: translateZ(-40px) rotateY(180deg);
-      }
-      #loading .dice .left {
-        top: 0;
-        left: 40px;
-        transform: rotateY(90deg);
-      }
-      #loading .dice .right {
-        top: 0;
-        right: 40px;
-        transform: rotateY(-90deg);
-      }
-      #loading .dice .top {
-        top: 40px;
-        left: 0;
-        transform: rotateX(-90deg);
-      }
-      #loading .dice .bottom {
-        bottom: 40px;
-        left: 0;
-        transform: rotateX(90deg);
-      }
-    </style>
-  </head>
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>iAiA</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="canonical" href="https://iAiA.app">
+  <meta name="description" content="クトゥルフ神話TRPGをサポートするアプリです。スマホがあればダイスもキャラクターシートも必要ありません。完全無料。">
+  <meta name="theme-color" content="#00ccbe">
+  <!-- OGP -->
+  <meta property="og:type" content="game">
+  <meta property="og:title" content="iAiA | クトゥルフTRPGサポーター">
+  <meta property="og:site_name" content="iAiA">
+  <meta property="og:description" content="クトゥルフ神話TRPGをサポートするアプリです。スマホがあればダイスもキャラクターシートも必要ありません。完全無料。">
+  <meta property="og:image" content="/img/ogp.png">
+  <meta property="og:url" content="iAiA.app">
+  <meta property="og:locale" content="ja_JP">
+  <!-- CSS for Loading -->
+  <style>
+    @keyframes blink {
+      from { opacity: 1 }
+      to { opacity: .2 }
+    }
+    @keyframes roll {
+      0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) }
+      50% { transform: rotateX(40deg) rotateY(180deg) rotateZ(320deg) }
+      100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg) }
+    }
 
-  <body>
+    #loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      width: 100vw;
+      height: 100vh;
+      perspective: 500;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: #141b1e;;
+      font-family: "Avenir Next", "Avenir Neue", "Avenir", Futura, "Century Gothic", "Helvetica Neue", Helvetica, Roboto, Arial, Sans-serif;
+      font-weight: bold;
+      text-align: center;
+    }
 
-    <noscript><strong>Javascriptがサポートされていません。</strong></noscript>
+    #loading p {
+      margin: 80px auto 0;
+      color: #0fe;
+      letter-spacing: 0.5em;
+      text-indent: 0.5em;
+      font-size: 18px;
+      animation: blink 1s ease-in-out infinite alternate;
+    }
 
-    <div id="loading">
-        <div class="dice">
-          <div class="front">1</div>
-          <div class="back">6</div>
-          <div class="left">2</div>
-          <div class="right">5</div>
-          <div class="top">3</div>
-          <div class="bottom">4</div>
-        </div>
-        <p>LOADING...</p>
-      </div>
+    #loading .dice {
+      width: 80px;
+      height: 80px;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: roll 3s linear infinite;
+    }
 
-    <div id="app"></div>
+    #loading .dice div {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      box-sizing: border-box;
+      background: #0fe;
+      color: rgba(0, 34, 51, 0.5);
+      line-height: 80px;
+      border-radius: 8px;
+      font-size: 40px;
+    }
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-storage.js"></script>
+    #loading .dice .front {
+      top: 0;
+      left: 0;
+      transform: translateZ(40px);
+    }
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-50842673-7"></script>
-    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-50842673-7');</script>
+    #loading .dice .back {
+      top: 0;
+      left: 0;
+      transform: translateZ(-40px) rotateY(180deg);
+    }
 
-  </body>
+    #loading .dice .left {
+      top: 0;
+      left: 40px;
+      transform: rotateY(90deg);
+    }
+
+    #loading .dice .right {
+      top: 0;
+      right: 40px;
+      transform: rotateY(-90deg);
+    }
+
+    #loading .dice .top {
+      top: 40px;
+      left: 0;
+      transform: rotateX(-90deg);
+    }
+
+    #loading .dice .bottom {
+      bottom: 40px;
+      left: 0;
+      transform: rotateX(90deg);
+    }
+  </style>
+</head>
+
+<body>
+
+  <noscript><strong>Javascriptがサポートされていません。</strong></noscript>
+
+  <div id="loading">
+    <div class="dice">
+      <div class="front">1</div>
+      <div class="back">6</div>
+      <div class="left">2</div>
+      <div class="right">5</div>
+      <div class="top">3</div>
+      <div class="bottom">4</div>
+    </div>
+    <p>LOADING...</p>
+  </div>
+
+  <div id="app"></div>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.5/firebase-storage.js"></script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-50842673-7"></script>
+  <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'UA-50842673-7');</script>
+
+</body>
 
 </html>

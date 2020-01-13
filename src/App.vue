@@ -1,14 +1,17 @@
-<template>
-  <div id="app">
-    <router-view />
-  </div>
+<template lang="pug">
+#app
+  global-nav
+  router-view
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import GlobalNav from "@/components/GlobalNav.vue";
 
 @Component({
-  components: {}
+  components: {
+    GlobalNav
+  }
 })
 export default class App extends Vue {
   // lifecycle hook
@@ -29,15 +32,15 @@ export default class App extends Vue {
       if (!elm) {
         return;
       }
-      elm.classList.add("hide");
+      elm.style.display = "none";
     });
   }
 }
 </script>
 
 <style lang="scss">
-@import "@/scss/common.scss";
-@import "@/scss/foundation.scss";
-@import "@/scss/utility.scss";
-@import "@/scss/layout.scss";
+@import "@/style/foundation.scss";
+@import "@/style/layout.scss";
+@import "@/style/component.scss";
+@import "@/style/utility.scss";
 </style>

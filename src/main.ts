@@ -13,6 +13,10 @@ new Vue({
   render: h => h(App)
 }).$mount("#app");
 
+// router.afterEach(to => {
+//   gtag("config", "UA-50842673-7", { page_path: to.path });
+// });
+
 Vue.use(firestorePlugin);
 
 window.console.log(
