@@ -85,7 +85,6 @@ main#l-content
         | 閉じる
         <img svg-inline src="@/assets/icon/close.svg" />
 
-
 </template>
 
 <script lang="ts">

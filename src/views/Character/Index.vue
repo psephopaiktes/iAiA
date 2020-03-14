@@ -129,6 +129,7 @@ export default class Character extends Vue {
       right: 0;
       line-height: 3.2rem;
       caret-color: $COLOR_THEME;
+      outline: none;
       &::placeholder {
         font-weight: lighter;
       }
