@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import router from "./router";
 import firebaseApp from "./firebase";
 import { throwDice } from "./lib/dice";
 
