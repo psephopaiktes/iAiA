@@ -1,34 +1,41 @@
 <template lang="pug">
 main#l-content
 
-  header.c-pageHeader
-    router-link.c-pageHeader__close(to='/character')
-      <img svg-inline src="@/assets/icon/close.svg" />
-    h1 キャラクター作成
-    //- h1 キャラクター編集
+  CharacterEditHeader(:CharData="CharData")
 
-  h2.u-mt56 {{ CharData.name }}
   img(:src='CharData.iconUrl', alt='キャラクターアイコン')
   p: input(type='file', @change='updateImage($event.target, $store.state.user)')
-  p {{ $route.params.charId }}
-  p {{ CharData.idDead }}
+
+  CharacterEditFooter
+
+  //- CharacterEditSampleModal
+
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import firebase from "firebase";
 import { storage, User } from "firebase";
+import CharacterEditHeader from "@/components/Character/Edit/Header.vue";
+import CharacterEditFooter from "@/components/Character/Edit/Footer.vue";
+import CharacterEditSampleModal from "@/components/Character/Edit/SampleModal.vue";
 
-@Component
+@Component({
+  components: {
+    CharacterEditHeader,
+    CharacterEditFooter,
+    CharacterEditSampleModal
+  }
+})
 export default class CharacterEdit extends Vue {
   // data
   // TODO Fetch from Firebase by charId
-  // CharId = this.$route.params.charId
+  // charId = this.$route.params.charId
   public CharData: any = {
     name: "AAA",
     iconUrl: "aaa",
     modifiedDate: "20190802",
-    isDead: "aaa"
+    isDead: true
   };
 
   public updateImage(element: HTMLInputElement, user: User) {
