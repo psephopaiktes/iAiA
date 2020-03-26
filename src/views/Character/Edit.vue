@@ -3,7 +3,7 @@ main#l-content
 
   CharacterEditHeader(:CharData="CharData")
 
-  img(:src='CharData.iconUrl', alt='キャラクターアイコン')
+  img(:src='CharData.profile.avatarUrl', alt='キャラクターアイコン')
   p: input(type='file', @change='updateImage($event.target, $store.state.user)')
 
   CharacterEditFooter
@@ -20,6 +20,8 @@ import CharacterEditHeader from "@/components/Character/Edit/Header.vue";
 import CharacterEditFooter from "@/components/Character/Edit/Footer.vue";
 import CharacterEditSampleModal from "@/components/Character/Edit/SampleModal.vue";
 
+import CharData from "@/types/CharData";
+
 @Component({
   components: {
     CharacterEditHeader,
@@ -33,9 +35,11 @@ export default class CharacterEdit extends Vue {
   // charId = this.$route.params.charId
   public CharData: any = {
     name: "AAA",
-    iconUrl: "aaa",
-    modifiedDate: "20190802",
-    isDead: true
+    profile: {
+      name: "あああ",
+      avatarUrl: "",
+      isDead: true
+    }
   };
 
   public updateImage(element: HTMLInputElement, user: User) {
@@ -61,7 +65,7 @@ export default class CharacterEdit extends Vue {
       })
       .then(() => ref.getDownloadURL())
       .then(url => {
-        this.CharData.iconUrl = url;
+        this.CharData.avatarUrl = url;
       })
       .catch(e => {
         window.alert("画像の更新に失敗しました");

@@ -18,18 +18,18 @@ main#l-content
         select
           option(value='') 名前順
           option(value='') レアリティ順
-    p.charEmpty(v-if='CharList.length < 1') キャラクターがいません
+    p.charEmpty(v-if='CharDataList.length < 1') キャラクターがいません
     // TODO 読み込みUI
     ul.charList(v-else)
       li.c-panel(
-        v-for='(item, i) in CharList',
+        v-for='(item, i) in CharDataList',
         :key='i',
-        :class="{ dead: item.isDead }"
+        :class="{ dead: item.profile.isDead }"
       )
-        router-link(:to="'/character/detail/' + item.id")
-          img(:src="item.iconUrl" alt="アイコン画像")
-          h3 {{ item.name }}
-          p {{ item.roll }}
+        router-link(:to="'/character/detail?charId=' + item.id")
+          img(:src="item.profile.avatarUrl" alt="アイコン画像")
+          h3 {{ item.profile.name }}
+          p {{ item.profile.occupation }}
           time {{ item.modifiedDate }}
     router-link.c-btn#l-floatButton(to='/character/edit')
       | 新規作成
@@ -40,57 +40,34 @@ main#l-content
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 
+import CharData from "@/types/CharData";
+
 @Component
 export default class Character extends Vue {
   // data
   // TODO Fetch from Firebase by UserId
-  public CharList: any = [
+  public CharDataList: CharData[] = [
     {
       id: "aaa",
-      name: "平田 アキラ",
-      iconUrl:
-        "https://pbs.twimg.com/profile_images/919519162287849472/RuH3Vk9H_400x400.jpg",
       modifiedDate: "2019/08/42",
-      roll: "探偵",
-      isDead: "true"
-    },
-    {
-      id: "bbb",
-      name:
-        "ジュゲムジュゲム・ゴコウノスリキレカイジャリスイギョノスイギョウマツ",
-      iconUrl:
-        "https://pbs.twimg.com/profile_images/919519162287849472/RuH3Vk9H_400x400.jpg",
-      modifiedDate: "2019/08/42",
-      roll:
-        "探偵探偵探偵探偵探偵探偵探偵探偵探偵探偵探偵探偵探偵探偵探偵探偵探偵探偵探偵探偵探偵探偵探偵探偵探偵探偵探偵探偵探偵",
-      isDead: ""
+      profile: {
+        name: "平田 アキラ",
+        avatarUrl:
+          "https://pbs.twimg.com/profile_images/919519162287849472/RuH3Vk9H_400x400.jpg",
+        occupation: "探偵",
+        isDead: true
+      }
     },
     {
       id: "aaa",
-      name: "平田 アキラ",
-      iconUrl:
-        "https://pbs.twimg.com/profile_images/919519162287849472/RuH3Vk9H_400x400.jpg",
       modifiedDate: "2019/08/42",
-      roll: "探偵",
-      isDead: "true"
-    },
-    {
-      id: "aaa",
-      name: "平田 アキラ",
-      iconUrl:
-        "https://pbs.twimg.com/profile_images/919519162287849472/RuH3Vk9H_400x400.jpg",
-      modifiedDate: "2019/08/42",
-      roll: "探偵",
-      isDead: "true"
-    },
-    {
-      id: "aaa",
-      name: "平田 アキラ",
-      iconUrl:
-        "https://pbs.twimg.com/profile_images/919519162287849472/RuH3Vk9H_400x400.jpg",
-      modifiedDate: "2019/08/42",
-      roll: "探偵",
-      isDead: "true"
+      profile: {
+        name: "平田 アキラ",
+        avatarUrl:
+          "https://pbs.twimg.com/profile_images/919519162287849472/RuH3Vk9H_400x400.jpg",
+        occupation: "探偵",
+        isDead: true
+      }
     }
   ];
 }
