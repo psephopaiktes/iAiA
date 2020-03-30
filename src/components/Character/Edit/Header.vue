@@ -11,7 +11,7 @@ header.c-pageHeader
     li(v-if="$route.query.charId")
       button.c-subBtn.c-pageHeader__subBtn(@click="")
         | 死亡状態にする
-        <img v-if="CharData.isDead" svg-inline src="@/assets/icon/check_box_outline_blank.svg" />
+        <img v-if="CharData.profile.isDead" svg-inline src="@/assets/icon/check_box_outline_blank.svg" />
         <img v-else svg-inline src="@/assets/icon/check_box.svg" />
     li(v-if="$route.query.charId")
       button.c-subBtn.c-pageHeader__subBtn(@click="")
@@ -25,9 +25,11 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import firebase from "firebase";
 import { storage, User } from "firebase";
 
+import CharData from "@/types/CharData";
+
 @Component
 export default class CharacterEditHeader extends Vue {
-  @Prop() CharData!: any;
+  @Prop() CharData!: CharData;
 }
 </script>
 
