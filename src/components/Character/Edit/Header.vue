@@ -15,7 +15,7 @@ header.c-pageHeader
         <img v-else svg-inline src="@/assets/icon/check_box.svg" />
     li(v-if="$route.query.charId")
       button.c-subBtn.c-pageHeader__subBtn(@click="")
-        | 完了
+        | 保存
         <img svg-inline src="@/assets/icon/check.svg" />
 
 </template>
@@ -29,6 +29,7 @@ import CharData from "@/types/CharData";
 
 @Component
 export default class CharacterEditHeader extends Vue {
+  // props
   @Prop() CharData!: CharData;
 }
 </script>
@@ -36,9 +37,12 @@ export default class CharacterEditHeader extends Vue {
 <style scoped lang="scss">
 .buttons {
   position: absolute;
-  top: 2.4rem;
+  top: 3.2rem;
   right: 2.4rem;
   display: flex;
+  @include minmax($SM, $MD - 1) {
+    top: #{3.2rem + $L-NAV_SM_H};
+  }
   li {
     margin-left: 0.8rem;
   }

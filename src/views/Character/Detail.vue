@@ -4,10 +4,12 @@ main#l-content
   router-link.c-pageHeader__close(to='/character')
     <img svg-inline src="@/assets/icon/close.svg" />
 
-  h1.u-mt56 {{ CharData.name }}
+  h1.u-mt56 {{ CharData.profile.name }}
   img(:src="CharData.profile.avatarUrl" alt="アイコン画像")
 
-  router-link.c-btn.u-mt56(to='/character/edit?charId=XXXXX') 編集
+  router-link.c-btn.u-mt56(:to="'/character/edit?charId=' + $route.query.charId")
+    | 編集
+    <img svg-inline src="@/assets/icon/edit.svg" />
 
 </template>
 
@@ -24,8 +26,8 @@ export default class CharacterDetail extends Vue {
 
   // lifecycle hook
   public beforeCreate() {
-    if (!this.$store.state.login) {
-      // 未ログインの場合
+    if (!this.$route.query.charId || !this.$store.state.login) {
+      // URLにID指定がない or 未ログインの場合
       this.$router.push("/character");
     }
     const db = firebaseApp.firestore();
