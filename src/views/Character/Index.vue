@@ -30,7 +30,7 @@ main#l-content
           img(:src="item.profile.avatarUrl" alt="アイコン画像")
           h3 {{ item.profile.name }}
           p {{ item.profile.occupation }}
-          time {{ item.modifiedDate }}
+          time {{ item.modifiedDate.toLocaleDateString() }}
     router-link.c-btn#l-floatButton(to='/character/edit')
       | 新規作成
       <img svg-inline src="@/assets/icon/add.svg" />
@@ -49,7 +49,7 @@ export default class Character extends Vue {
   public CharDataList: CharData[] = [
     {
       id: "aaa",
-      modifiedDate: "2019/08/42",
+      modifiedDate: new Date("2019/08/42"),
       profile: {
         name: "平田 アキラ",
         avatarUrl:
@@ -60,7 +60,7 @@ export default class Character extends Vue {
     },
     {
       id: "aaa",
-      modifiedDate: "2019/08/42",
+      modifiedDate: new Date("2019/08/42"),
       profile: {
         name: "平田 アキラ",
         avatarUrl:
