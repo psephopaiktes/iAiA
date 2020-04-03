@@ -1,15 +1,18 @@
 <template lang="pug">
 main#l-content
 
-  CharacterEditHeader(:CharData="CharData")
+  CharacterEditHeader(:CharData="CharData" @showSampleModal="showSampleModal=true")
 
   CharacterEditSectionProfile(:CharData="CharData")
-  CharacterEditSectionCharacteristics
-
+  CharacterEditSectionAbility
+  CharacterEditSectionStatus
+  CharacterEditSectionSkill
+  CharacterEditSectionWeapons
+  CharacterEditSectionBelongings
 
   CharacterEditFooter
 
-  //- CharacterEditSampleModal
+  CharacterEditSampleModal(v-if="showSampleModal" @closeSampleModal="showSampleModal=false")
 
 </template>
 
@@ -23,7 +26,11 @@ import CharData from "@/types/CharData";
 import CharacterEditHeader from "@/components/Character/Edit/Header.vue";
 import CharacterEditFooter from "@/components/Character/Edit/Footer.vue";
 import CharacterEditSectionProfile from "@/components/Character/Edit/SectionProfile.vue";
-import CharacterEditSectionCharacteristics from "@/components/Character/Edit/SectionCharacteristics.vue";
+import CharacterEditSectionAbility from "@/components/Character/Edit/SectionAbility.vue";
+import CharacterEditSectionStatus from "@/components/Character/Edit/SectionStatus.vue";
+import CharacterEditSectionSkill from "@/components/Character/Edit/SectionSkill.vue";
+import CharacterEditSectionWeapons from "@/components/Character/Edit/SectionWeapons.vue";
+import CharacterEditSectionBelongings from "@/components/Character/Edit/SectionBelongings.vue";
 import CharacterEditSampleModal from "@/components/Character/Edit/SampleModal.vue";
 
 @Component({
@@ -31,12 +38,17 @@ import CharacterEditSampleModal from "@/components/Character/Edit/SampleModal.vu
     CharacterEditHeader,
     CharacterEditFooter,
     CharacterEditSectionProfile,
-    CharacterEditSectionCharacteristics,
+    CharacterEditSectionAbility,
+    CharacterEditSectionStatus,
+    CharacterEditSectionSkill,
+    CharacterEditSectionWeapons,
+    CharacterEditSectionBelongings,
     CharacterEditSampleModal
   }
 })
 export default class CharacterEdit extends Vue {
   // data
+  showSampleModal: boolean = false;
   // TODO Fetch from Firebase by $route.query.charId
   public CharData: CharData = {
     profile: {
@@ -61,7 +73,6 @@ export default class CharacterEdit extends Vue {
   margin-top: 5.6rem;
   font-size: 1.8rem;
   font-weight: 300;
-  letter-spacing: 0.05em;
   color: rgba($COLOR_MAIN, 0.5);
   svg {
     width: 1.6rem;
@@ -70,6 +81,54 @@ export default class CharacterEdit extends Vue {
     path {
       fill: $COLOR_MAIN;
     }
+  }
+}
+::v-deep .parameterTable {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  tr {
+    height: 4rem;
+  }
+  th,
+  td {
+    text-align: center;
+    box-sizing: border-box;
+    font-weight: 600;
+  }
+  th {
+    border: 0.2rem solid lighten($COLOR_BASE, 20%);
+    font-size: 1.2rem;
+    color: rgba($COLOR_MAIN, 0.6);
+    &:empty {
+      position: relative;
+      &::after {
+        @include beforeAfter;
+        top: 0;
+        left: 0;
+        background: lighten($COLOR_BASE, 20%);
+        clip-path: polygon(2% 0, 100% 98%, 98% 100%, 0 2%);
+      }
+    }
+  }
+  td {
+    border: 0.1rem solid lighten($COLOR_BASE, 20%);
+    font-size: 1.6rem;
+  }
+  input {
+    max-width: calc(100% - 0.8rem);
+    margin: 0.4rem;
+    background: rgba($COLOR_MAIN, 0.1);
+    text-align: center;
+    line-height: 3.2rem;
+    letter-spacing: 0.1em;
+  }
+}
+::v-deep .rowBtns {
+  display: flex;
+  margin-top: 1.6rem;
+  li + li {
+    margin-left: 0.8rem;
   }
 }
 </style>

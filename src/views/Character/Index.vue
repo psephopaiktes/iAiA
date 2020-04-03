@@ -22,8 +22,8 @@ main#l-content
     // TODO 読み込みUI
     ul.charList(v-else)
       li.c-panel(
-        v-for='(item, i) in CharDataList',
-        :key='i',
+        v-for='(item, i) in CharDataList'
+        :key='i'
         :class="{ dead: item.profile.isDead }"
       )
         router-link(:to="'/character/detail?charId=' + item.id")

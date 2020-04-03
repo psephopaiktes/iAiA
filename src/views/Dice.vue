@@ -227,7 +227,6 @@ export default class Dice extends Vue {
     border-spacing: 0 0.8rem;
     width: 100%;
     font-size: 16px;
-    letter-spacing: 0.05em;
     tr {
       height: 2.4rem;
       line-height: 2.4rem;
@@ -235,7 +234,6 @@ export default class Dice extends Vue {
     th {
       text-align: left;
       font-size: 1.6rem;
-      letter-spacing: 0.05em;
       font-weight: 600;
     }
     td {

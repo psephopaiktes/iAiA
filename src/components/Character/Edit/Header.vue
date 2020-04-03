@@ -5,7 +5,7 @@ header.c-pageHeader
   h1 {{ $route.query.charId ? 'キャラクター編集' : 'キャラクター作成' }}
   ul.buttons
     li(v-if="!$route.query.charId")
-      button.c-subBtn.c-pageHeader__subBtn(@click="")
+      button.c-subBtn.c-pageHeader__subBtn(@click="$emit('showSampleModal')")
         | サンプルから作成
         <img svg-inline src="@/assets/icon/wc.svg" />
     li(v-if="$route.query.charId")
