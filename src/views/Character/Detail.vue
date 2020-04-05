@@ -16,7 +16,6 @@ main#l-content
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import firebaseApp from "../../firebase";
-import firebase from "firebase";
 
 import CharData from "@/types/CharData";
 
@@ -51,6 +50,9 @@ export default class CharacterDetail extends Vue {
             }
           };
         }
+      })
+      .catch(err => {
+        console.error(err);
       });
   }
 }

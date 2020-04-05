@@ -41,35 +41,41 @@ main#l-content
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 import CharData from "@/types/CharData";
+import firebaseApp from "@/firebase";
 
 @Component
 export default class Character extends Vue {
   // data
-  // TODO Fetch from Firebase by UserId
-  public CharDataList: CharData[] = [
-    {
-      id: "aaa",
-      modifiedDate: new Date("2019/08/42"),
-      profile: {
-        name: "平田 アキラ",
-        avatarUrl:
-          "https://pbs.twimg.com/profile_images/919519162287849472/RuH3Vk9H_400x400.jpg",
-        occupation: "探偵",
-        isDead: true
-      }
-    },
-    {
-      id: "aaa",
-      modifiedDate: new Date("2019/08/42"),
-      profile: {
-        name: "平田 アキラ",
-        avatarUrl:
-          "https://pbs.twimg.com/profile_images/919519162287849472/RuH3Vk9H_400x400.jpg",
-        occupation: "探偵",
-        isDead: true
-      }
-    }
-  ];
+  public CharDataList: CharData[] = [];
+
+  // lifecycle hook
+  public beforeCreate() {
+    const db = firebaseApp.firestore();
+    const charactersRef = db.collection("characters");
+    const snapshot = charactersRef.where("userRef", "==",
+      db.collection("users").doc(this.$store.state.user.uid)).get();
+    snapshot.then(querySnapshot => {
+      querySnapshot.forEach(doc => {
+        if (doc.exists) {
+          const data = doc.data();
+          if (data == undefined) {
+            throw new Error("undefined data: " + this.$route.params.charID);
+          }
+          this.CharDataList.push({
+            id: data.id,
+            modifiedDate: data.modifiedDate,
+            profile: {
+              name: data.name,
+              avatarUrl: data.avatarUrl,
+              isDead: data.isDead
+            }
+          });
+        }
+      })
+    }).catch(err => {
+        window.console.error(err);
+      });
+  }
 }
 </script>
 

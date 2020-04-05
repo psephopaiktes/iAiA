@@ -47,7 +47,7 @@ export default new Vuex.Store({
                 docRef
                   .set({
                     uid: user.uid,
-                    displayName: user.displayName
+                    displayName: user.displayName,
                   })
                   .catch(error => {
                     throw error;
