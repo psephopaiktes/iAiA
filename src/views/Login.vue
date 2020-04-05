@@ -132,7 +132,6 @@ main {
     height: 5.6rem;
     line-height: 5.6rem;
     font-size: 1.4rem;
-    letter-spacing: 0.05em;
   }
   .google {
     margin-top: 3.2rem;

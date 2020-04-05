@@ -28,7 +28,7 @@ export default new Router({
       component: () => import("./views/Character/Edit.vue")
     },
     {
-      path: "/character/detail/:charId",
+      path: "/character/detail",
       component: () => import("./views/Character/Detail.vue")
     },
     {

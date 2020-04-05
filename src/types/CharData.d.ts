@@ -39,7 +39,7 @@ export default interface CharData {
     INT?: number;
     EDU?: number;
   };
-  secondAttribute?: {
+  status?: {
     // キャラクターの状態 stausから導き出されるもの
     HP?: number;
     MAXHP?: number;

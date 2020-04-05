@@ -73,7 +73,7 @@
 
 .c-article{
   margin-top: 1.6rem;
-  line-height: 1.5;
+  line-height: 1.6;
   font-weight: 500;
   font-family: "Hiragino Sans", -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Noto Sans CJK JP", "Meiryo", "メイリオ", "Avenir Next", "Avenir", "SF Pro Text", "Robot", "Helvetica Neue", "Helvetica", "Arial", "Segoe UI", sans-serif;
   @include min($SM){
@@ -197,6 +197,12 @@
   *{
     fill: rgba($COLOR_MAIN, 0.8);
   }
+  &.--noText {
+    padding: 0 .4rem;
+    svg {
+      margin: .4rem 0 0;
+    }
+  }
 }
 
 .c-link{
@@ -218,7 +224,39 @@
 }
 
 .c-detail{
-  summary{}
+  margin-top: 1.6rem;
+  border-radius: .4rem;
+  background: rgba($COLOR_MAIN, 0.05);
+  padding: 0;
+  position: relative;
+  summary{
+    outline: none;
+    display: block;
+    height: 4rem;
+    line-height: 4rem;
+    color: $COLOR_THEME;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: .1em;
+    &::-webkit-details-marker {
+      display: none;
+    }
+    &::before{
+      @include beforeAfter;
+      width: 1rem; height: 1rem;
+      top: 1.5rem; left: 1.4rem;
+      border: 1px solid $COLOR_THEME;
+      border-width: 0 .2rem .2rem 0;
+      transform: rotate(-45deg);
+      transition: transform $TRANSITION;
+    }
+  }
+  &[open]{
+    padding: 0 .8rem 1.6rem;
+    & summary::before{
+      transform: rotate(45deg);
+    }
+  }
 }
 
 .c-scrim{

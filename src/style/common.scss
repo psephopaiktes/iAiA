@@ -7,6 +7,8 @@ $COLOR_GRADIENT: linear-gradient(to right bottom, $COLOR_THEME, $COLOR_ACCE);
 $COLOR_BASE: #141b1e;
 $COLOR_MAIN: #fff;
 
+$TRANSITION: .2s ease-out;
+
 $SM: 480px;
 $MD: 960px;
 $LG: 1440px;
@@ -46,7 +48,7 @@ $L-NAV_LG_W: 20rem;
 @mixin transition($property: all) {
   transition: $property .1s ease-out;
   @include btn {
-    transition: $property .2s ease-out;
+    transition: $property $TRANSITION;
     @content;
   }
 }

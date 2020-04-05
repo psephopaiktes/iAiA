@@ -19,12 +19,12 @@ body {
   color: rgba($COLOR_MAIN, 0.9);
   line-height: 1.4;
   font-weight: 600;
-  font-family: "Avenir Next", "Avenir", "SF Pro Text", "Robot", "Helvetica Neue",
-    "Helvetica", "Arial", "Hiragino Sans", -apple-system, BlinkMacSystemFont,
-    "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Noto Sans CJK JP", "Meiryo",
-    "メイリオ", "Segoe UI", sans-serif;
+  font-family:
+    "Avenir Next", "Avenir", "SF Pro Text", "Robot", "Helvetica Neue", "Helvetica", "Arial",
+    "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Noto Sans CJK JP", "BIZ UDPGothic", Meiryo, sans-serif;
   font-smoothing: antialiased;
   font-feature-settings: "pkna";
+  letter-spacing: 0.05em;
 }
 
 *,
