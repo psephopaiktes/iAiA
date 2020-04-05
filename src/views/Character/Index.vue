@@ -52,27 +52,27 @@ export default class Character extends Vue {
   public beforeCreate() {
     const db = firebaseApp.firestore();
     const charactersRef = db.collection("characters");
-    const snapshot = charactersRef.where("userRef", "==",
-      db.collection("users").doc(this.$store.state.user.uid)).get();
-    snapshot.then(querySnapshot => {
-      querySnapshot.forEach(doc => {
-        if (doc.exists) {
-          const data = doc.data();
-          if (data == undefined) {
-            throw new Error("undefined data: " + this.$route.params.charID);
+    const userRef = db.collection("users").doc(this.$store.state.user.uid);
+    const snapshot = charactersRef.where("userRef", "==", userRef).get();
+    snapshot
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          if (doc.exists) {
+            const data = doc.data();
+            this.CharDataList.push({
+              id: data.id,
+              modifiedDate: data.modifiedDate,
+              profile: {
+                name: data.name,
+                avatarUrl: data.avatarUrl,
+                occupation: data.occupation,
+                isDead: data.isDead
+              }
+            });
           }
-          this.CharDataList.push({
-            id: data.id,
-            modifiedDate: data.modifiedDate,
-            profile: {
-              name: data.name,
-              avatarUrl: data.avatarUrl,
-              isDead: data.isDead
-            }
-          });
-        }
+        });
       })
-    }).catch(err => {
+      .catch(err => {
         window.console.error(err);
       });
   }
