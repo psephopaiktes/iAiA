@@ -1,4 +1,5 @@
 import { User } from "firebase";
+import { DiceItem } from "./DiceItem";
 
 export interface RootState {
   login: boolean;
@@ -12,9 +13,4 @@ export interface RootState {
     add: number;
     log: DiceItem[];
   };
-}
-
-export interface DiceItem {
-  dice: string;
-  date: string;
 }
