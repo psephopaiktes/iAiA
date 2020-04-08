@@ -2,29 +2,25 @@ import Vue from "vue";
 import Vuex from "vuex";
 import firebaseApp from "./firebase";
 import { throwDice } from "./lib/dice";
+import { DiceItem, RootState } from "@/types/RootState";
 
 Vue.use(Vuex);
 
-interface DiceItem {
-  dice: string;
-  date: string;
-}
-const logArray: DiceItem[] = [];
+let rootState: RootState = {
+  login: false,
+  loading: true,
+  dice: {
+    showModal: false,
+    result: 0,
+    n: 0,
+    ub: 0,
+    add: 0,
+    log: []
+  }
+};
 
 export default new Vuex.Store({
-  state: {
-    login: false,
-    loading: true,
-    user: {},
-    dice: {
-      showModal: false,
-      result: 0,
-      n: 0,
-      ub: 0,
-      add: 0,
-      log: logArray
-    }
-  },
+  state: rootState,
 
   mutations: {
     checkLocalStorageLogin(state) {
@@ -51,7 +47,7 @@ export default new Vuex.Store({
                 docRef
                   .set({
                     uid: user.uid,
-                    displayName: user.displayName
+                    displayName: user.displayName,
                   })
                   .catch(error => {
                     throw error;

@@ -19,5 +19,7 @@
   "vetur.format.enable": false,
   "search.exclude": {
     "/dist": true
-  }
+  },
+  "javascript.suggest.completeFunctionCalls": true,
+  "typescript.suggest.completeFunctionCalls": true
 }
