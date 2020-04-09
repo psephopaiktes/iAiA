@@ -2,13 +2,15 @@ import Vue from "vue";
 import Vuex from "vuex";
 import firebaseApp from "./firebase";
 import { throwDice } from "./lib/dice";
-import { DiceItem, RootState } from "@/types/RootState";
+import { DiceItem } from "./types/DiceItem";
+import { RootState } from "./types/RootState";
 
 Vue.use(Vuex);
 
 let rootState: RootState = {
   login: false,
   loading: true,
+  user: null,
   dice: {
     showModal: false,
     result: 0,
@@ -47,7 +49,7 @@ export default new Vuex.Store({
                 docRef
                   .set({
                     uid: user.uid,
-                    displayName: user.displayName,
+                    displayName: user.displayName
                   })
                   .catch(error => {
                     throw error;

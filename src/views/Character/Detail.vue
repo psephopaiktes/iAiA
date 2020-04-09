@@ -52,7 +52,7 @@ export default class CharacterDetail extends Vue {
         }
       })
       .catch(err => {
-        console.error(err);
+        window.console.error(err);
       });
   }
 }

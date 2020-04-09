@@ -4,7 +4,7 @@ import { DiceItem } from "./DiceItem";
 export interface RootState {
   login: boolean;
   loading: boolean;
-  user?: User;
+  user: User | null;
   dice: {
     showModal: boolean;
     result: number;
