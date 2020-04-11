@@ -24,7 +24,7 @@ export default class CharacterDetail extends Vue {
   public CharData: CharData = { profile: {} };
 
   // lifecycle hook
-  public beforeCreate() {
+  public beforeMount() {
     if (!this.$route.query.charId || !this.$store.state.login) {
       // URLにID指定がない or 未ログインの場合
       this.$router.push("/character");

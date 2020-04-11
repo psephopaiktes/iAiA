@@ -50,7 +50,7 @@ export default class Character extends Vue {
   public CharDataList: CharData[] = [];
 
   // lifecycle hook
-  public beforeCreate() {
+  public beforeMount() {
     const db = firebaseApp.firestore();
     const user = this.$store.state.user;
     if (user == null) {
