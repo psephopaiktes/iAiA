@@ -1,4 +1,5 @@
 import { DiceItem } from "./DiceItem";
+import { UserInfo } from "@/types/UserInfo";
 
 export interface RootState {
   login: boolean;
@@ -12,13 +13,4 @@ export interface RootState {
     add: number;
     log: DiceItem[];
   };
-}
-
-export interface UserInfo {
-  displayName: string | null;
-  email: string | null;
-  phoneNumber: string | null;
-  photoURL: string | null;
-  providerId: string;
-  uid: string;
 }

@@ -1,9 +1,10 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import firebaseApp from "./firebase";
-import { throwDice } from "./lib/dice";
-import { DiceItem } from "./types/DiceItem";
-import { RootState, UserInfo } from "./types/RootState";
+import firebaseApp from "@/firebase";
+import { throwDice } from "@/lib/dice";
+import { DiceItem } from "@/types/DiceItem";
+import { RootState } from "@/types/RootState";
+import { UserInfo } from "@/types/UserInfo";
 
 Vue.use(Vuex);
 
