@@ -3,7 +3,7 @@ import Vuex from "vuex";
 import firebaseApp from "./firebase";
 import { throwDice } from "./lib/dice";
 import { DiceItem } from "./types/DiceItem";
-import { RootState } from "./types/RootState";
+import { RootState, UserInfo } from "./types/RootState";
 
 Vue.use(Vuex);
 
@@ -22,6 +22,7 @@ let rootState: RootState = {
 };
 
 export default new Vuex.Store({
+  strict: process.env.NODE_ENV !== "production",
   state: rootState,
 
   mutations: {
@@ -36,7 +37,15 @@ export default new Vuex.Store({
         state.loading = false;
         if (user) {
           state.login = true;
-          state.user = Object.assign({}, user);
+          const userInfo: UserInfo = {
+            displayName: user.displayName,
+            email: user.email,
+            phoneNumber: user.phoneNumber,
+            photoURL: user.photoURL,
+            providerId: user.providerId,
+            uid: user.uid
+          };
+          state.user = Object.assign({}, userInfo);
           localStorage.uid = user.uid;
           const docRef = firebaseApp
             .firestore()
