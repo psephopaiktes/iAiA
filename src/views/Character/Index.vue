@@ -42,6 +42,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 
 import CharData from "@/types/CharData";
 import firebaseApp from "@/firebase";
+import firebase from "firebase";
 
 @Component
 export default class Character extends Vue {
@@ -49,19 +50,24 @@ export default class Character extends Vue {
   public CharDataList: CharData[] = [];
 
   // lifecycle hook
-  public beforeCreate() {
+  public beforeMount() {
     const db = firebaseApp.firestore();
+    const user = this.$store.state.user;
+    if (user == null) {
+      return;
+    }
     const charactersRef = db.collection("characters");
-    const userRef = db.collection("users").doc(this.$store.state.user.uid);
-    const snapshot = charactersRef.where("userRef", "==", userRef).get();
-    snapshot
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
+    const userRef = db.collection("users").doc(user.uid);
+    const characters = charactersRef.where("userRef", "==", userRef).get();
+    characters
+      .then(snapshot => {
+        snapshot.docs.forEach(doc => {
           if (doc.exists) {
             const data = doc.data();
+
             this.CharDataList.push({
               id: data.id,
-              modifiedDate: data.modifiedDate,
+              modifiedDate: data.modifiedDate.toDate(),
               profile: {
                 name: data.name,
                 avatarUrl: data.avatarUrl,
