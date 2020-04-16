@@ -32,7 +32,7 @@ main#l-content
       | ログイン
       <img svg-inline src="@/assets/icon/play_arrow.svg" />
 
-    li: button.c-btn()
+    li(v-if="installIsAvailable"): button.c-btn(@click='install')
       | ホーム画面に追加
       <img svg-inline src="@/assets/icon/add_circle_outline.svg" />
 
@@ -44,7 +44,31 @@ main#l-content
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
-export default class Other extends Vue {}
+export default class Other extends Vue {
+  // data
+  promptEvent: any = null;
+  installIsAvailable: boolean = false;
+
+  // lifecycle hook
+  public mounted() {
+    // なぜかEventが呼ばれてない気がする
+    window.addEventListener("beforeinstallprompt", event => {
+      event.preventDefault();
+      this.promptEvent = event;
+      this.installIsAvailable = true;
+      return false;
+    });
+  }
+
+  // method
+  install(): void {
+    if (!this.promptEvent) {
+      window.alert("エラーが発生しました。");
+      return;
+    }
+    this.promptEvent.prompt();
+  }
+}
 </script>
 
 <style scoped lang="scss">
