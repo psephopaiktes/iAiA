@@ -56,22 +56,28 @@ export default class CharacterEdit extends Vue {
     this.CharData.userId = this.$store.state.user.uid;
   }
 
+  createCharacter() {
+    window.console.log("debug");
+    window.console.dir(this.CharData.userId);
+    this.db
+      .collection("characters")
+      .add(this.CharData)
+      .then(res => window.console.log("successfully written, id=", res.id))
+      .catch(error => window.console.error("error writing document: ", error));
+  }
+
   updateCharacter() {
-    if (this.CharData == {}) {
-      return;
-    }
     const charId = this.$route.query.charId as string;
-    if (charId.length == 0) {
-      return;
+    if (charId == undefined) {
+      return this.createCharacter();
     }
     const setOptions: SetOptions = { merge: true };
-    window.console.dir(this.CharData);
     this.db
       .collection("characters")
       .doc(charId)
       .set(this.CharData, setOptions)
-      .then(() => window.console.log("document successfully written"))
-      .catch(error => window.console.error("Error writing document: ", error));
+      .then(() => window.console.log("successfully written"))
+      .catch(error => window.console.error("error writing document: ", error));
   }
 
   // lifecycle hook
@@ -88,7 +94,7 @@ export default class CharacterEdit extends Vue {
       return;
     }
     const charId = this.$route.query.charId as string;
-    if (charId.length == 0) {
+    if (charId == undefined) {
       return;
     }
     this.db

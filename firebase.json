@@ -13,5 +13,10 @@
   },
   "storage": {
     "rules": "storage.rules"
+  },
+  "emulators": {
+    "firestore": {
+      "port": "8090"
+    }
   }
 }

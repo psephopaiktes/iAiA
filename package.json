@@ -15,8 +15,10 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@firebase/testing": "^0.19.1",
     "@types/chart.js": "^2.9.19",
     "@types/mersenne-twister": "^1.1.2",
+    "@types/node": "^13.13.0",
     "chart.js": "^2.9.3",
     "firebase": "^6.4.0",
     "mersenne-twister": "^1.1.0",
