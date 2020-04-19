@@ -56,8 +56,7 @@ export default class Character extends Vue {
       return;
     }
     const charactersRef = db.collection("characters");
-    const userRef = db.collection("users").doc(user.uid);
-    const characters = charactersRef.where("userRef", "==", userRef).get();
+    const characters = charactersRef.where("userId", "==", user.uid).get();
     characters
       .then(snapshot => {
         snapshot.docs.forEach(doc => {

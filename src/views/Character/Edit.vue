@@ -30,6 +30,7 @@ import CharacterEditSectionBelongings from "@/components/Character/Edit/SectionB
 import CharacterEditSampleModal from "@/components/Character/Edit/SampleModal.vue";
 import firebaseApp from "@/firebase";
 import CharData from "@/types/CharData";
+import SetOptions = firebase.firestore.SetOptions;
 
 @Component({
   components: {
@@ -47,8 +48,13 @@ import CharData from "@/types/CharData";
 export default class CharacterEdit extends Vue {
   // data
   showSampleModal: boolean = false;
-  public CharData: CharData = {};
   db = firebaseApp.firestore();
+  public CharData: CharData = { userId: this.$store.state.user.uid };
+
+  setCharData(cd: CharData) {
+    this.CharData = cd;
+    this.CharData.userId = this.$store.state.user.uid;
+  }
 
   updateCharacter() {
     if (this.CharData == {}) {
@@ -58,10 +64,12 @@ export default class CharacterEdit extends Vue {
     if (charId.length == 0) {
       return;
     }
+    const setOptions: SetOptions = { merge: true };
+    window.console.dir(this.CharData);
     this.db
       .collection("characters")
       .doc(charId)
-      .set(this.CharData)
+      .set(this.CharData, setOptions)
       .then(() => window.console.log("document successfully written"))
       .catch(error => window.console.error("Error writing document: ", error));
   }
@@ -92,7 +100,7 @@ export default class CharacterEdit extends Vue {
         if (data == undefined) {
           throw Error("undefined data. charId=" + charId);
         }
-        this.CharData = data as CharData;
+        this.setCharData(data as CharData);
       })
       .catch(err => {
         window.console.error(err);

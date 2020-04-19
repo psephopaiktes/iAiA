@@ -1,5 +1,4 @@
 import firebase from "firebase";
-import DocumentReference = firebase.firestore.DocumentReference;
 import Timestamp = firebase.firestore.Timestamp;
 
 export default interface CharData {
@@ -7,7 +6,7 @@ export default interface CharData {
   user?: string; // キャラクター作成者
   createDate?: Timestamp; // 作成日
   modifiedDate?: Timestamp; // 更新日 キャラ一覧の並び替えなどで使う用
-  userRef?: DocumentReference; //?
+  userId?: string;
   profile?: {
     // キャラクターの基本情報
     name?: string; // 名前

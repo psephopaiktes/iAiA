@@ -18,14 +18,11 @@ service cloud.firestore {
       allow get, create, write: if isUserAuthenticated(userId);
     }
 
-    match /characters/ {
-      allow read: if isAuthenticated();
-    }
     match /characters/{characterId} {
       allow read: if isAuthenticated();
     }
     match /characters/{characterId} {
-      allow write: if resource.data.userRef == '/users/' + request.auth.uid;
+      allow write: if resource.data.userId == request.auth.uid;
     }
   }
 }
