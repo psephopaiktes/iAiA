@@ -22,8 +22,6 @@ header.c-pageHeader
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import firebase from "firebase";
-import { storage, User } from "firebase";
 
 import CharData from "@/types/CharData";
 

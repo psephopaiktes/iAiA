@@ -10,18 +10,14 @@ main#l-content
   CharacterEditSectionWeapons
   CharacterEditSectionBelongings
 
-  CharacterEditFooter
+  CharacterEditFooter(@updateCharacter="updateCharacter")
 
   CharacterEditSampleModal(v-if="showSampleModal" @closeSampleModal="showSampleModal=false")
 
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import firebase from "firebase";
-import { storage, User } from "firebase";
-
-import CharData from "@/types/CharData";
+import { Component, Vue } from "vue-property-decorator";
 
 import CharacterEditHeader from "@/components/Character/Edit/Header.vue";
 import CharacterEditFooter from "@/components/Character/Edit/Footer.vue";
@@ -32,6 +28,8 @@ import CharacterEditSectionSkill from "@/components/Character/Edit/SectionSkill.
 import CharacterEditSectionWeapons from "@/components/Character/Edit/SectionWeapons.vue";
 import CharacterEditSectionBelongings from "@/components/Character/Edit/SectionBelongings.vue";
 import CharacterEditSampleModal from "@/components/Character/Edit/SampleModal.vue";
+import firebaseApp from "@/firebase";
+import CharData from "@/types/CharData";
 
 @Component({
   components: {
@@ -49,14 +47,7 @@ import CharacterEditSampleModal from "@/components/Character/Edit/SampleModal.vu
 export default class CharacterEdit extends Vue {
   // data
   showSampleModal: boolean = false;
-  // TODO Fetch from Firebase by $route.query.charId
-  public CharData: CharData = {
-    profile: {
-      name: "あああ",
-      avatarUrl: "",
-      isDead: true
-    }
-  };
+  public CharData: CharData = {};
 
   // lifecycle hook
   public beforeCreate() {
@@ -64,6 +55,31 @@ export default class CharacterEdit extends Vue {
       // 未ログインの場合
       this.$router.push("/character");
     }
+  }
+
+  public beforeMount() {
+    const db = firebaseApp.firestore();
+    const user = this.$store.state.user;
+    if (user == null) {
+      return;
+    }
+    const charId = this.$route.query.charId as string;
+    if (charId.length == 0) {
+      return;
+    }
+    db.collection("characters")
+      .doc(charId)
+      .get()
+      .then(snapshot => {
+        const data = snapshot.data();
+        if (data == undefined) {
+          throw Error("undefined data. charId=" + charId);
+        }
+        this.CharData = data as CharData;
+      })
+      .catch(err => {
+        window.console.error(err);
+      });
   }
 }
 </script>

@@ -14,7 +14,7 @@ main#l-content
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import firebaseApp from "../../firebase";
 
 import CharData from "@/types/CharData";
@@ -51,34 +51,27 @@ export default class CharacterDetail extends Vue {
   // lifecycle hook
   public beforeMount() {
     if (!this.$route.query.charId || !this.$store.state.login) {
-      // URLにID指定がない or 未ログインの場合
       this.$router.push("/character");
+
+      const db = firebaseApp.firestore();
+      const charId = this.$route.query.charId as string;
+      db.collection("characters")
+        .doc(charId)
+        .get()
+        .then(doc => {
+          if (!doc.exists) {
+            throw new Error("does not exists. charId=" + charId);
+          }
+          const data = doc.data();
+          if (data == undefined) {
+            throw new Error("undefined data. charId=" + charId);
+          }
+          this.CharData = data as CharData;
+        })
+        .catch(err => {
+          window.console.error(err);
+        });
     }
-    // const db = firebaseApp.firestore();
-    // const charactersRef = db.collection("characters");
-    // charactersRef
-    //   .doc(this.$route.params.charId)
-    //   .get()
-    //   .then(doc => {
-    //     if (doc.exists) {
-    //       const data = doc.data();
-    //       if (data == undefined) {
-    //         throw new Error("undefined data: " + this.$route.params.charId);
-    //       }
-    //       this.CharData = {
-    //         userRef: db.collection("users").doc(this.$store.state.user.uid),
-    //         modifiedDate: data.modifiedDate,
-    //         profile: {
-    //           name: data.name,
-    //           avatarUrl: data.avatarUrl,
-    //           isDead: data.isDead
-    //         }
-    //       };
-    //     }
-    //   })
-    //   .catch(err => {
-    //     window.console.error(err);
-    //   });
   }
 }
 </script>
