@@ -48,6 +48,23 @@ export default class CharacterEdit extends Vue {
   // data
   showSampleModal: boolean = false;
   public CharData: CharData = {};
+  db = firebaseApp.firestore();
+
+  updateCharacter() {
+    if (this.CharData == {}) {
+      return;
+    }
+    const charId = this.$route.query.charId as string;
+    if (charId.length == 0) {
+      return;
+    }
+    this.db
+      .collection("characters")
+      .doc(charId)
+      .set(this.CharData)
+      .then(() => window.console.log("document successfully written"))
+      .catch(error => window.console.error("Error writing document: ", error));
+  }
 
   // lifecycle hook
   public beforeCreate() {
@@ -58,7 +75,6 @@ export default class CharacterEdit extends Vue {
   }
 
   public beforeMount() {
-    const db = firebaseApp.firestore();
     const user = this.$store.state.user;
     if (user == null) {
       return;
@@ -67,7 +83,8 @@ export default class CharacterEdit extends Vue {
     if (charId.length == 0) {
       return;
     }
-    db.collection("characters")
+    this.db
+      .collection("characters")
       .doc(charId)
       .get()
       .then(snapshot => {
