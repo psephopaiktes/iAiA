@@ -1,15 +1,15 @@
 <template lang="pug">
 main#l-content
 
-  router-link.c-pageHeader__close(to='/character')
-    <img svg-inline src="@/assets/icon/close.svg" />
+  CharacterDetailHeader(:CharData="CharData")
 
-  h1.u-mt56 {{ CharData.profile.name }}
-  img(:src="CharData.profile.avatarUrl" alt="アイコン画像")
-
-  router-link.c-btn.u-mt56(:to="'/character/edit?charId=' + $route.query.charId")
-    | 編集
-    <img svg-inline src="@/assets/icon/edit.svg" />
+  CharacterDetailSectionProfile(:CharData="CharData")
+  CharacterDetailSectionStatus(:CharData="CharData")
+  CharacterDetailSectionAbility(:CharData="CharData")
+  CharacterDetailSectionStatus2(:CharData="CharData")
+  CharacterDetailSectionSkill(:CharData="CharData")
+  //- CharacterDetailSectionWeapons(:CharData="CharData")
+  //- CharacterDetailSectionBelongings(:CharData="CharData")
 
 </template>
 
@@ -19,9 +19,34 @@ import firebaseApp from "../../firebase";
 
 import CharData from "@/types/CharData";
 
-@Component
+import CharacterDetailHeader from "@/components/Character/Detail/Header.vue";
+import CharacterDetailSectionProfile from "@/components/Character/Detail/SectionProfile.vue";
+import CharacterDetailSectionStatus from "@/components/Character/Detail/SectionStatus.vue";
+import CharacterDetailSectionStatus2 from "@/components/Character/Detail/SectionStatus2.vue";
+import CharacterDetailSectionAbility from "@/components/Character/Detail/SectionAbility.vue";
+import CharacterDetailSectionSkill from "@/components/Character/Detail/SectionSkill.vue";
+import CharacterDetailSectionWeapons from "@/components/Character/Detail/SectionWeapons.vue";
+import CharacterDetailSectionBelongings from "@/components/Character/Detail/SectionBelongings.vue";
+
+// set Dummy data
+import Hirata from "@/lib/samplaChars/hirata";
+
+@Component({
+  components: {
+    CharacterDetailHeader,
+    CharacterDetailSectionProfile,
+    CharacterDetailSectionStatus,
+    CharacterDetailSectionStatus2,
+    CharacterDetailSectionAbility,
+    CharacterDetailSectionSkill,
+    CharacterDetailSectionWeapons,
+    CharacterDetailSectionBelongings
+  }
+})
 export default class CharacterDetail extends Vue {
-  public CharData: CharData = { profile: {} };
+  // set Dummy data
+  // public CharData: CharData = { profile: {} };
+  public CharData: CharData = Hirata;
 
   // lifecycle hook
   public beforeMount() {
@@ -29,31 +54,31 @@ export default class CharacterDetail extends Vue {
       // URLにID指定がない or 未ログインの場合
       this.$router.push("/character");
     }
-    const db = firebaseApp.firestore();
-    const charactersRef = db.collection("characters");
-    charactersRef
-      .doc(this.$route.params.charID)
-      .get()
-      .then(doc => {
-        if (doc.exists) {
-          const data = doc.data();
-          if (data == undefined) {
-            throw new Error("undefined data: " + this.$route.params.charID);
-          }
-          this.CharData = {
-            userRef: db.collection("users").doc(this.$store.state.user.uid),
-            modifiedDate: data.modifiedDate,
-            profile: {
-              name: data.name,
-              avatarUrl: data.avatarUrl,
-              isDead: data.isDead
-            }
-          };
-        }
-      })
-      .catch(err => {
-        window.console.error(err);
-      });
+    // const db = firebaseApp.firestore();
+    // const charactersRef = db.collection("characters");
+    // charactersRef
+    //   .doc(this.$route.params.charId)
+    //   .get()
+    //   .then(doc => {
+    //     if (doc.exists) {
+    //       const data = doc.data();
+    //       if (data == undefined) {
+    //         throw new Error("undefined data: " + this.$route.params.charId);
+    //       }
+    //       this.CharData = {
+    //         userRef: db.collection("users").doc(this.$store.state.user.uid),
+    //         modifiedDate: data.modifiedDate,
+    //         profile: {
+    //           name: data.name,
+    //           avatarUrl: data.avatarUrl,
+    //           isDead: data.isDead
+    //         }
+    //       };
+    //     }
+    //   })
+    //   .catch(err => {
+    //     window.console.error(err);
+    //   });
   }
 }
 </script>
