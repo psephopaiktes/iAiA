@@ -1,11 +1,12 @@
 import firebase from "firebase";
 import DocumentReference = firebase.firestore.DocumentReference;
+import Timestamp = firebase.firestore.Timestamp;
 
 export default interface CharData {
   id?: string; // キャラクターの一意のID
   user?: string; // キャラクター作成者
-  createDate?: Date; // 作成日 経過ミリ秒の文字列でいいのかな？
-  modifiedDate?: Date; // 更新日 キャラ一覧の並び替えなどで使う用
+  createDate?: Timestamp; // 作成日
+  modifiedDate?: Timestamp; // 更新日 キャラ一覧の並び替えなどで使う用
   userRef?: DocumentReference; //?
   profile?: {
     // キャラクターの基本情報

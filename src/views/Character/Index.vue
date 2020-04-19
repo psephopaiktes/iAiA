@@ -30,7 +30,7 @@ main#l-content
           img(:src="item.profile.avatarUrl" alt="アイコン画像")
           h3 {{ item.profile.name }}
           p {{ item.profile.occupation }}
-          time {{ item.modifiedDate.toLocaleDateString() }}
+          time {{ item.modifiedDate.toDate().toLocaleDateString() }}
     router-link.c-btn#l-floatButton(to='/character/edit')
       | 新規作成
       <img svg-inline src="@/assets/icon/add.svg" />
@@ -38,11 +38,10 @@ main#l-content
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 
 import CharData from "@/types/CharData";
 import firebaseApp from "@/firebase";
-import firebase from "firebase";
 
 @Component
 export default class Character extends Vue {
@@ -64,17 +63,12 @@ export default class Character extends Vue {
         snapshot.docs.forEach(doc => {
           if (doc.exists) {
             const data = doc.data();
-
-            this.CharDataList.push({
-              id: data.id,
-              modifiedDate: data.modifiedDate.toDate(),
-              profile: {
-                name: data.name,
-                avatarUrl: data.avatarUrl,
-                occupation: data.occupation,
-                isDead: data.isDead
-              }
-            });
+            if (data == {}) {
+              return;
+            }
+            let charData = data as CharData;
+            charData.id = doc.id;
+            this.CharDataList.push(charData);
           }
         });
       })
