@@ -140,5 +140,9 @@ export default new Vuex.Store({
     }
   },
 
-  actions: {}
+  actions: {
+    checkFirebaseLogin({ commit }) {
+      commit("checkFirebaseLogin");
+    }
+  }
 });

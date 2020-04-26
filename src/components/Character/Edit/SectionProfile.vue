@@ -9,27 +9,27 @@ section#profile
     input(type='file' @change='updateImage($event.target, $store.state.user)')
 
   label
-    input(type='text' placeholder='探索 好太郎' autofocus='')
+    input(type='text' v-model='CharData.profile.name' placeholder='探索 好太郎' autofocus='')
     span キャラクター名
 
   label
-    input(type='text' placeholder='探偵')
+    input(type='text' v-model='CharData.profile.occupation' placeholder='探偵')
     span 職業
 
   label
-    input(type='number' placeholder='20')
+    input(type='number' v-model='CharData.profile.age' placeholder='20')
     span 年齢
 
   label
-    input(type='text' placeholder='男')
+    input(type='text' v-model='CharData.profile.sex' placeholder='男')
     span 性別
 
   label
-    input(type='number' placeholder='170')
+    input(type='number' v-model='CharData.profile.heightMeter' placeholder='170')
     span 身長
 
   label
-    input(type='number' placeholder='65')
+    input(type='number' v-model='CharData.profile.weightKilogram' placeholder='65')
     span 体重
 
   label(:style="`height:${getTextareaHeight}px`")
@@ -46,7 +46,7 @@ section#profile
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import firebase from "firebase";
-import { storage, User } from "firebase";
+import { User } from "firebase";
 
 import CharData from "@/types/CharData";
 

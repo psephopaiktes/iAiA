@@ -30,7 +30,6 @@ import CharacterEditSectionBelongings from "@/components/Character/Edit/SectionB
 import CharacterEditSampleModal from "@/components/Character/Edit/SampleModal.vue";
 import firebase from "@/firebase";
 import CharData from "@/types/CharData";
-import SetOptions = firebase.firestore.SetOptions;
 
 @Component({
   components: {
@@ -71,11 +70,11 @@ export default class CharacterEdit extends Vue {
     if (charId == undefined) {
       return this.createCharacter();
     }
-    const setOptions: SetOptions = { merge: true };
+    window.console.dir(this.CharData);
     this.db
       .collection("characters")
       .doc(charId)
-      .set(this.CharData, setOptions)
+      .set(this.CharData, { merge: true })
       .then(() => window.console.log("successfully written"))
       .catch(error => window.console.error("error writing document: ", error));
   }
