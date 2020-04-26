@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import firebaseApp from "@/firebase";
+import firebase from "@/firebase";
 import { throwDice } from "@/lib/dice";
 import { DiceItem } from "@/types/DiceItem";
 import { RootState } from "@/types/RootState";
@@ -34,7 +34,7 @@ export default new Vuex.Store({
     },
 
     checkFirebaseLogin(state) {
-      firebaseApp.auth().onAuthStateChanged(user => {
+      firebase.auth().onAuthStateChanged(user => {
         state.loading = false;
         if (user) {
           state.login = true;
@@ -48,7 +48,7 @@ export default new Vuex.Store({
           };
           state.user = Object.assign({}, userInfo);
           localStorage.uid = user.uid;
-          const docRef = firebaseApp
+          const docRef = firebase
             .firestore()
             .collection("users")
             .doc(user.uid);
@@ -76,7 +76,7 @@ export default new Vuex.Store({
     },
 
     logout(state) {
-      firebaseApp
+      firebase
         .auth()
         .signOut()
         .catch(err => window.console.log(err));

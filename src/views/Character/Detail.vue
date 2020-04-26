@@ -15,8 +15,7 @@ main#l-content
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import firebaseApp from "../../firebase";
-
+import firebase from "@/firebase";
 import CharData from "@/types/CharData";
 
 import CharacterDetailHeader from "@/components/Character/Detail/Header.vue";
@@ -52,26 +51,26 @@ export default class CharacterDetail extends Vue {
   public beforeMount() {
     if (!this.$route.query.charId || !this.$store.state.login) {
       this.$router.push("/character");
-
-      const db = firebaseApp.firestore();
-      const charId = this.$route.query.charId as string;
-      db.collection("characters")
-        .doc(charId)
-        .get()
-        .then(doc => {
-          if (!doc.exists) {
-            throw new Error("does not exists. charId=" + charId);
-          }
-          const data = doc.data();
-          if (data == undefined) {
-            throw new Error("undefined data. charId=" + charId);
-          }
-          this.CharData = data as CharData;
-        })
-        .catch(err => {
-          window.console.error(err);
-        });
     }
+
+    const db = firebase.firestore();
+    const charId = this.$route.query.charId as string;
+    db.collection("characters")
+      .doc(charId)
+      .get()
+      .then(doc => {
+        if (!doc.exists) {
+          throw new Error("does not exists. charId=" + charId);
+        }
+        const data = doc.data();
+        if (data == undefined) {
+          throw new Error("undefined data. charId=" + charId);
+        }
+        this.CharData = data as CharData;
+      })
+      .catch(err => {
+        window.console.error(err);
+      });
   }
 }
 </script>

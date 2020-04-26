@@ -32,8 +32,8 @@ main#l-content
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import firebaseApp from "@/firebase";
+import { Component, Vue } from "vue-property-decorator";
+import firebase from "@/firebase";
 
 @Component
 export default class Account extends Vue {
@@ -55,7 +55,7 @@ export default class Account extends Vue {
   // methods
   public updateName() {
     const $this = this;
-    const user = firebaseApp.auth().currentUser;
+    const user = firebase.auth().currentUser;
     if (!user) {
       return;
     }
@@ -75,7 +75,7 @@ export default class Account extends Vue {
     const confirm: boolean = window.confirm(
       "アカウントを削除すると元には戻せません。削除しますか？"
     );
-    const user = firebaseApp.auth().currentUser;
+    const user = firebase.auth().currentUser;
     if (!user || !confirm) {
       return;
     }
@@ -84,7 +84,7 @@ export default class Account extends Vue {
       .then(() => {
         // User deleted.
         $this.$store.commit("logout");
-        firebaseApp
+        firebase
           .firestore()
           .collection("users")
           .doc(user.uid)
@@ -95,7 +95,7 @@ export default class Account extends Vue {
           });
       })
       .catch(error => {
-        // An error happened.
+        window.console.error(error);
         $this.msg.deleteAccount = "エラーが発生しました。";
       });
   }

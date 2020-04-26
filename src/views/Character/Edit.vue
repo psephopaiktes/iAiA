@@ -28,7 +28,7 @@ import CharacterEditSectionSkill from "@/components/Character/Edit/SectionSkill.
 import CharacterEditSectionWeapons from "@/components/Character/Edit/SectionWeapons.vue";
 import CharacterEditSectionBelongings from "@/components/Character/Edit/SectionBelongings.vue";
 import CharacterEditSampleModal from "@/components/Character/Edit/SampleModal.vue";
-import firebaseApp from "@/firebase";
+import firebase from "@/firebase";
 import CharData from "@/types/CharData";
 import SetOptions = firebase.firestore.SetOptions;
 
@@ -48,7 +48,7 @@ import SetOptions = firebase.firestore.SetOptions;
 export default class CharacterEdit extends Vue {
   // data
   showSampleModal: boolean = false;
-  db = firebaseApp.firestore();
+  db = firebase.firestore();
   public CharData: CharData = { userId: this.$store.state.user.uid };
 
   setCharData(cd: CharData) {

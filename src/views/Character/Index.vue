@@ -41,7 +41,7 @@ main#l-content
 import { Component, Vue } from "vue-property-decorator";
 
 import CharData from "@/types/CharData";
-import firebaseApp from "@/firebase";
+import firebase from "@/firebase";
 
 @Component
 export default class Character extends Vue {
@@ -50,7 +50,7 @@ export default class Character extends Vue {
 
   // lifecycle hook
   public beforeMount() {
-    const db = firebaseApp.firestore();
+    const db = firebase.firestore();
     const user = this.$store.state.user;
     if (user == null) {
       return;

@@ -1,4 +1,4 @@
-import firebaseApp from "../../src/firebase";
+import firebase from "../../src/firebase";
 import { assertSucceeds, loadFirestoreRules } from "@firebase/testing";
 import { readFileSync } from "fs";
 
@@ -7,7 +7,7 @@ describe("Firestore", () => {
     projectId: "iaia-app",
     rules: readFileSync("../../firestore.rules")
   });
-  const db = firebaseApp.firestore();
+  const db = firebase.firestore();
   it("can add character", () => {
     const data = { userId: "123" };
     const character = db.collection("characters");
