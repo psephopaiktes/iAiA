@@ -1,25 +1,18 @@
 <template lang="pug">
-section#belongings
-  //- TODO 仕様確認・デザイン
+section#belongings.rightGradationCover
 
-  h2
-    | 所持品
+  h2 所持品
 
-  table.parameterTable.u-mt16
+  .parameterTableScrollContainer: table.parameterTable.u-mt16
     tr
-      th
       th 名称
-      th 個数
       th 備考
     tr
-      th
-        input(type='text' value='')
       td
-        input(type='text' value='')
+        input(type='text' placeholder='スマホ')
       td
-        input(type='number' value='')
-      td
-        input(type='text' value='')
+        input(type='text' placeholder='iPhone X')
+
   ul.rowBtns
     li: button.c-subBtn(@click="")
       | 行を追加
@@ -39,4 +32,13 @@ import { storage, User } from "firebase";
 export default class CharacterEditSectionBelongings extends Vue {}
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.parameterTable {
+  th:nth-child(1) {
+    width: 20rem;
+  }
+  th:nth-child(2) {
+    width: 40rem;
+  }
+}
+</style>
