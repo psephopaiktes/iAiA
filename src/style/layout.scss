@@ -23,15 +23,13 @@
 }
 
 #l-content{
-  // SM
-  padding: 1px 3.2rem $L-NAV_SM_H + 6.4rem;
+  padding: 1px $PADDING_SM $L-NAV_SM_H + 6.4rem;
   @include min($SM){
-    padding: $L-NAV_MD_H 5.6rem 7.2rem;
+    padding: $L-NAV_MD_H $PADDING_MD 7.2rem;
   }
   @include min($MD){
-    padding: 1px 9.6rem 9.6rem 9.6rem + $L-NAV_LG_W;
+    padding: 1px $PADDING_LG 9.6rem $PADDING_LG + $L-NAV_LG_W;
   }
-  @include min($LG){}
 }
 
 #l-loginContainer{

@@ -83,6 +83,15 @@ export default class CharacterEdit extends Vue {
     }
   }
 }
+
+::v-deep .rowBtns {
+  display: flex;
+  margin-top: 1.6rem;
+  li + li {
+    margin-left: 0.8rem;
+  }
+}
+
 ::v-deep .parameterTable {
   table-layout: fixed;
   width: 100%;
@@ -116,7 +125,7 @@ export default class CharacterEdit extends Vue {
     font-size: 1.6rem;
   }
   input {
-    max-width: calc(100% - 0.8rem);
+    width: calc(100% - 0.8rem);
     margin: 0.4rem;
     background: rgba($COLOR_MAIN, 0.1);
     text-align: center;
@@ -124,11 +133,72 @@ export default class CharacterEdit extends Vue {
     letter-spacing: 0.1em;
   }
 }
-::v-deep .rowBtns {
-  display: flex;
-  margin-top: 1.6rem;
-  li + li {
-    margin-left: 0.8rem;
+
+::v-deep .parameterTableScrollContainer {
+  width: 100vw;
+  overflow: scroll;
+  margin: 0 -#{$PADDING_SM};
+  padding: 0 $PADDING_SM;
+  @include min($SM) {
+    margin: 0 -#{$PADDING_MD};
+    padding: 0 $PADDING_MD;
+  }
+  @include min($MD) {
+    width: calc(100vw - #{$L-NAV_LG_W});
+    margin: 0 -#{$PADDING_LG};
+    padding: 0 $PADDING_LG;
+  }
+
+  .parameterTable {
+    // ブラウザバグでpadding-rightが効かないための対応
+    position: relative;
+    &::after {
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 100%;
+      height: 1px;
+      width: $PADDING_SM;
+      @include min($SM) {
+        width: $PADDING_MD;
+      }
+      @include min($MD) {
+        width: $PADDING_LG;
+      }
+    }
+  }
+}
+
+::v-deep .rightGradationCover {
+  position: relative;
+  &::before,
+  &::after {
+    @include beforeAfter;
+    top: 0;
+    width: $PADDING_SM;
+    z-index: 1;
+    @include min($SM) {
+      width: $PADDING_MD;
+    }
+    @include min($MD) {
+      width: $PADDING_LG;
+    }
+  }
+  &::before {
+    right: 100%;
+    background-image: linear-gradient(
+      to left,
+      rgba($COLOR_BASE, 0),
+      $COLOR_BASE 40%
+    );
+  }
+  &::after {
+    left: 100%;
+    background-image: linear-gradient(
+      to right,
+      rgba($COLOR_BASE, 0),
+      $COLOR_BASE 40%
+    );
   }
 }
 </style>

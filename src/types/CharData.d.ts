@@ -21,12 +21,26 @@ export default interface CharData {
     nationality?: string; // 国籍
     money?: number; // 所持金
     moneyUnit?: string; // 所持金の単位
-    // weapons?: [ // 武器
-    //   {},
-    // ],
-    // belongings?: [ // 所持品
-    //   {},
-    // ],
+    weapons?: [
+      // 武器
+      {
+        name?: string; // 名称
+        probability?: number; // 成功率
+        damage?: string; // ダメージ
+        range?: string; // 射程
+        numberOfAttack?: number; // 攻撃回数
+        numberOfBullets?: number; // 装弾数
+        durability?: number; // 耐久力
+        note?: string; // 備考
+      }
+    ];
+    belongings?: [
+      // 所持品
+      {
+        name?: string; // 名称
+        note?: string; // 備考
+      }
+    ];
   };
   ability?: {
     // キャラクターの能力値 ダイスで決まるもの
