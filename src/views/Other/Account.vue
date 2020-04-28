@@ -15,15 +15,15 @@ main#l-content
       b {{ $store.state.user.displayName }}
     input.u-mt16(type='text', v-model='newName', placeholder='新しい表示名を入力してください。')
     button.c-btn.--secondary.u-mt12(v-if='!newName', disabled)
-      <img svg-inline src="@/assets/icon/edit.svg" />
+      <img svg-inline src="@/assets/icon/check.svg" />
       | 変更
     button.c-btn.--secondary.u-mt12(v-else, @click='updateName')
-      <img svg-inline src="@/assets/icon/edit.svg" />
+      <img svg-inline src="@/assets/icon/check.svg" />
       | 変更
     p.l-toast.c-toast(v-if='msg.updateName') {{ msg.updateName }}
 
     h2 アカウント削除
-    p アカウントを削除すると、キャラクター情報などこれまでのデータもすべて消去され、元に戻せないのでご注意ください。
+    p 作成したキャラクターの情報など、これまでのデータがすべて消去されます。元に戻せませんのでご注意ください。
     button.c-btn.--caution.u-mt12(@click='deleteAccount')
       | アカウントを削除
       <img svg-inline src="@/assets/icon/delete.svg" />
