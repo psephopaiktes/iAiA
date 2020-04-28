@@ -15,6 +15,11 @@ main#l-loginContainer
     p
       router-link(to='/term') 利用規約
       | に同意の上ご利用ください
+  #alpha
+    h2
+      <img svg-inline src="@/assets/icon/warning.svg" />
+      | ご注意
+    p iAiAは現在アルファ版です。記載されている内容には誤りがある可能性があります。また登録したアカウントやデータは予告なく削除される場合があります。
 </template>
 
 <script lang="ts">
@@ -153,6 +158,32 @@ main {
     background: rgba($COLOR_BASE, 0.1);
     border: 2px solid $COLOR_BASE;
     color: $COLOR_BASE;
+  }
+}
+
+#alpha {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  padding: 1.2rem 2.4rem 2rem;
+  background: rgba($COLOR_CAUTION, 0.8);
+  color: $COLOR_MAIN;
+  h2 {
+    line-height: 2;
+    font-size: 1.4rem;
+  }
+  svg {
+    fill: #fff;
+    width: 1.6rem;
+    margin-right: 0.5em;
+    vertical-align: text-bottom;
+  }
+  p {
+    margin-top: 0.4rem;
+    opacity: 0.8;
+    font-size: 1.2rem;
+    font-weight: 500;
   }
 }
 </style>
