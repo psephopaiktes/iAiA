@@ -16,4 +16,8 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: npm run test:unit
+      - run:
+          name: Run unit test
+          command: |
+            npm run firestore &
+            npm run test:unit
