@@ -21,8 +21,9 @@ service cloud.firestore {
     match /characters/{characterId} {
       allow read: if isAuthenticated();
     }
+
     match /characters/{characterId} {
-      allow write: if resource.data.userId == request.auth.uid;
+      allow write: if isAuthenticated() && resource.data.userId == request.auth.uid;
     }
   }
 }
