@@ -7,13 +7,14 @@
     "url": "https://github.com/psephopaiktes/iaia"
   },
   "scripts": {
-    "serve": "vue-cli-service serve & firebase serve",
-    "start": "vue-cli-service serve & firebase serve",
+    "serve": "vue-cli-service serve",
+    "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit",
-    "firestore": "firebase emulators:start --only firestore"
+    "firebase": "firebase serve",
+    "firestore-emulator": "firebase emulators:start --only firestore"
   },
   "dependencies": {
     "@firebase/testing": "^0.19.1",

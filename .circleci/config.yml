@@ -18,6 +18,6 @@ jobs:
             - ~/.cache/firebase/emulators
           key: v1-dependencies-{{ checksum "package.json" }}
       - run:
-          command: npm run firestore
+          command: npm run firestore-emulator
           background: true
       - run: npm run test:unit
