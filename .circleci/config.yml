@@ -15,6 +15,7 @@ jobs:
       - save_cache:
           paths:
             - node_modules
+            - ~/.cache/firebase/emulators
           key: v1-dependencies-{{ checksum "package.json" }}
       - run:
           command: npm run firestore
