@@ -92,6 +92,12 @@ button {
   font-size: inherit;
   color: inherit;
 }
+table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  width: 100%;
+}
+
 
 @media (prefers-reduced-motion: reduce) {
   * {

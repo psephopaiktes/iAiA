@@ -93,9 +93,6 @@ export default class CharacterEdit extends Vue {
 }
 
 ::v-deep .parameterTable {
-  table-layout: fixed;
-  width: 100%;
-  border-collapse: collapse;
   tr {
     height: 4rem;
   }

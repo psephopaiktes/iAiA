@@ -15,7 +15,25 @@ const Hirata: CharData = {
     sex: "男",
     nationality: "日本",
     money: 20,
-    moneyUnit: "円"
+    moneyUnit: "円",
+    weapons: [
+      {
+        name: "ナイフ",
+        probability: 50,
+        damage: "1D4",
+        range: "近接",
+        numberOfAttack: 1,
+        numberOfBullets: 1,
+        durability: 9,
+        note: "護身用の一般的な小型のナイフ。スイス製。"
+      }
+    ],
+    belongings: [
+      {
+        name: "スマホ",
+        note: "ごく普通のiPhoneX。"
+      }
+    ]
   },
   ability: {
     STR: 12,

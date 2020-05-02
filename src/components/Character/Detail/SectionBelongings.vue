@@ -1,5 +1,17 @@
 <template lang="pug">
-section#belongings
+section#belongings(v-if="CharData.profile.belongings.length > 0")
+
+  h2 アイテム
+
+  dl.weaponItemList
+
+    div(
+        v-for='(item, i) in CharData.profile.belongings'
+        :key='i'
+      )
+      dt {{ item.name }}
+      dd {{ item.note }}
+
 </template>
 
 <script lang="ts">

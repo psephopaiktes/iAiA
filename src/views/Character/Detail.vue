@@ -8,8 +8,8 @@ main#l-content
   CharacterDetailSectionAbility(:CharData="CharData")
   CharacterDetailSectionStatus2(:CharData="CharData")
   CharacterDetailSectionSkill(:CharData="CharData")
-  //- CharacterDetailSectionWeapons(:CharData="CharData")
-  //- CharacterDetailSectionBelongings(:CharData="CharData")
+  CharacterDetailSectionWeapons(:CharData="CharData")
+  CharacterDetailSectionBelongings(:CharData="CharData")
 
 </template>
 
@@ -83,4 +83,38 @@ export default class CharacterDetail extends Vue {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+::v-deep h2 {
+  margin-top: 5.6rem;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: rgba($COLOR_MAIN, 0.5);
+}
+::v-deep .weaponItemList {
+  text-align: center;
+  > div {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1.2rem;
+    background: rgba($COLOR_MAIN, 0.05);
+    border-radius: 0.4rem;
+    overflow: hidden;
+    dt {
+      display: block;
+      width: 100%;
+      padding: 0.8rem 1.6rem;
+      background: rgba($COLOR_MAIN, 0.1);
+    }
+    dd {
+      display: block;
+      border-top: 0.2rem solid $COLOR_BASE;
+    }
+    dd:last-child {
+      width: 100%;
+      padding: 1.2rem 1.6rem;
+      font-size: 1.2rem;
+      font-weight: 400;
+    }
+  }
+}
+</style>
