@@ -13,7 +13,7 @@ main#l-loginContainer
     router-link.trial(to='/dice')
       | ログインせずに試す
     p
-      router-link(to='/term') 利用規約
+      router-link(to='/other/term') 利用規約
       | に同意の上ご利用ください
   #alpha
     h2

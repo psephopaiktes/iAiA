@@ -20,7 +20,7 @@ aside#l-nav: nav
       <img svg-inline src="@/assets/icon/tab/other-fil.svg" />
       <img svg-inline src="@/assets/icon/tab/other-line.svg" />
       p OTHER
-  p: small © iAiA 2019
+  p: small © iAiA 2020
 </template>
 
 <script lang="ts">
