@@ -1,46 +1,9 @@
 <template lang="pug">
 section#profile
   h2 プロフィール
-
-  label.avatar
-    img(v-if="CharData.profile.avatarUrl" :src='CharData.profile.avatarUrl' alt='キャラクターアイコン')
-    img(v-else src='/img/avatar.png' alt='キャラクターアイコン')
-    p 変更
-    input(type='file' @change='updateImage($event.target, $store.state.user)')
-
   label
-    input(type='text' v-model='CharData.profile.name' placeholder='探索 好太郎' autofocus='')
+    input(type='text' v-model='profileName' placeholder='探索 好太郎' autofocus='')
     span キャラクター名
-
-  label
-    input(type='text' v-model='CharData.profile.occupation' placeholder='探偵')
-    span 職業
-
-  label
-    input(type='number' v-model='CharData.profile.age' placeholder='20')
-    span 年齢
-
-  label
-    input(type='text' v-model='CharData.profile.sex' placeholder='男')
-    span 性別
-
-  label
-    input(type='number' v-model='CharData.profile.heightMeter' placeholder='170')
-    span 身長
-
-  label
-    input(type='number' v-model='CharData.profile.weightKilogram' placeholder='65')
-    span 体重
-
-  label(:style="`height:${getTextareaHeight}px`")
-    textarea(
-      :style="`height:${getTextareaHeight}px`"
-      @input="updateTextareaHeight($event)"
-      @click="updateTextareaHeight($event)"
-      placeholder='昼行灯だがいざというときには抜群の洞察力を魅せる探偵。\n元警察官。独身。'
-    )
-    span 紹介・メモ
-
 </template>
 
 <script lang="ts">
@@ -49,12 +12,10 @@ import firebase from "firebase";
 import { User } from "firebase";
 
 import CharData from "@/types/CharData";
+import { RootState } from "@/types/RootState";
 
 @Component
 export default class CharacterEditSectionProfile extends Vue {
-  // props
-  @Prop() CharData!: CharData;
-
   // data
   textareaHeight: number = 80;
 
@@ -92,8 +53,8 @@ export default class CharacterEditSectionProfile extends Vue {
       })
       .then(() => ref.getDownloadURL())
       .then(url => {
-        if (this.CharData.profile) {
-          this.CharData.profile.avatarUrl = url;
+        if (this.$store.state.editedCharacter.profile) {
+          this.$store.commit("setCharacterAvatarUrl", url);
         } else {
           throw "avatarUrl is nothing";
         }
@@ -102,6 +63,13 @@ export default class CharacterEditSectionProfile extends Vue {
         window.alert("画像の更新に失敗しました");
         window.console.error(e);
       });
+  }
+
+  get profileName(): string {
+    return this.$store.state.editedCharacter?.profile?.name || "";
+  }
+  set profileName(name: string) {
+    this.$store.commit("setCharacterProfileName", name);
   }
 
   storageReference(uid: string, filename: string): string {

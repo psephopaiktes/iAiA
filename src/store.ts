@@ -5,13 +5,23 @@ import { throwDice } from "@/lib/dice";
 import { DiceItem } from "@/types/DiceItem";
 import { RootState } from "@/types/RootState";
 import { UserInfo } from "@/types/UserInfo";
+import CharData from "@/types/CharData";
 
 Vue.use(Vuex);
+
+const defaultEditedCharacter: CharData = {
+  profile: {
+    name: "",
+    belongings: [{}],
+    weapons: [{}]
+  }
+};
 
 let rootState: RootState = {
   login: false,
   loading: true,
   user: null,
+  editedCharacter: defaultEditedCharacter,
   dice: {
     showModal: false,
     result: 0,
@@ -137,7 +147,27 @@ export default new Vuex.Store({
 
     diceClose(state) {
       state.dice.showModal = false;
-    }
+    },
+
+    setCharacterProfileName: function(state, name: string) {
+      if (
+        state.editedCharacter != null &&
+        state.editedCharacter.profile != null
+      ) {
+        state.editedCharacter.profile.name = name;
+      }
+    },
+
+    setCharacterAvatarUrl: function(state, url: string) {
+      if (
+        state.editedCharacter != null &&
+        state.editedCharacter.profile != null
+      ) {
+        state.editedCharacter.profile.avatarUrl = url;
+      }
+    },
+
+    fillEditedCharacter: function(state) {}
   },
 
   actions: {

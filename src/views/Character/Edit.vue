@@ -3,7 +3,7 @@ main#l-content
 
   CharacterEditHeader(:CharData="CharData" @showSampleModal="showSampleModal=true")
 
-  CharacterEditSectionProfile(:CharData="CharData")
+  CharacterEditSectionProfile
   CharacterEditSectionAbility
   CharacterEditSectionStatus
   CharacterEditSectionSkill
@@ -72,25 +72,23 @@ export default class CharacterEdit extends Vue {
   }
 
   createCharacter() {
-    window.console.log("debug");
-    window.console.dir(this.CharData.userId);
     this.db
       .collection("characters")
-      .add(this.CharData)
+      .add(this.$store.state.editedCharacter)
       .then(res => window.console.log("successfully written, id=", res.id))
       .catch(error => window.console.error("error writing document: ", error));
   }
 
   updateCharacter() {
+    this.$store.state.editedCharacter.userId = this.$store.state.user.uid;
     const charId = this.$route.query.charId as string;
     if (charId == undefined) {
       return this.createCharacter();
     }
-    window.console.dir(this.CharData);
     this.db
       .collection("characters")
       .doc(charId)
-      .set(this.CharData, { merge: true })
+      .set(this.$store.state.editedCharacter, { merge: true })
       .then(() => window.console.log("successfully written"))
       .catch(error => window.console.error("error writing document: ", error));
   }
