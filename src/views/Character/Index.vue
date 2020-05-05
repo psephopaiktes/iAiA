@@ -22,7 +22,7 @@ main#l-content
     // TODO 読み込みUI
     ul.charList(v-else)
       li.c-panel(
-        v-for='(item, i) in CharDataList'
+        v-for='(item, i) in getCharDataList'
         :key='i'
         :class="{ dead: item.profile.isDead }"
       )
@@ -47,33 +47,41 @@ import firebase from "@/firebase";
 export default class Character extends Vue {
   // data
   public CharDataList: CharData[] = [];
+  get getCharDataList(): CharData[] {
+    return this.CharDataList;
+  }
 
   // lifecycle hook
-  public beforeMount() {
+  public async beforeMount() {
+    window.console.log(0);
     const db = firebase.firestore();
-    const user = this.$store.state.user;
-    if (user == null) {
+    if (!this.$store.state.login) {
       return;
     }
+    window.console.log(2);
     const charactersRef = db.collection("characters");
-    const characters = charactersRef.where("userId", "==", user.uid).get();
-    characters
-      .then(snapshot => {
-        snapshot.docs.forEach(doc => {
-          if (doc.exists) {
-            const data = doc.data();
-            if (data == {}) {
-              return;
+    const characters = charactersRef
+      .where("userId", "==", localStorage.uid)
+      .get();
+    window.console.log(3);
+    const updateCharDataList = () => {
+      return characters
+        .then(snapshot => {
+          snapshot.docs.forEach(doc => {
+            if (doc.exists) {
+              const data = doc.data();
+              let charData = data as CharData;
+              charData.id = doc.id;
+              this.CharDataList.push(charData);
+              window.console.log(4);
             }
-            let charData = data as CharData;
-            charData.id = doc.id;
-            this.CharDataList.push(charData);
-          }
+          });
+        })
+        .catch(err => {
+          window.console.error(err);
         });
-      })
-      .catch(err => {
-        window.console.error(err);
-      });
+    };
+    await updateCharDataList();
   }
 }
 </script>
