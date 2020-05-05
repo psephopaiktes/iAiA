@@ -14,12 +14,12 @@ export default interface CharData {
     avatarUrl?: string; // プロフィール画像のURL
     occupation?: string; // 職業
     backstory?: string; // 説明文 改行を許容
-    heightCentimeter?: number; // 身長
-    age?: number; // 年齢
-    weightKilogram?: number; // 体重
+    heightCentimeter?: number | null; // 身長
+    age?: number | null; // 年齢
+    weightKilogram?: number | null; // 体重
     sex?: string; // 性別
     nationality?: string; // 国籍
-    money?: number; // 所持金
+    money?: number | null; // 所持金
     moneyUnit?: string; // 所持金の単位
     weapons?: [
       // 武器
