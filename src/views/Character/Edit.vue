@@ -74,27 +74,27 @@ export default class CharacterEdit extends Vue {
 
   createCharacter() {
     const now = Timestamp.now();
-    this.$store.commit("setCharacterModifiedDate", now);
-    this.$store.commit("setCharacterCreateDate", now);
+    this.$store.commit("characterEdit/setCharacterModifiedDate", now);
+    this.$store.commit("characterEdit/setCharacterCreateDate", now);
     this.db
       .collection("characters")
-      .add(this.$store.state.editedCharacter)
+      .add(this.$store.state.characterEdit.charData)
       .then(res => window.console.log("successfully written, id=", res.id))
       .catch(error => window.console.error("error writing document: ", error));
   }
 
   updateCharacter() {
-    this.$store.commit("setCharacterUserId", this.$store.state.user.uid);
+    this.$store.commit("characterEdit/setCharacterUserId", this.$store.state.user.uid);
     const charId = this.$route.query.charId as string;
     if (charId == undefined) {
       return this.createCharacter();
     }
     const now = Timestamp.now();
-    this.$store.commit("setCharacterModifiedDate", now);
+    this.$store.commit("characterEdit/setCharacterModifiedDate", now);
     this.db
       .collection("characters")
       .doc(charId)
-      .set(this.$store.state.editedCharacter, { merge: true })
+      .set(this.$store.state.characterEdit.charData, { merge: true })
       .then(() => window.console.log("successfully written"))
       .catch(error => window.console.error("error writing document: ", error));
   }
