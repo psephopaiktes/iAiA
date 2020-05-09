@@ -8,18 +8,24 @@ main#l-content
     router-link.c-btn.u-mt24(to="/login")
       | ログイン <img svg-inline src="@/assets/icon/play_arrow.svg" />
 
-  #login(v-else='')
+  #login(v-else)
+
     nav.charConntrol
       label.charConntrol__search
         <img svg-inline src="@/assets/icon/search.svg" />
-        input(type='search' maxlength='' pattern='' placeholder='キャラクター名で検索')
+        input(type='search' v-model="charSearchWord" maxlength='' pattern='' placeholder='キャラクター名で検索')
       label.charConntrol__sort
         <img svg-inline src="@/assets/icon/swap_vert.svg" />
-        select
-          option(value='') 名前順
-          option(value='') レアリティ順
-    p.charEmpty(v-if='CharDataList.length < 1') キャラクターがいません
-    // TODO 読み込みUI
+        select(v-model="charOrder")
+          option(value='dateDescending' selected) 新しい順
+          option(value='dateAscending') 古い順
+          option(value='nameAscending') 名前順(あ→わ)
+          option(value='nameDescending') 名前順(わ→あ)
+
+    .charLoading(v-if='charDataLoading')
+      <img svg-inline src="@/assets/loader.svg" />
+    p.charEmpty(v-else-if='CharDataList.length < 1')
+      | キャラクターがいません
     ul.charList(v-else)
       li.c-panel(
         v-for='(item, i) in getCharDataList'
@@ -46,24 +52,65 @@ import firebase from "@/firebase";
 @Component
 export default class Character extends Vue {
   // data
+  public charDataLoading: boolean = true;
   public CharDataList: CharData[] = [];
+  public charSearchWord: string = "";
+  public charOrder: string = "dateDescending";
+
+  // computed
   get getCharDataList(): CharData[] {
-    return this.CharDataList;
+    return (
+      this.CharDataList
+        // filter by inputed word
+        .filter(CharData => {
+          return (
+            CharData.profile?.name?.normalize().indexOf(this.charSearchWord) !==
+            -1
+          );
+        })
+        // sort by selected order
+        .sort((CharDataA, CharDataB) => {
+          switch (this.charOrder) {
+            case "nameAscending":
+            case "nameDescending": {
+              const nameA = CharDataA.profile?.name?.toUpperCase();
+              const nameB = CharDataB.profile?.name?.toUpperCase();
+              if (nameA && nameB && nameA < nameB) {
+                return this.charOrder == "nameAscending" ? -1 : 1;
+              } else {
+                return this.charOrder == "nameAscending" ? 1 : -1;
+              }
+            }
+
+            case "dateAscending":
+            case "dateDescending": {
+              const dateA = CharDataA.modifiedDate?.toDate();
+              const dateB = CharDataB.modifiedDate?.toDate();
+              if (dateA && dateB && dateA < dateB) {
+                return this.charOrder == "dateAscending" ? -1 : 1;
+              } else {
+                return this.charOrder == "dateAscending" ? 1 : -1;
+              }
+            }
+
+            default: {
+              return 0;
+            }
+          }
+        })
+    );
   }
 
   // lifecycle hook
   public async beforeMount() {
-    window.console.log(0);
     const db = firebase.firestore();
     if (!this.$store.state.login) {
       return;
     }
-    window.console.log(2);
     const charactersRef = db.collection("characters");
     const characters = charactersRef
       .where("userId", "==", localStorage.uid)
       .get();
-    window.console.log(3);
     const updateCharDataList = () => {
       return characters
         .then(snapshot => {
@@ -73,7 +120,6 @@ export default class Character extends Vue {
               let charData = data as CharData;
               charData.id = doc.id;
               this.CharDataList.push(charData);
-              window.console.log(4);
             }
           });
         })
@@ -82,6 +128,7 @@ export default class Character extends Vue {
         });
     };
     await updateCharDataList();
+    this.charDataLoading = false;
   }
 }
 </script>
@@ -148,6 +195,13 @@ export default class Character extends Vue {
   }
 }
 
+.charLoading {
+  margin-top: 16vh;
+  text-align: center;
+  svg {
+    width: 4rem;
+  }
+}
 .charEmpty {
   margin-top: 16vh;
   opacity: 0.5;
