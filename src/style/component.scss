@@ -183,7 +183,6 @@
   color: rgba($COLOR_MAIN, 0.8);
   border-radius: .2rem;
   backdrop-filter: blur(8px);
-  box-shadow: 0 0 8px rgba(#000, 0.1);
   font-size: 1rem;
   letter-spacing: .1em;
   text-align: center;
@@ -220,7 +219,7 @@
 .c-panel{
   background: rgba($COLOR_MAIN,.05);
   border-radius: .2rem;
-  box-shadow: 0 0 8px rgba(#000,.3);
+  box-shadow: 0 0 8px rgba(#000,.2);
 }
 
 .c-detail{

@@ -164,7 +164,12 @@ export default class Character extends Vue {
     overflow: hidden;
     margin-top: 1.2rem;
     position: relative;
-    &.dead::after {
+  }
+  li.dead {
+    img {
+      filter: grayscale(0.5);
+    }
+    &::after {
       content: "死亡";
       position: absolute;
       width: 6.4rem;
@@ -195,8 +200,10 @@ export default class Character extends Vue {
   }
   img {
     position: absolute;
-    widows: 4rem;
+    width: 4rem;
     height: 4rem;
+    object-fit: cover;
+    background: rgba($COLOR_MAIN, 0.1);
     top: 1.2rem;
     left: 1.2rem;
     border-radius: 0.2rem;

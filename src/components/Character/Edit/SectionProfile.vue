@@ -3,9 +3,10 @@ section#profile
   h2 プロフィール
 
   label.avatar
-    img(v-if="this.$store.state.characterEdit.charData.profile.avatarUrl" :src='this.$store.state.characterEdit.charData.profile.avatarUrl' alt='キャラクターアイコン')
+    .loading(v-if="avatarLoading"): <img svg-inline src="@/assets/loader.svg" />
+    img(v-else-if="this.$store.state.characterEdit.charData.profile.avatarUrl" :src='this.$store.state.characterEdit.charData.profile.avatarUrl' alt='キャラクターアイコン')
     img(v-else src='/img/avatar.png' alt='キャラクターアイコン')
-    p 変更
+    p(v-if="!avatarLoading") 変更
     input(type='file' @change='updateImage($event.target, $store.state.user)')
 
   label
@@ -52,6 +53,7 @@ import { User } from "firebase";
 export default class CharacterEditSectionProfile extends Vue {
   // data
   textareaHeight: number = 80;
+  avatarLoading: boolean = false;
 
   // computed
   get getTextareaHeight(): number {
@@ -64,7 +66,7 @@ export default class CharacterEditSectionProfile extends Vue {
     await this.$nextTick();
     this.textareaHeight = event.target.scrollHeight;
   }
-  public updateImage(element: HTMLInputElement, user: User) {
+  public async updateImage(element: HTMLInputElement, user: User) {
     if (element.files == null || element.files.length == 0) {
       return;
     }
@@ -77,9 +79,10 @@ export default class CharacterEditSectionProfile extends Vue {
       window.alert("ファイルサイズが2MB以下の画像を選択してください)");
       return;
     }
+    this.avatarLoading = true;
     const storageRef = firebase.storage().ref();
     const ref = storageRef.child(this.storageReference(user.uid, f.name));
-    ref
+    await ref
       .put(f)
       .catch(e => {
         window.alert("画像のアップロードに失敗しました");
@@ -97,6 +100,7 @@ export default class CharacterEditSectionProfile extends Vue {
         window.alert("画像の更新に失敗しました");
         window.console.error(e);
       });
+    this.avatarLoading = false;
   }
 
   get profileName(): string {
@@ -128,14 +132,21 @@ export default class CharacterEditSectionProfile extends Vue {
   }
 
   get profileHeightCentiMeter(): number {
-    return this.$store.state.characterEdit.charData.profile.heightCentimeter || "";
+    return (
+      this.$store.state.characterEdit.charData.profile.heightCentimeter || ""
+    );
   }
   set profileHeightCentiMeter(num: number) {
-    this.$store.commit("characterEdit/setCharacterProfileHeightCentiMeter", num);
+    this.$store.commit(
+      "characterEdit/setCharacterProfileHeightCentiMeter",
+      num
+    );
   }
 
   get profileWeightKilogram(): number {
-    return this.$store.state.characterEdit.charData.profile.weightKilogram || "";
+    return (
+      this.$store.state.characterEdit.charData.profile.weightKilogram || ""
+    );
   }
   set profileWeightKilogram(num: number) {
     this.$store.commit("characterEdit/setCharacterProfileWeightKilogram", num);
@@ -157,9 +168,18 @@ export default class CharacterEditSectionProfile extends Vue {
   overflow: hidden;
   width: 12.8rem;
   height: 12.8rem;
+  background: rgba($COLOR_MAIN, 0.1);
+  .loading {
+    margin-top: 4.8rem;
+    text-align: center;
+    svg {
+      width: 6rem;
+    }
+  }
   img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
   }
   p {
     position: absolute;
