@@ -3,7 +3,7 @@ section#profile
   h2 プロフィール
 
   label.avatar
-    img(v-if="this.$store.state.editedCharacter.profile.avatarUrl" :src='this.$store.state.editedCharacter.profile.avatarUrl' alt='キャラクターアイコン')
+    img(v-if="this.$store.state.characterEdit.charData.profile.avatarUrl" :src='this.$store.state.characterEdit.charData.profile.avatarUrl' alt='キャラクターアイコン')
     img(v-else src='/img/avatar.png' alt='キャラクターアイコン')
     p 変更
     input(type='file' @change='updateImage($event.target, $store.state.user)')
@@ -87,8 +87,8 @@ export default class CharacterEditSectionProfile extends Vue {
       })
       .then(() => ref.getDownloadURL())
       .then(url => {
-        if (this.$store.state.editedCharacter.profile) {
-          this.$store.commit("setCharacterAvatarUrl", url);
+        if (this.$store.state.characterEdit.charData.profile) {
+          this.$store.commit("characterEdit/setCharacterAvatarUrl", url);
         } else {
           throw "avatarUrl is nothing";
         }
@@ -100,45 +100,45 @@ export default class CharacterEditSectionProfile extends Vue {
   }
 
   get profileName(): string {
-    return this.$store.state.editedCharacter?.profile?.name || "";
+    return this.$store.state.characterEdit.charData.profile.name || "";
   }
   set profileName(name: string) {
-    this.$store.commit("setCharacterProfileName", name);
+    this.$store.commit("characterEdit/setCharacterProfileName", name);
   }
 
   get profileOccupation(): string {
-    return this.$store.state.editedCharacter?.profile?.occupation || "";
+    return this.$store.state.characterEdit.charData.profile.occupation || "";
   }
   set profileOccupation(s: string) {
-    this.$store.commit("setCharacterProfileOccupation", s);
+    this.$store.commit("characterEdit/setCharacterProfileOccupation", s);
   }
 
   get profileAge(): number {
-    return this.$store.state.editedCharacter?.profile?.age || "";
+    return this.$store.state.characterEdit.charData.profile.age || "";
   }
   set profileAge(num: number) {
-    this.$store.commit("setCharacterProfileAge", num);
+    this.$store.commit("characterEdit/setCharacterProfileAge", num);
   }
 
   get profileSex(): string {
-    return this.$store.state.editedCharacter?.profile?.sex || "";
+    return this.$store.state.characterEdit.charData.profile.sex || "";
   }
   set profileSex(s: string) {
-    this.$store.commit("setCharacterProfileSex", s);
+    this.$store.commit("characterEdit/setCharacterProfileSex", s);
   }
 
   get profileHeightCentiMeter(): number {
-    return this.$store.state.editedCharacter?.profile?.heightCentimeter || "";
+    return this.$store.state.characterEdit.charData.profile.heightCentimeter || "";
   }
   set profileHeightCentiMeter(num: number) {
-    this.$store.commit("setCharacterProfileHeightCentiMeter", num);
+    this.$store.commit("characterEdit/setCharacterProfileHeightCentiMeter", num);
   }
 
   get profileWeightKilogram(): number {
-    return this.$store.state.editedCharacter?.profile?.weightKilogram || "";
+    return this.$store.state.characterEdit.charData.profile.weightKilogram || "";
   }
   set profileWeightKilogram(num: number) {
-    this.$store.commit("setCharacterProfileWeightKilogram", num);
+    this.$store.commit("characterEdit/setCharacterProfileWeightKilogram", num);
   }
 
   storageReference(uid: string, filename: string): string {
