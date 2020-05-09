@@ -35,6 +35,17 @@ export default class App extends Vue {
       elm.style.display = "none";
     });
   }
+  // Anchor Scroll
+  public updated() {
+    const hash = this.$route.hash;
+    const elm = document.getElementById(hash.substring(1));
+    if (hash && elm && hash.match(/^#.+$/)) {
+      window.scroll({
+        top: elm.getBoundingClientRect().y + window.pageYOffset,
+        behavior: "smooth"
+      });
+    }
+  }
 }
 </script>
 
