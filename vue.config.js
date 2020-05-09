@@ -1,5 +1,5 @@
 module.exports = {
-  productionSourceMap: false,
+  // productionSourceMap: false,
   pages: {
     app: {
       entry: "src/main.ts",
@@ -19,6 +19,9 @@ module.exports = {
         data: '@import "@/style/common.scss";'
       }
     }
+  },
+  configureWebpack: {
+    devtool: "source-map"
   },
   chainWebpack: config => {
     config.module

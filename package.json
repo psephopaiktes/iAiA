@@ -7,16 +7,20 @@
     "url": "https://github.com/psephopaiktes/iaia"
   },
   "scripts": {
-    "serve": "vue-cli-service serve & firebase serve",
-    "start": "vue-cli-service serve & firebase serve",
+    "serve": "vue-cli-service serve",
+    "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:e2e": "vue-cli-service test:e2e",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "firebase": "firebase serve",
+    "firestore-emulator": "firebase emulators:start --only firestore"
   },
   "dependencies": {
+    "@firebase/testing": "^0.19.1",
     "@types/chart.js": "^2.9.19",
     "@types/mersenne-twister": "^1.1.2",
+    "@types/node": "^13.13.0",
     "chart.js": "^2.9.3",
     "firebase": "^6.4.0",
     "mersenne-twister": "^1.1.0",
@@ -44,12 +48,13 @@
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-pug": "^1.1.1",
     "eslint-plugin-vue": "^5.0.0",
+    "firebase-tools": "^8.2.0",
     "prettier": "^1.18.2",
     "pug": "^2.0.4",
     "pug-plain-loader": "^1.0.0",
     "sass": "^1.18.0",
     "sass-loader": "^7.3.1",
-    "ts-jest": "^23.0.0",
+    "ts-jest": "23.0.0 - 24.0.0",
     "typescript": "^3.4.3",
     "vue-svg-inline-loader": "^1.4.4",
     "vue-template-compiler": "^2.6.10"

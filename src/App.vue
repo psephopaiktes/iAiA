@@ -24,7 +24,7 @@ export default class App extends Vue {
     }
   }
   public created() {
-    this.$store.commit("checkFirebaseLogin");
+    this.$store.dispatch("checkFirebaseLogin");
   }
   public mounted() {
     window.addEventListener("load", () => {

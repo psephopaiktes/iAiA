@@ -22,7 +22,7 @@ main#l-content
     // TODO 読み込みUI
     ul.charList(v-else)
       li.c-panel(
-        v-for='(item, i) in CharDataList'
+        v-for='(item, i) in getCharDataList'
         :key='i'
         :class="{ dead: item.profile.isDead }"
       )
@@ -30,7 +30,7 @@ main#l-content
           img(:src="item.profile.avatarUrl" alt="アイコン画像")
           h3 {{ item.profile.name }}
           p {{ item.profile.occupation }}
-          time {{ item.modifiedDate.toLocaleDateString() }}
+          time {{ item.modifiedDate.toDate().toLocaleDateString() }}
     router-link.c-btn#l-floatButton(to='/character/edit')
       | 新規作成
       <img svg-inline src="@/assets/icon/add.svg" />
@@ -38,49 +38,50 @@ main#l-content
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 
 import CharData from "@/types/CharData";
-import firebaseApp from "@/firebase";
-import firebase from "firebase";
+import firebase from "@/firebase";
 
 @Component
 export default class Character extends Vue {
   // data
   public CharDataList: CharData[] = [];
+  get getCharDataList(): CharData[] {
+    return this.CharDataList;
+  }
 
   // lifecycle hook
-  public beforeMount() {
-    const db = firebaseApp.firestore();
-    const user = this.$store.state.user;
-    if (user == null) {
+  public async beforeMount() {
+    window.console.log(0);
+    const db = firebase.firestore();
+    if (!this.$store.state.login) {
       return;
     }
+    window.console.log(2);
     const charactersRef = db.collection("characters");
-    const userRef = db.collection("users").doc(user.uid);
-    const characters = charactersRef.where("userRef", "==", userRef).get();
-    characters
-      .then(snapshot => {
-        snapshot.docs.forEach(doc => {
-          if (doc.exists) {
-            const data = doc.data();
-
-            this.CharDataList.push({
-              id: data.id,
-              modifiedDate: data.modifiedDate.toDate(),
-              profile: {
-                name: data.name,
-                avatarUrl: data.avatarUrl,
-                occupation: data.occupation,
-                isDead: data.isDead
-              }
-            });
-          }
+    const characters = charactersRef
+      .where("userId", "==", localStorage.uid)
+      .get();
+    window.console.log(3);
+    const updateCharDataList = () => {
+      return characters
+        .then(snapshot => {
+          snapshot.docs.forEach(doc => {
+            if (doc.exists) {
+              const data = doc.data();
+              let charData = data as CharData;
+              charData.id = doc.id;
+              this.CharDataList.push(charData);
+              window.console.log(4);
+            }
+          });
+        })
+        .catch(err => {
+          window.console.error(err);
         });
-      })
-      .catch(err => {
-        window.console.error(err);
-      });
+    };
+    await updateCharDataList();
   }
 }
 </script>

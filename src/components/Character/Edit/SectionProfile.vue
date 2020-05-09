@@ -3,33 +3,33 @@ section#profile
   h2 プロフィール
 
   label.avatar
-    img(v-if="CharData.profile.avatarUrl" :src='CharData.profile.avatarUrl' alt='キャラクターアイコン')
+    img(v-if="this.$store.state.editedCharacter.profile.avatarUrl" :src='this.$store.state.editedCharacter.profile.avatarUrl' alt='キャラクターアイコン')
     img(v-else src='/img/avatar.png' alt='キャラクターアイコン')
     p 変更
     input(type='file' @change='updateImage($event.target, $store.state.user)')
 
   label
-    input(type='text' placeholder='探索 好太郎' autofocus='')
+    input(type='text' v-model='profileName' placeholder='探索 好太郎' autofocus='')
     span キャラクター名
 
   label
-    input(type='text' placeholder='探偵')
+    input(type='text' v-model='profileOccupation' placeholder='探偵')
     span 職業
 
   label
-    input(type='number' placeholder='20')
+    input(type='number' v-model='profileAge' placeholder='20')
     span 年齢
 
   label
-    input(type='text' placeholder='男')
+    input(type='text' v-model='profileSex' placeholder='男')
     span 性別
 
   label
-    input(type='number' placeholder='170')
+    input(type='number' v-model='profileHeightCentiMeter' placeholder='170')
     span 身長
 
   label
-    input(type='number' placeholder='65')
+    input(type='number' v-model='profileWeightKilogram' placeholder='65')
     span 体重
 
   label(:style="`height:${getTextareaHeight}px`")
@@ -44,17 +44,12 @@ section#profile
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import firebase from "firebase";
-import { storage, User } from "firebase";
-
-import CharData from "@/types/CharData";
+import { User } from "firebase";
 
 @Component
 export default class CharacterEditSectionProfile extends Vue {
-  // props
-  @Prop() CharData!: CharData;
-
   // data
   textareaHeight: number = 80;
 
@@ -92,8 +87,8 @@ export default class CharacterEditSectionProfile extends Vue {
       })
       .then(() => ref.getDownloadURL())
       .then(url => {
-        if (this.CharData.profile) {
-          this.CharData.profile.avatarUrl = url;
+        if (this.$store.state.editedCharacter.profile) {
+          this.$store.commit("setCharacterAvatarUrl", url);
         } else {
           throw "avatarUrl is nothing";
         }
@@ -102,6 +97,48 @@ export default class CharacterEditSectionProfile extends Vue {
         window.alert("画像の更新に失敗しました");
         window.console.error(e);
       });
+  }
+
+  get profileName(): string {
+    return this.$store.state.editedCharacter?.profile?.name || "";
+  }
+  set profileName(name: string) {
+    this.$store.commit("setCharacterProfileName", name);
+  }
+
+  get profileOccupation(): string {
+    return this.$store.state.editedCharacter?.profile?.occupation || "";
+  }
+  set profileOccupation(s: string) {
+    this.$store.commit("setCharacterProfileOccupation", s);
+  }
+
+  get profileAge(): number {
+    return this.$store.state.editedCharacter?.profile?.age || "";
+  }
+  set profileAge(num: number) {
+    this.$store.commit("setCharacterProfileAge", num);
+  }
+
+  get profileSex(): string {
+    return this.$store.state.editedCharacter?.profile?.sex || "";
+  }
+  set profileSex(s: string) {
+    this.$store.commit("setCharacterProfileSex", s);
+  }
+
+  get profileHeightCentiMeter(): number {
+    return this.$store.state.editedCharacter?.profile?.heightCentimeter || "";
+  }
+  set profileHeightCentiMeter(num: number) {
+    this.$store.commit("setCharacterProfileHeightCentiMeter", num);
+  }
+
+  get profileWeightKilogram(): number {
+    return this.$store.state.editedCharacter?.profile?.weightKilogram || "";
+  }
+  set profileWeightKilogram(num: number) {
+    this.$store.commit("setCharacterProfileWeightKilogram", num);
   }
 
   storageReference(uid: string, filename: string): string {

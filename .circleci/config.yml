@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:11.14
+      - image: circleci/openjdk:11-jdk-sid-node
     working_directory: ~/repo
     steps:
       - checkout
@@ -15,5 +15,9 @@ jobs:
       - save_cache:
           paths:
             - node_modules
+            - ~/.cache/firebase/emulators
           key: v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          command: npm run firestore-emulator
+          background: true
       - run: npm run test:unit

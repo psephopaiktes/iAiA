@@ -3,25 +3,21 @@ main#l-content
 
   CharacterEditHeader(:CharData="CharData" @showSampleModal="showSampleModal=true")
 
-  CharacterEditSectionProfile(:CharData="CharData")
+  CharacterEditSectionProfile
   CharacterEditSectionAbility
   CharacterEditSectionStatus
   CharacterEditSectionSkill
   CharacterEditSectionWeapons
   CharacterEditSectionBelongings
 
-  CharacterEditFooter
+  CharacterEditFooter(@updateCharacter="updateCharacter")
 
   CharacterEditSampleModal(v-if="showSampleModal" @closeSampleModal="showSampleModal=false")
 
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import firebase from "firebase";
-import { storage, User } from "firebase";
-
-import CharData from "@/types/CharData";
+import { Component, Vue } from "vue-property-decorator";
 
 import CharacterEditHeader from "@/components/Character/Edit/Header.vue";
 import CharacterEditFooter from "@/components/Character/Edit/Footer.vue";
@@ -32,6 +28,9 @@ import CharacterEditSectionSkill from "@/components/Character/Edit/SectionSkill.
 import CharacterEditSectionWeapons from "@/components/Character/Edit/SectionWeapons.vue";
 import CharacterEditSectionBelongings from "@/components/Character/Edit/SectionBelongings.vue";
 import CharacterEditSampleModal from "@/components/Character/Edit/SampleModal.vue";
+import firebase from "@/firebase";
+import CharData from "@/types/CharData";
+import Timestamp = firebase.firestore.Timestamp;
 
 @Component({
   components: {
@@ -49,14 +48,56 @@ import CharacterEditSampleModal from "@/components/Character/Edit/SampleModal.vu
 export default class CharacterEdit extends Vue {
   // data
   showSampleModal: boolean = false;
-  // TODO Fetch from Firebase by $route.query.charId
+  db = firebase.firestore();
   public CharData: CharData = {
+    userId: localStorage.uid,
     profile: {
-      name: "あああ",
+      name: "",
+      isDead: false,
       avatarUrl: "",
-      isDead: true
+      occupation: "",
+      backstory: "",
+      heightCentimeter: null,
+      age: null,
+      weightKilogram: null,
+      sex: "",
+      nationality: "",
+      money: null,
+      moneyUnit: ""
     }
   };
+
+  setCharData(cd: CharData) {
+    this.CharData = cd;
+    this.CharData.userId = localStorage.uid;
+  }
+
+  createCharacter() {
+    const now = Timestamp.now();
+    this.$store.commit("setCharacterModifiedDate", now);
+    this.$store.commit("setCharacterCreateDate", now);
+    this.db
+      .collection("characters")
+      .add(this.$store.state.editedCharacter)
+      .then(res => window.console.log("successfully written, id=", res.id))
+      .catch(error => window.console.error("error writing document: ", error));
+  }
+
+  updateCharacter() {
+    this.$store.commit("setCharacterUserId", this.$store.state.user.uid);
+    const charId = this.$route.query.charId as string;
+    if (charId == undefined) {
+      return this.createCharacter();
+    }
+    const now = Timestamp.now();
+    this.$store.commit("setCharacterModifiedDate", now);
+    this.db
+      .collection("characters")
+      .doc(charId)
+      .set(this.$store.state.editedCharacter, { merge: true })
+      .then(() => window.console.log("successfully written"))
+      .catch(error => window.console.error("error writing document: ", error));
+  }
 
   // lifecycle hook
   public beforeCreate() {
@@ -64,6 +105,27 @@ export default class CharacterEdit extends Vue {
       // 未ログインの場合
       this.$router.push("/character");
     }
+  }
+
+  public beforeMount() {
+    const charId = this.$route.query.charId as string;
+    if (charId == undefined) {
+      return;
+    }
+    this.db
+      .collection("characters")
+      .doc(charId)
+      .get()
+      .then(snapshot => {
+        const data = snapshot.data();
+        if (data == undefined) {
+          throw Error("undefined data. charId=" + charId);
+        }
+        this.setCharData(data as CharData);
+      })
+      .catch(err => {
+        window.console.error(err);
+      });
   }
 }
 </script>

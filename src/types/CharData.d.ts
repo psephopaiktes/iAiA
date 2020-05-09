@@ -1,12 +1,12 @@
 import firebase from "firebase";
-import DocumentReference = firebase.firestore.DocumentReference;
+import Timestamp = firebase.firestore.Timestamp;
 
 export default interface CharData {
   id?: string; // キャラクターの一意のID
   user?: string; // キャラクター作成者
-  createDate?: Date; // 作成日 経過ミリ秒の文字列でいいのかな？
-  modifiedDate?: Date; // 更新日 キャラ一覧の並び替えなどで使う用
-  userRef?: DocumentReference; //?
+  createDate?: Timestamp; // 作成日
+  modifiedDate?: Timestamp; // 更新日 キャラ一覧の並び替えなどで使う用
+  userId?: string;
   profile?: {
     // キャラクターの基本情報
     name?: string; // 名前
@@ -14,12 +14,12 @@ export default interface CharData {
     avatarUrl?: string; // プロフィール画像のURL
     occupation?: string; // 職業
     backstory?: string; // 説明文 改行を許容
-    heightCentimeter?: number; // 身長
-    age?: number; // 年齢
-    weightKilogram?: number; // 体重
+    heightCentimeter?: number | null; // 身長
+    age?: number | null; // 年齢
+    weightKilogram?: number | null; // 体重
     sex?: string; // 性別
     nationality?: string; // 国籍
-    money?: number; // 所持金
+    money?: number | null; // 所持金
     moneyUnit?: string; // 所持金の単位
     weapons?: [
       // 武器

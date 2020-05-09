@@ -1,17 +1,28 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import firebaseApp from "@/firebase";
+import firebase from "@/firebase";
 import { throwDice } from "@/lib/dice";
 import { DiceItem } from "@/types/DiceItem";
 import { RootState } from "@/types/RootState";
 import { UserInfo } from "@/types/UserInfo";
+import CharData from "@/types/CharData";
+import Timestamp = firebase.firestore.Timestamp;
 
 Vue.use(Vuex);
+
+const defaultEditedCharacter: CharData = {
+  profile: {
+    name: "",
+    belongings: [{}],
+    weapons: [{}]
+  }
+};
 
 let rootState: RootState = {
   login: false,
   loading: true,
   user: null,
+  editedCharacter: defaultEditedCharacter,
   dice: {
     showModal: false,
     result: 0,
@@ -34,7 +45,7 @@ export default new Vuex.Store({
     },
 
     checkFirebaseLogin(state) {
-      firebaseApp.auth().onAuthStateChanged(user => {
+      firebase.auth().onAuthStateChanged(user => {
         state.loading = false;
         if (user) {
           state.login = true;
@@ -48,7 +59,7 @@ export default new Vuex.Store({
           };
           state.user = Object.assign({}, userInfo);
           localStorage.uid = user.uid;
-          const docRef = firebaseApp
+          const docRef = firebase
             .firestore()
             .collection("users")
             .doc(user.uid);
@@ -76,7 +87,7 @@ export default new Vuex.Store({
     },
 
     logout(state) {
-      firebaseApp
+      firebase
         .auth()
         .signOut()
         .catch(err => window.console.log(err));
@@ -137,8 +148,95 @@ export default new Vuex.Store({
 
     diceClose(state) {
       state.dice.showModal = false;
-    }
+    },
+
+    setCharacterProfileName: function(state, name: string) {
+      if (
+        state.editedCharacter != null &&
+        state.editedCharacter.profile != null
+      ) {
+        state.editedCharacter.profile.name = name;
+      }
+    },
+
+    setCharacterProfileOccupation: function(state, s: string) {
+      if (
+        state.editedCharacter != null &&
+        state.editedCharacter.profile != null
+      ) {
+        state.editedCharacter.profile.occupation = s;
+      }
+    },
+
+    setCharacterProfileAge: function(state, num: number) {
+      if (
+        state.editedCharacter != null &&
+        state.editedCharacter.profile != null
+      ) {
+        state.editedCharacter.profile.age = num;
+      }
+    },
+
+    setCharacterProfileSex: function(state, s: string) {
+      if (
+        state.editedCharacter != null &&
+        state.editedCharacter.profile != null
+      ) {
+        state.editedCharacter.profile.sex = s;
+      }
+    },
+
+    setCharacterProfileHeightCentiMeter: function(state, num: number) {
+      if (
+        state.editedCharacter != null &&
+        state.editedCharacter.profile != null
+      ) {
+        state.editedCharacter.profile.heightCentimeter = num;
+      }
+    },
+
+    setCharacterProfileWeightKilogram: function(state, num: number) {
+      if (
+        state.editedCharacter != null &&
+        state.editedCharacter.profile != null
+      ) {
+        state.editedCharacter.profile.weightKilogram = num;
+      }
+    },
+
+    setCharacterUserId: function(state, s: string) {
+      if (state.editedCharacter != null) {
+        state.editedCharacter.userId = s;
+      }
+    },
+
+    setCharacterCreateDate: function(state, t: Timestamp) {
+      if (state.editedCharacter != null) {
+        state.editedCharacter.createDate = t;
+      }
+    },
+
+    setCharacterModifiedDate: function(state, t: Timestamp) {
+      if (state.editedCharacter != null) {
+        state.editedCharacter.modifiedDate = t;
+      }
+    },
+
+    setCharacterAvatarUrl: function(state, url: string) {
+      if (
+        state.editedCharacter != null &&
+        state.editedCharacter.profile != null
+      ) {
+        state.editedCharacter.profile.avatarUrl = url;
+      }
+    },
+
+    fillEditedCharacter: function(state) {}
   },
 
-  actions: {}
+  actions: {
+    checkFirebaseLogin({ commit }) {
+      commit("checkFirebaseLogin");
+    }
+  }
 });

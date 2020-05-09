@@ -23,10 +23,8 @@ main#l-loginContainer
 </template>
 
 <script lang="ts">
-import { Watch, Component, Prop, Vue } from "vue-property-decorator";
-
-import firebaseApp from "@/firebase";
-import * as firebase from "firebase";
+import { Watch, Component, Vue } from "vue-property-decorator";
+import firebase from "@/firebase";
 
 @Component
 export default class Login extends Vue {
@@ -41,7 +39,7 @@ export default class Login extends Vue {
   // methods
   public redirectGoogleAuth() {
     this.$store.commit("startLoading");
-    firebaseApp
+    firebase
       .auth()
       .signInWithRedirect(new firebase.auth.GoogleAuthProvider())
       .catch(reason => {

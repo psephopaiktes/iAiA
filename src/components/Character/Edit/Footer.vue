@@ -1,6 +1,6 @@
 <template lang="pug">
 footer
-  button.c-btn.u-mt96(@click='')
+  button.c-btn.u-mt96(@click="$emit('updateCharacter')")
     | 保存
     <img svg-inline src="@/assets/icon/check.svg" />
   button.c-btn.--caution.u-mt12(v-if="$route.query.charId" @click='')
@@ -16,9 +16,7 @@ footer
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import firebase from "firebase";
-import { storage, User } from "firebase";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class CharacterEditFooter extends Vue {}
