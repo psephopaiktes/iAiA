@@ -6,6 +6,7 @@ import { DiceItem } from "@/types/DiceItem";
 import { RootState } from "@/types/RootState";
 import { UserInfo } from "@/types/UserInfo";
 import CharData from "@/types/CharData";
+import Timestamp = firebase.firestore.Timestamp;
 
 Vue.use(Vuex);
 
@@ -155,6 +156,69 @@ export default new Vuex.Store({
         state.editedCharacter.profile != null
       ) {
         state.editedCharacter.profile.name = name;
+      }
+    },
+
+    setCharacterProfileOccupation: function(state, s: string) {
+      if (
+        state.editedCharacter != null &&
+        state.editedCharacter.profile != null
+      ) {
+        state.editedCharacter.profile.occupation = s;
+      }
+    },
+
+    setCharacterProfileAge: function(state, num: number) {
+      if (
+        state.editedCharacter != null &&
+        state.editedCharacter.profile != null
+      ) {
+        state.editedCharacter.profile.age = num;
+      }
+    },
+
+    setCharacterProfileSex: function(state, s: string) {
+      if (
+        state.editedCharacter != null &&
+        state.editedCharacter.profile != null
+      ) {
+        state.editedCharacter.profile.sex = s;
+      }
+    },
+
+    setCharacterProfileHeightCentiMeter: function(state, num: number) {
+      if (
+        state.editedCharacter != null &&
+        state.editedCharacter.profile != null
+      ) {
+        state.editedCharacter.profile.heightCentimeter = num;
+      }
+    },
+
+    setCharacterProfileWeightKilogram: function(state, num: number) {
+      if (
+        state.editedCharacter != null &&
+        state.editedCharacter.profile != null
+      ) {
+        state.editedCharacter.profile.weightKilogram = num;
+      }
+    },
+
+    setCharacterUserId: function(state, s: string) {
+      if (state.editedCharacter != null) {
+        state.editedCharacter.userId = s;
+      }
+    },
+
+    setCharacterCreateDate: function(state, t: Timestamp) {
+      if (state.editedCharacter != null) {
+        state.editedCharacter.createDate = t;
+      }
+    },
+
+    setCharacterModifiedDate: function(state, t: Timestamp) {
+      if (state.editedCharacter != null) {
+        state.editedCharacter.modifiedDate = t;
       }
     },
 

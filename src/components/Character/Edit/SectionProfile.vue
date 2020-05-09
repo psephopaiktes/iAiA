@@ -1,18 +1,52 @@
 <template lang="pug">
 section#profile
   h2 プロフィール
+
+  label.avatar
+    img(v-if="this.$store.state.editedCharacter.profile.avatarUrl" :src='this.$store.state.editedCharacter.profile.avatarUrl' alt='キャラクターアイコン')
+    img(v-else src='/img/avatar.png' alt='キャラクターアイコン')
+    p 変更
+    input(type='file' @change='updateImage($event.target, $store.state.user)')
+
   label
     input(type='text' v-model='profileName' placeholder='探索 好太郎' autofocus='')
     span キャラクター名
+
+  label
+    input(type='text' v-model='profileOccupation' placeholder='探偵')
+    span 職業
+
+  label
+    input(type='number' v-model='profileAge' placeholder='20')
+    span 年齢
+
+  label
+    input(type='text' v-model='profileSex' placeholder='男')
+    span 性別
+
+  label
+    input(type='number' v-model='profileHeightCentiMeter' placeholder='170')
+    span 身長
+
+  label
+    input(type='number' v-model='profileWeightKilogram' placeholder='65')
+    span 体重
+
+  label(:style="`height:${getTextareaHeight}px`")
+    textarea(
+      :style="`height:${getTextareaHeight}px`"
+      @input="updateTextareaHeight($event)"
+      @click="updateTextareaHeight($event)"
+      placeholder='昼行灯だがいざというときには抜群の洞察力を魅せる探偵。\n元警察官。独身。'
+    )
+    span 紹介・メモ
+
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import firebase from "firebase";
 import { User } from "firebase";
-
-import CharData from "@/types/CharData";
-import { RootState } from "@/types/RootState";
 
 @Component
 export default class CharacterEditSectionProfile extends Vue {
@@ -70,6 +104,41 @@ export default class CharacterEditSectionProfile extends Vue {
   }
   set profileName(name: string) {
     this.$store.commit("setCharacterProfileName", name);
+  }
+
+  get profileOccupation(): string {
+    return this.$store.state.editedCharacter?.profile?.occupation || "";
+  }
+  set profileOccupation(s: string) {
+    this.$store.commit("setCharacterProfileOccupation", s);
+  }
+
+  get profileAge(): number {
+    return this.$store.state.editedCharacter?.profile?.age || "";
+  }
+  set profileAge(num: number) {
+    this.$store.commit("setCharacterProfileAge", num);
+  }
+
+  get profileSex(): string {
+    return this.$store.state.editedCharacter?.profile?.sex || "";
+  }
+  set profileSex(s: string) {
+    this.$store.commit("setCharacterProfileSex", s);
+  }
+
+  get profileHeightCentiMeter(): number {
+    return this.$store.state.editedCharacter?.profile?.heightCentimeter || "";
+  }
+  set profileHeightCentiMeter(num: number) {
+    this.$store.commit("setCharacterProfileHeightCentiMeter", num);
+  }
+
+  get profileWeightKilogram(): number {
+    return this.$store.state.editedCharacter?.profile?.weightKilogram || "";
+  }
+  set profileWeightKilogram(num: number) {
+    this.$store.commit("setCharacterProfileWeightKilogram", num);
   }
 
   storageReference(uid: string, filename: string): string {

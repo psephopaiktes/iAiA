@@ -30,6 +30,7 @@ import CharacterEditSectionBelongings from "@/components/Character/Edit/SectionB
 import CharacterEditSampleModal from "@/components/Character/Edit/SampleModal.vue";
 import firebase from "@/firebase";
 import CharData from "@/types/CharData";
+import Timestamp = firebase.firestore.Timestamp;
 
 @Component({
   components: {
@@ -72,6 +73,9 @@ export default class CharacterEdit extends Vue {
   }
 
   createCharacter() {
+    const now = Timestamp.now();
+    this.$store.commit("setCharacterModifiedDate", now);
+    this.$store.commit("setCharacterCreateDate", now);
     this.db
       .collection("characters")
       .add(this.$store.state.editedCharacter)
@@ -80,11 +84,13 @@ export default class CharacterEdit extends Vue {
   }
 
   updateCharacter() {
-    this.$store.state.editedCharacter.userId = this.$store.state.user.uid;
+    this.$store.commit("setCharacterUserId", this.$store.state.user.uid);
     const charId = this.$route.query.charId as string;
     if (charId == undefined) {
       return this.createCharacter();
     }
+    const now = Timestamp.now();
+    this.$store.commit("setCharacterModifiedDate", now);
     this.db
       .collection("characters")
       .doc(charId)
