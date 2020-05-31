@@ -128,14 +128,21 @@ export default class CharacterEditSectionProfile extends Vue {
   }
 
   get profileHeightCentiMeter(): number {
-    return this.$store.state.characterEdit.charData.profile.heightCentimeter || "";
+    return (
+      this.$store.state.characterEdit.charData.profile.heightCentimeter || ""
+    );
   }
   set profileHeightCentiMeter(num: number) {
-    this.$store.commit("characterEdit/setCharacterProfileHeightCentiMeter", num);
+    this.$store.commit(
+      "characterEdit/setCharacterProfileHeightCentiMeter",
+      num
+    );
   }
 
   get profileWeightKilogram(): number {
-    return this.$store.state.characterEdit.charData.profile.weightKilogram || "";
+    return (
+      this.$store.state.characterEdit.charData.profile.weightKilogram || ""
+    );
   }
   set profileWeightKilogram(num: number) {
     this.$store.commit("characterEdit/setCharacterProfileWeightKilogram", num);

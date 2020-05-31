@@ -84,7 +84,10 @@ export default class CharacterEdit extends Vue {
   }
 
   updateCharacter() {
-    this.$store.commit("characterEdit/setCharacterUserId", this.$store.state.user.uid);
+    this.$store.commit(
+      "characterEdit/setCharacterUserId",
+      this.$store.state.user.uid
+    );
     const charId = this.$route.query.charId as string;
     if (charId == undefined) {
       return this.createCharacter();
