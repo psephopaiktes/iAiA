@@ -13,9 +13,8 @@ section#ability
       th 基本値
       th 増減
       th 合計
-    //- ここv-forで表示したい
-    tr
-      th STR
+    tr(v-for='(ent, i) in Object.entries(abilities)')
+      th {{ ent[1] }}
       td
         input(type='number' value='0')
         button.c-subBtn.--noText(@click="")
@@ -31,8 +30,23 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import firebase from "firebase";
 import { storage, User } from "firebase";
 
+const abilities = {
+  Strength: "STR",
+  Constitution: "CON",
+  Power: "POW",
+  Dexterity: "DEX",
+  Appearance: "APP",
+  Size: "SIZ",
+  Intelligence: "INT",
+  Education: "EDU"
+};
+type Ability = typeof abilities[keyof typeof abilities];
+
 @Component
 export default class CharacterEditSectionAbility extends Vue {
+  // data
+  abilities = abilities;
+
   // method
   help(): void {
     window.alert("STR, CON などの能力値をダイスを振ってランダムに決定します。");
