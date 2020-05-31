@@ -135,9 +135,14 @@ export default class CharacterEdit extends Vue {
 
 <style scoped lang="scss">
 ::v-deep h2 {
-  margin-top: 5.6rem;
+  position: sticky;
+  top: 0;
+  z-index: 600;
+  margin: 4.8rem -0.8rem -0.8rem;
+  padding: 0.8rem 0.8rem;
   font-size: 1.8rem;
   font-weight: 300;
+  background: $COLOR_BASE;
   color: rgba($COLOR_MAIN, 0.5);
   svg {
     width: 1.6rem;

@@ -11,7 +11,7 @@ main#l-content
       | アカウント設定
       <img svg-inline src="@/assets/icon/person.svg" />
 
-    li: router-link.c-panel(to='/other/share')
+    li: button.c-panel(@click='share')
       | iAiAを共有
       <img svg-inline src="@/assets/icon/share.svg" />
 
@@ -76,7 +76,20 @@ export default class Other extends Vue {
   }
 
   // method
-  install(): void {
+  public share(): void {
+    const nav: any = window.navigator;
+    if (nav.share) {
+      nav
+        .share({
+          title: "iAiA TRPGサポーター",
+          url: "https://iaia.app/"
+        })
+        .then(() => window.console.log("Successful share"));
+    } else {
+      this.$router.push("/other/share");
+    }
+  }
+  public install(): void {
     if (!this.promptEvent) {
       window.alert("エラーが発生しました。");
       return;

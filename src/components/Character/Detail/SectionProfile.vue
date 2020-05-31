@@ -1,13 +1,12 @@
 <template lang="pug">
 section#profile
 
-  img.icon(:src="CharData.profile.avatarUrl" alt="アイコン画像")
+  .icon(class="dead")
+    img.icon(:src="CharData.profile.avatarUrl" alt="アイコン画像")
 
   .rightBlock
 
-    h1.name
-      | {{ CharData.profile.name }}
-      span(v-if="CharData.profile.isDead") （死亡）
+    h1.name {{ CharData.profile.name }}
 
     p.mainProfile {{ CharData.profile.sex }} / {{ CharData.profile.age }}歳 / {{ CharData.profile.occupation }}
 
@@ -47,9 +46,33 @@ export default class CharacterDetailSectionProfile extends Vue {
   .icon {
     width: 10.8rem;
     height: 10.8rem;
-    object-fit: cover;
     border-radius: 50%;
-    border: 0.6rem solid $COLOR_BASE;
+    border: 0.3rem solid $COLOR_BASE;
+    position: relative;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .icon.dead {
+    filter: grayscale(0.5);
+    &::after {
+      content: "死亡";
+      position: absolute;
+      width: 12rem;
+      height: 1.6rem;
+      line-height: 1.6rem;
+      text-align: center;
+      top: 2rem;
+      left: -2.8rem;
+      transform: rotate(-45deg);
+      font-size: 1.2rem;
+      background: #000;
+      color: rgba($COLOR_MAIN, 1);
+      letter-spacing: 0.1em;
+    }
   }
 
   .rightBlock {
