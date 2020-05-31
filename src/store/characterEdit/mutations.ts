@@ -1,9 +1,14 @@
 import { MutationTree } from "vuex";
-import CharacterEditState from "@/types/CharacterEditState";
 import firebase from "firebase";
+import CharacterEditState from "@/types/CharacterEditState";
+import CharData from "@/types/CharData";
 import Timestamp = firebase.firestore.Timestamp;
 
 const mutations: MutationTree<CharacterEditState> = {
+  setCharData: function(state, data: CharData) {
+    state.charData = data;
+  },
+
   setCharacterProfileName: function(state, name: string) {
     if (state.charData != null && state.charData.profile != null) {
       state.charData.profile.name = name;

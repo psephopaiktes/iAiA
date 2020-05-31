@@ -125,6 +125,7 @@ export default class CharacterEdit extends Vue {
           throw Error("undefined data. charId=" + charId);
         }
         this.setCharData(data as CharData);
+        this.$store.commit("characterEdit/setCharData", data as CharData);
       })
       .catch(err => {
         window.console.error(err);
