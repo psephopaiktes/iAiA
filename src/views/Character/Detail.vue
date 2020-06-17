@@ -44,8 +44,8 @@ import Hirata from "@/lib/samplaChars/hirata";
 })
 export default class CharacterDetail extends Vue {
   // set Dummy data
-  // public CharData: CharData = { profile: {} };
-  public CharData: CharData = Hirata;
+  public CharData: CharData = { profile: {} };
+  // public CharData: CharData = Hirata;
 
   // lifecycle hook
   public beforeMount() {
@@ -67,6 +67,7 @@ export default class CharacterDetail extends Vue {
           throw new Error("undefined data. charId=" + charId);
         }
         this.CharData = data as CharData;
+        this.$store.commit("characterEdit/setCharData", data as CharData);
       })
       .catch(err => {
         window.console.error(err);

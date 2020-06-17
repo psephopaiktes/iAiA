@@ -42,17 +42,7 @@ export default interface CharData {
       }
     ];
   };
-  ability?: {
-    // キャラクターの能力値 ダイスで決まるもの
-    STR?: number;
-    CON?: number;
-    POW?: number;
-    DEX?: number;
-    APP?: number;
-    SIZ?: number;
-    INT?: number;
-    EDU?: number;
-  };
+  ability?: Ability;
   status?: {
     // キャラクターの状態 stausから導き出されるもの
     HP?: number;
@@ -74,4 +64,15 @@ export default interface CharData {
       avoid?: number; // 回避
     };
   };
+}
+
+export interface Ability {
+  STR: number;
+  CON: number;
+  POW: number;
+  DEX: number;
+  APP: number;
+  SIZ: number;
+  INT: number;
+  EDU: number;
 }
