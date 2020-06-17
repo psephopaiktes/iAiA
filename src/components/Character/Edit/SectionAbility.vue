@@ -3,7 +3,7 @@ section#ability
   h2
     | 能力値
     <img svg-inline src="@/assets/icon/help.svg" @click='help' />
-  button.c-subBtn.u-mt24(@click="")
+  button.c-subBtn.u-mt24(@click="diceAll")
     | 一括でダイスを振る
     <img svg-inline src="@/assets/icon/loop.svg" />
 
@@ -21,7 +21,7 @@ section#ability
           <img svg-inline src="@/assets/icon/loop.svg" />
       td
         input(type='number' value='0')
-      td {{ 15 }}
+      td
     tr
       th CON
       td
@@ -30,7 +30,7 @@ section#ability
           <img svg-inline src="@/assets/icon/loop.svg" />
       td
         input(type='number' value='0')
-      td {{ 15 }}
+      td
     tr
       th POW
       td
@@ -39,7 +39,7 @@ section#ability
           <img svg-inline src="@/assets/icon/loop.svg" />
       td
         input(type='number' value='0')
-      td {{ 15 }}
+      td
     tr
       th DEX
       td
@@ -48,7 +48,7 @@ section#ability
           <img svg-inline src="@/assets/icon/loop.svg" />
       td
         input(type='number' value='0')
-      td {{ 15 }}
+      td
     tr
       th APP
       td
@@ -57,7 +57,7 @@ section#ability
           <img svg-inline src="@/assets/icon/loop.svg" />
       td
         input(type='number' value='0')
-      td {{ 15 }}
+      td
     tr
       th SIZ
       td
@@ -66,7 +66,7 @@ section#ability
           <img svg-inline src="@/assets/icon/loop.svg" />
       td
         input(type='number' value='0')
-      td {{ 15 }}
+      td
     tr
       th INT
       td
@@ -75,7 +75,7 @@ section#ability
           <img svg-inline src="@/assets/icon/loop.svg" />
       td
         input(type='number' value='0')
-      td {{ 15 }}
+      td
     tr
       th EDU
       td
@@ -84,7 +84,7 @@ section#ability
           <img svg-inline src="@/assets/icon/loop.svg" />
       td
         input(type='number' value='0')
-      td {{ 15 }}
+      td
 
 </template>
 
@@ -92,32 +92,15 @@ section#ability
 import { Component, Prop, Vue } from "vue-property-decorator";
 import firebase from "firebase";
 import { storage, User } from "firebase";
-
-const abilities = {
-  Strength: "STR",
-  Constitution: "CON",
-  Power: "POW",
-  Dexterity: "DEX",
-  Appearance: "APP",
-  Size: "SIZ",
-  Intelligence: "INT",
-  Education: "EDU"
-};
-type Ability = typeof abilities[keyof typeof abilities];
+import { throwDice } from "@/lib/dice";
 
 @Component
 export default class CharacterEditSectionAbility extends Vue {
-  // data
-  abilities = abilities;
-
   // method
   help(): void {
     window.alert("STR, CON などの能力値をダイスを振ってランダムに決定します。");
   }
   get abilityStrength(): number {
-    window.console.log("debug");
-    window.console.dir(this.$store.state.characterEdit.charData);
-
     return this.$store.state.characterEdit.charData.ability.STR || 0;
   }
   set abilityStrength(input: number) {
@@ -125,7 +108,7 @@ export default class CharacterEditSectionAbility extends Vue {
   }
 
   get abilityConstitution(): number {
-    return this.$store.state.characterEdit.charData.ability.STR || 0;
+    return this.$store.state.characterEdit.charData.ability.CON || 0;
   }
   set abilityConstitution(input: number) {
     this.$store.commit("characterEdit/setCharacterAbilityConstitution", input);
@@ -171,6 +154,65 @@ export default class CharacterEditSectionAbility extends Vue {
   }
   set abilityEducation(input: number) {
     this.$store.commit("characterEdit/setCharacterAbilityEducation", input);
+  }
+
+  diceStrength() {
+    this.$store.commit(
+      "characterEdit/setCharacterAbilityStrength",
+      throwDice(3, 6)
+    );
+  }
+  diceConstitution() {
+    this.$store.commit(
+      "characterEdit/setCharacterAbilityConstitution",
+      throwDice(3, 6)
+    );
+  }
+  dicePower() {
+    this.$store.commit(
+      "characterEdit/setCharacterAbilityPower",
+      throwDice(3, 6)
+    );
+  }
+  diceDexterity() {
+    this.$store.commit(
+      "characterEdit/setCharacterAbilityDexterity",
+      throwDice(3, 6)
+    );
+  }
+  diceAppearance() {
+    this.$store.commit(
+      "characterEdit/setCharacterAbilityAppearance",
+      throwDice(3, 6)
+    );
+  }
+  diceSize() {
+    this.$store.commit(
+      "characterEdit/setCharacterAbilitySize",
+      throwDice(2, 6) + 6
+    );
+  }
+  diceIntelligence() {
+    this.$store.commit(
+      "characterEdit/setCharacterAbilityIntelligence",
+      throwDice(2, 6) + 6
+    );
+  }
+  diceEducation() {
+    this.$store.commit(
+      "characterEdit/setCharacterAbilityEducation",
+      throwDice(3, 6) + 3
+    );
+  }
+  diceAll() {
+    this.diceStrength();
+    this.diceConstitution();
+    this.dicePower();
+    this.diceDexterity();
+    this.diceAppearance();
+    this.diceSize();
+    this.diceIntelligence();
+    this.diceEducation();
   }
 }
 </script>
