@@ -2,6 +2,7 @@
 #app
   global-nav
   router-view
+  audio(id="diceSound" preload="auto"): source(src="/img/dice.mp3" type="audio/mp3")
 </template>
 
 <script lang="ts">

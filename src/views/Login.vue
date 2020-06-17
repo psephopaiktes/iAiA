@@ -19,7 +19,10 @@ main#l-loginContainer
     h2
       <img svg-inline src="@/assets/icon/warning.svg" />
       | ご注意
-    p iAiAは現在アルファ版です。記載されている内容には誤りがある可能性があります。また登録したアカウントやデータは予告なく削除される場合があります。
+    p
+      | iAiAは現在アルファ版です。記載されている内容には誤りがある可能性があります。
+      br.u-hide-sp
+      | また登録したアカウントやデータは予告なく削除される場合があります。
 </template>
 
 <script lang="ts">

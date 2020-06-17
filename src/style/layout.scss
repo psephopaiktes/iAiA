@@ -51,6 +51,12 @@
   top: 0; left: 0;
   overflow: scroll;
   padding-bottom: $L-NAV_SM_H;
+  opacity: 0;
+  pointer-events: none;
+  &.show {
+    pointer-events: auto;
+    opacity: 1;
+  }
   @include min($SM){
     padding-top: $L-NAV_MD_H;
     padding-bottom: 0;

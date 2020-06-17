@@ -1,5 +1,5 @@
 <template lang="pug">
-section#l-modal
+section#l-modal(:class='{show: showSampleModal}')
 
   .c-scrim(@click="$emit('closeSampleModal')")
 
@@ -32,6 +32,9 @@ import { storage, User } from "firebase";
 
 @Component
 export default class CharacterEditSampleModal extends Vue {
+  // props
+  @Prop() showSampleModal!: boolean;
+
   // data
   public SampleCharList: any = [
     {

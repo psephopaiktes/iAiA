@@ -126,6 +126,11 @@ export default new Vuex.Store({
         state.dice.log.pop();
       }
       localStorage.diceLog = JSON.stringify(state.dice.log);
+
+      const audioPlayer = <HTMLVideoElement>(
+        document.getElementById("diceSound")
+      );
+      audioPlayer.play();
     },
 
     restoreDiceLog(state) {

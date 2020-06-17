@@ -35,6 +35,7 @@ export default class CharacterEditFooter extends Vue {}
   backdrop-filter: blur(8px);
   color: $COLOR_MAIN;
   text-align: center;
+  z-index: 601;
   @include min($SM) {
     bottom: 0.4rem;
   }
