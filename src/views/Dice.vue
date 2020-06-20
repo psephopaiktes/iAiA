@@ -66,7 +66,7 @@ main#l-content
           th {{ item.dice }}
           td {{ item.date }}
 
-  section#l-modal(v-if='$store.state.dice.showModal')
+  section#l-modal(:class='{show: $store.state.dice.showModal}')
     .c-scrim(@click="$store.commit('diceClose')")
     .c-modal
       h2

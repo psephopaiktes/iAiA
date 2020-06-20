@@ -12,7 +12,7 @@ main#l-content
 
   CharacterEditFooter(@updateCharacter="updateCharacter")
 
-  CharacterEditSampleModal(v-if="showSampleModal" @closeSampleModal="showSampleModal=false")
+  CharacterEditSampleModal(:showSampleModal="showSampleModal" @closeSampleModal="showSampleModal=false")
 
 </template>
 

@@ -265,6 +265,11 @@
   background: rgba(#000,.5);
   backdrop-filter: blur(2px);
   z-index: -1;
+  transition: .2s ease;
+  opacity: 0;
+  .show & {
+    opacity: 1;
+  }
 }
 .c-modal{
   margin: 4.8rem 2.4rem;
@@ -274,7 +279,15 @@
   background: lighten($COLOR_BASE,5%);
   border-radius: .4rem;
   box-shadow: 0 .4rem 1.6rem rgba(#000,.7);
+  transition: .2s ease;
+  opacity: 0;
+  transform: translateY(2.4rem);
+  .show & {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
 .c-toast{
   background: lighten($COLOR_BASE, 30%);
   padding: 1.2rem 1.6rem;
