@@ -79,7 +79,11 @@ export default class CharacterEdit extends Vue {
     this.db
       .collection("characters")
       .add(this.$store.state.characterEdit.charData)
-      .then(res => window.console.log("successfully written, id=", res.id))
+      .then(() => {
+        this.$store.commit("characterEdit/resetCharData");
+        window.alert("created the character successfully");
+        this.$router.push("/character");
+      })
       .catch(error => window.console.error("error writing document: ", error));
   }
 
@@ -98,7 +102,14 @@ export default class CharacterEdit extends Vue {
       .collection("characters")
       .doc(charId)
       .set(this.$store.state.characterEdit.charData, { merge: true })
-      .then(() => window.console.log("successfully written"))
+      .then(() => {
+        this.$store.commit("characterEdit/resetCharData");
+        window.alert("updated the character successfully");
+        this.$router.push({
+          path: "/character/detail",
+          query: { charId: charId }
+        });
+      })
       .catch(error => window.console.error("error writing document: ", error));
   }
 

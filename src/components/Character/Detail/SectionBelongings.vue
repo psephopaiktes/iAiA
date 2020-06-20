@@ -1,5 +1,5 @@
 <template lang="pug">
-section#belongings(v-if="CharData.profile.belongings.length > 0")
+section#belongings(v-if="CharData.profile.belongings != undefined && CharData.profile.belongings != null && CharData.profile.belongings.length > 0")
 
   h2 アイテム
 
@@ -16,8 +16,6 @@ section#belongings(v-if="CharData.profile.belongings.length > 0")
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import firebase from "firebase";
-import { storage, User } from "firebase";
 
 import CharData from "@/types/CharData";
 
