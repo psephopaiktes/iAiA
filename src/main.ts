@@ -19,16 +19,6 @@ new Vue({
 
 Vue.use(firestorePlugin);
 
-Vue.config.errorHandler = (err, vm, info) => {
-  window.console.log(`Captured in Vue.config.errorHandler: ${info}`, err);
-};
-window.addEventListener("error", event => {
-  window.console.log("Captured in error EventListener", event.error);
-});
-window.addEventListener("unhandledrejection", event => {
-  window.console.log("Captured in unhandledrejection EventListener", event.reason);
-});
-
 window.console.log(
   "%c iAiA 🐙 %c\nhttps://github.com/psephopaiktes/iAiA",
   `

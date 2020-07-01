@@ -37,7 +37,7 @@ main#l-content
           h3 {{ item.profile.name }}
           p {{ item.profile.occupation }}
           time {{ item.modifiedDate.toDate().toLocaleDateString() }}
-    router-link.c-btn#l-floatButton(to='/character/edit')
+    button.c-btn#l-floatButton(@click="transitToNewCharacterEdit")
       | 新規作成
       <img svg-inline src="@/assets/icon/add.svg" />
 
@@ -48,6 +48,7 @@ import { Component, Vue } from "vue-property-decorator";
 
 import CharData from "@/types/CharData";
 import firebase from "@/firebase";
+import router from "../../router";
 
 @Component
 export default class Character extends Vue {
@@ -99,6 +100,12 @@ export default class Character extends Vue {
           }
         })
     );
+  }
+
+  // methods
+  public transitToNewCharacterEdit() {
+    this.$store.commit("characterEdit/resetCharData");
+    this.$router.push("/character/edit");
   }
 
   // lifecycle hook

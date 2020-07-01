@@ -7,7 +7,20 @@ import { RootState } from "@/types/RootState";
 
 const state: CharacterEditState = {
   charData: {
-    profile: { weapons: [{}], belongings: [{}] }
+    ability: {
+      STR: 0,
+      CON: 0,
+      POW: 0,
+      DEX: 0,
+      APP: 0,
+      SIZ: 0,
+      INT: 0,
+      EDU: 0
+    },
+    profile: {
+      weapons: [{}],
+      belongings: [{}]
+    }
   }
 };
 

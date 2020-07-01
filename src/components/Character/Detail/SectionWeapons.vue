@@ -1,5 +1,5 @@
 <template lang="pug">
-section#weapons(v-if="CharData.profile.weapons.length > 0")
+section#weapons(v-if="CharData.profile.weapons != undefined && CharData.profile.weapons.length > 0")
 
   h2 武器・防具
 
