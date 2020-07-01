@@ -289,12 +289,9 @@
 }
 
 .c-toast{
-  background: lighten($COLOR_BASE, 30%);
+  background: rgba($COLOR_ACCE, .5);
+  backdrop-filter: blur(16px);
   padding: 1.2rem 1.6rem;
   border-radius: .4rem;
-  animation: fadeOut .4s 3s ease-out forwards;
-}
-@keyframes fadeOut {
-  from{ opacity: 1; }
-  to{ opacity: 0; pointer-events: none; }
+  text-align: center;
 }
