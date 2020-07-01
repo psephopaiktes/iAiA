@@ -27,11 +27,11 @@ section#profile
 
   label
     input(type='number' v-model='profileHeightCentiMeter' placeholder='170')
-    span 身長
+    span 身長（cm）
 
   label
     input(type='number' v-model='profileWeightKilogram' placeholder='65')
-    span 体重
+    span 体重（kg）
 
   label
     textarea(v-model='profileBackstory' placeholder='昼行灯だがいざというときには抜群の洞察力を魅せる探偵。\n元警察官。独身。')
