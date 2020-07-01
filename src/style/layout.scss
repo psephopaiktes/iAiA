@@ -88,10 +88,24 @@
   left: 1.6rem;
   bottom: $L-NAV_SM_H + 1.6rem;
   z-index: 800;
+  transform: translateY(calc(100% + #{$L-NAV_SM_H} + 1.6rem));
+  animation: toast 3s ease-in-out;
   @include min($SM){
     bottom: 1.6rem;
+    transform: translateY(calc(100% + 1.6rem));
   }
-  @include min($MD){
+}
+@keyframes toast {
+  0%{
+    transform: translateY(calc(100% + #{$L-NAV_SM_H} + 1.6rem));
+    opacity: 0;
   }
-  @include min($LG){}
+  20%,80%{
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100%{
+    transform: translateY(calc(100% + #{$L-NAV_SM_H} + 1.6rem));
+    opacity: 0;
+  }
 }
