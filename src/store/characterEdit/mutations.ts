@@ -78,6 +78,12 @@ const mutations: MutationTree<CharacterEditState> = {
     }
   },
 
+  setCharacterProfileBackstory: function(state, s: string) {
+    if (state.charData != null && state.charData.profile != null) {
+      state.charData.profile.backstory = s;
+    }
+  },
+
   setCharacterUserId: function(state, s: string) {
     if (state.charData != null) {
       state.charData.userId = s;

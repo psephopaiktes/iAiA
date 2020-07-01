@@ -33,13 +33,8 @@ section#profile
     input(type='number' v-model='profileWeightKilogram' placeholder='65')
     span 体重
 
-  label(:style="`height:${getTextareaHeight}px`")
-    textarea(
-      :style="`height:${getTextareaHeight}px`"
-      @input="updateTextareaHeight($event)"
-      @click="updateTextareaHeight($event)"
-      placeholder='昼行灯だがいざというときには抜群の洞察力を魅せる探偵。\n元警察官。独身。'
-    )
+  label
+    textarea(v-model='profileBackstory' placeholder='昼行灯だがいざというときには抜群の洞察力を魅せる探偵。\n元警察官。独身。')
     span 紹介・メモ
 
 </template>
@@ -56,16 +51,19 @@ export default class CharacterEditSectionProfile extends Vue {
   avatarLoading: boolean = false;
 
   // computed
-  get getTextareaHeight(): number {
-    return this.textareaHeight;
-  }
+
+  // get getTextareaHeight(): number {
+  //   return this.textareaHeight;
+  // }
 
   // method
-  async updateTextareaHeight(event: any) {
-    this.textareaHeight = 0;
-    await this.$nextTick();
-    this.textareaHeight = event.target.scrollHeight;
-  }
+
+  // async updateTextareaHeight(event: any) {
+  //   this.textareaHeight = 0;
+  //   await this.$nextTick();
+  //   this.textareaHeight = event.target.scrollHeight;
+  // }
+
   public async updateImage(element: HTMLInputElement, user: User) {
     if (element.files == null || element.files.length == 0) {
       return;
@@ -150,6 +148,13 @@ export default class CharacterEditSectionProfile extends Vue {
   }
   set profileWeightKilogram(num: number) {
     this.$store.commit("characterEdit/setCharacterProfileWeightKilogram", num);
+  }
+
+  get profileBackstory(): string {
+    return this.$store.state.characterEdit.charData.profile.backstory || "";
+  }
+  set profileBackstory(s: string) {
+    this.$store.commit("characterEdit/setCharacterProfileBackstory", s);
   }
 
   storageReference(uid: string, filename: string): string {
