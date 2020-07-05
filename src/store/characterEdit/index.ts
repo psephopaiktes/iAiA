@@ -18,6 +18,18 @@ const state: CharacterEditState = {
       EDU: 0
     },
     profile: {
+      name: "",
+      isDead: false,
+      avatarUrl: "",
+      occupation: "",
+      backstory: "",
+      heightCentimeter: null,
+      age: null,
+      weightKilogram: null,
+      sex: "",
+      nationality: "",
+      money: null,
+      moneyUnit: "",
       weapons: [{}],
       belongings: [{}]
     }
