@@ -12,30 +12,43 @@ section#profile
   label
     input(type='text' v-model='profileName' placeholder='探索 好太郎' autofocus='')
     span キャラクター名
+    ErrorText( v-if="errorTexts.name" :description="errorTexts.name" )
 
   label
     input(type='text' v-model='profileOccupation' placeholder='探偵')
     span 職業
+    ErrorText( v-if="errorTexts.occupation" :description="errorTexts.occupation" )
 
   label
     input(type='number' v-model='profileAge' placeholder='20')
     span 年齢
+    ErrorText( v-if="errorTexts.age" :description="errorTexts.age" )
 
   label
     input(type='text' v-model='profileSex' placeholder='男')
     span 性別
+    ErrorText( v-if="errorTexts.sex" :description="errorTexts.sex" )
 
   label
     input(type='number' v-model='profileHeightCentiMeter' placeholder='170')
     span 身長（cm）
+    ErrorText( v-if="errorTexts.heightCentimeter" :description="errorTexts.heightCentimeter" )
 
   label
     input(type='number' v-model='profileWeightKilogram' placeholder='65')
     span 体重（kg）
+    ErrorText( v-if="errorTexts.weightKilogram" :description="errorTexts.weightKilogram" )
 
   label
-    textarea(v-model='profileBackstory' placeholder='昼行灯だがいざというときには抜群の洞察力を魅せる探偵。\n元警察官。独身。')
+    textarea(
+      v-model='profileBackstory'
+      :style="`height:${getTextareaHeight}px`"
+      @input="updateTextareaHeight($event)"
+      @click="updateTextareaHeight($event)"
+      placeholder='昼行灯だがいざというときには抜群の洞察力を魅せる探偵。\n元警察官。独身。'
+    )
     span 紹介・メモ
+    ErrorText( v-if="errorTexts.backstory" :description="errorTexts.backstory" )
 
 </template>
 
@@ -43,26 +56,38 @@ section#profile
 import { Component, Vue } from "vue-property-decorator";
 import firebase from "firebase";
 import { User } from "firebase";
+import ErrorText from "@/components/Character/Edit/ErrorText.vue";
 
-@Component
+@Component({
+  components: {
+    ErrorText
+  }
+})
 export default class CharacterEditSectionProfile extends Vue {
   // data
-  textareaHeight: number = 80;
   avatarLoading: boolean = false;
+  textareaHeight: number = 80;
+  errorTexts: any = {
+    name: "",
+    occupation: "",
+    backstory: "",
+    heightCentimeter: "",
+    age: "",
+    weightKilogram: "",
+    sex: ""
+  };
 
   // computed
-
-  // get getTextareaHeight(): number {
-  //   return this.textareaHeight;
-  // }
+  get getTextareaHeight(): number {
+    return this.textareaHeight;
+  }
 
   // method
-
-  // async updateTextareaHeight(event: any) {
-  //   this.textareaHeight = 0;
-  //   await this.$nextTick();
-  //   this.textareaHeight = event.target.scrollHeight;
-  // }
+  async updateTextareaHeight(event: any) {
+    this.textareaHeight = 0;
+    await this.$nextTick();
+    this.textareaHeight = event.target.scrollHeight;
+  }
 
   public async updateImage(element: HTMLInputElement, user: User) {
     if (element.files == null || element.files.length == 0) {
@@ -105,6 +130,12 @@ export default class CharacterEditSectionProfile extends Vue {
     return this.$store.state.characterEdit.charData.profile.name || "";
   }
   set profileName(name: string) {
+    if (name.length > 50) {
+      this.errorTexts.name = "名前の長さは50文字以内にしてください。";
+      return;
+    } else {
+      this.errorTexts.name = "";
+    }
     this.$store.commit("characterEdit/setCharacterProfileName", name);
   }
 
@@ -208,14 +239,12 @@ label {
   position: relative;
   display: block;
   width: 100%;
-  height: 4rem;
   margin-top: 3.2rem;
   transition: 0.2s ease;
   input,
   textarea {
-    position: absolute;
     width: 100%;
-    height: 4rem;
+    min-height: 4rem;
     top: 0;
     left: 0;
     padding: 0.8rem 0.5rem 0;
@@ -235,6 +264,7 @@ label {
   textarea {
     padding-top: 1.2rem;
     overflow: hidden;
+    min-height: 80px;
   }
   input:focus,
   textarea:focus {
