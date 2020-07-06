@@ -132,6 +132,7 @@ export default class CharacterEditSectionProfile extends Vue {
   set profileName(name: string) {
     if (name.length > 50) {
       this.errorTexts.name = "名前の長さは50文字以内にしてください。";
+      return;
     } else {
       this.errorTexts.name = "";
     }
