@@ -16,80 +16,80 @@ section#ability
     tr
       th STR
       td
-        input(type='number' v-model='abilityStrength')
+        input(type='number' v-model.number='abilityStrength')
         button.c-subBtn.--noText(@click="diceStrength")
           <img svg-inline src="@/assets/icon/loop.svg" />
       td
-        input(type='number' value='0')
-      td
+        input(type='number' v-model.number='abilityDeltaStrength')
+      td {{ parseInt(abilityStrength) + parseInt(abilityDeltaStrength) }}
     tr
       th CON
       td
-        input(type='number' v-model='abilityConstitution')
+        input(type='number' v-model.number='abilityConstitution')
         button.c-subBtn.--noText(@click="diceConstitution")
           <img svg-inline src="@/assets/icon/loop.svg" />
       td
-        input(type='number' value='0')
-      td
+        input(type='number' v-model.number='abilityDeltaConstitution')
+      td {{ parseInt(abilityConstitution) + parseInt(abilityDeltaConstitution) }}
     tr
       th POW
       td
-        input(type='number' v-model='abilityPower')
+        input(type='number' v-model.number='abilityPower')
         button.c-subBtn.--noText(@click="dicePower")
           <img svg-inline src="@/assets/icon/loop.svg" />
       td
-        input(type='number' value='0')
-      td
+        input(type='number' v-model.number='abilityDeltaPower')
+      td {{ parseInt(abilityPower) + parseInt(abilityDeltaPower) }}
     tr
       th DEX
       td
-        input(type='number' v-model='abilityDexterity')
+        input(type='number' v-model.number='abilityDexterity')
         button.c-subBtn.--noText(@click="diceDexterity")
           <img svg-inline src="@/assets/icon/loop.svg" />
       td
-        input(type='number' value='0')
-      td
+        input(type='number' v-model.number='abilityDeltaDexterity')
+      td {{ parseInt(abilityDexterity) + parseInt(abilityDeltaDexterity) }}
     tr
       th APP
       td
-        input(type='number' v-model='abilityAppearance')
+        input(type='number' v-model.number='abilityAppearance')
         button.c-subBtn.--noText(@click="diceAppearance")
           <img svg-inline src="@/assets/icon/loop.svg" />
       td
-        input(type='number' value='0')
-      td
+        input(type='number' v-model.number='abilityDeltaAppearance')
+      td {{ parseInt(abilityAppearance) + parseInt(abilityDeltaAppearance) }}
     tr
       th SIZ
       td
-        input(type='number' v-model='abilitySize')
+        input(type='number' v-model.number='abilitySize')
         button.c-subBtn.--noText(@click="diceSize")
           <img svg-inline src="@/assets/icon/loop.svg" />
       td
-        input(type='number' value='0')
-      td
+        input(type='number' v-model.number='abilityDeltaSize')
+      td {{ parseInt(abilitySize) + parseInt(abilityDeltaSize) }}
     tr
       th INT
       td
-        input(type='number' v-model='abilityIntelligence')
+        input(type='number' v-model.number='abilityIntelligence')
         button.c-subBtn.--noText(@click="diceIntelligence")
           <img svg-inline src="@/assets/icon/loop.svg" />
       td
-        input(type='number' value='0')
-      td
+        input(type='number' v-model.number='abilityDeltaIntelligence')
+      td {{ parseInt(abilityIntelligence) + parseInt(abilityDeltaIntelligence) }}
     tr
       th EDU
       td
-        input(type='number' v-model='abilityEducation')
+        input(type='number' v-model.number='abilityEducation')
         button.c-subBtn.--noText(@click="diceEducation")
           <img svg-inline src="@/assets/icon/loop.svg" />
       td
-        input(type='number' value='0')
-      td
+        input(type='number' v-model.number='abilityDeltaEducation')
+      td {{ parseInt(abilityEducation) + parseInt(abilityDeltaEducation) }}
 
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import firebase from "firebase";
 import { storage, User } from "firebase";
 import { throwDice } from "@/lib/dice";
@@ -154,6 +154,77 @@ export default class CharacterEditSectionAbility extends Vue {
   }
   set abilityEducation(input: number) {
     this.$store.commit("characterEdit/setCharacterAbilityEducation", input);
+  }
+
+  get abilityDeltaStrength(): number {
+    return this.$store.state.characterEdit.charData.abilityDelta.STR || 0;
+  }
+  set abilityDeltaStrength(input: number) {
+    this.$store.commit("characterEdit/setCharacterAbilityDeltaStrength", input);
+  }
+
+  get abilityDeltaConstitution(): number {
+    return this.$store.state.characterEdit.charData.abilityDelta.CON || 0;
+  }
+  set abilityDeltaConstitution(input: number) {
+    this.$store.commit(
+      "characterEdit/setCharacterAbilityDeltaConstitution",
+      input
+    );
+  }
+
+  get abilityDeltaPower(): number {
+    return this.$store.state.characterEdit.charData.abilityDelta.POW || 0;
+  }
+  set abilityDeltaPower(input: number) {
+    this.$store.commit("characterEdit/setCharacterAbilityDeltaPower", input);
+  }
+
+  get abilityDeltaDexterity(): number {
+    return this.$store.state.characterEdit.charData.abilityDelta.DEX || 0;
+  }
+  set abilityDeltaDexterity(input: number) {
+    this.$store.commit(
+      "characterEdit/setCharacterAbilityDeltaDexterity",
+      input
+    );
+  }
+
+  get abilityDeltaAppearance(): number {
+    return this.$store.state.characterEdit.charData.abilityDelta.APP || 0;
+  }
+  set abilityDeltaAppearance(input: number) {
+    this.$store.commit(
+      "characterEdit/setCharacterAbilityDeltaAppearance",
+      input
+    );
+  }
+
+  get abilityDeltaSize(): number {
+    return this.$store.state.characterEdit.charData.abilityDelta.SIZ || 0;
+  }
+  set abilityDeltaSize(input: number) {
+    this.$store.commit("characterEdit/setCharacterAbilityDeltaSize", input);
+  }
+
+  get abilityDeltaIntelligence(): number {
+    return this.$store.state.characterEdit.charData.abilityDelta.INT || 0;
+  }
+  set abilityDeltaIntelligence(input: number) {
+    this.$store.commit(
+      "characterEdit/setCharacterAbilityDeltaIntelligence",
+      input
+    );
+  }
+
+  get abilityDeltaEducation(): number {
+    return this.$store.state.characterEdit.charData.abilityDelta.EDU || 0;
+  }
+  set abilityDeltaEducation(input: number) {
+    this.$store.commit(
+      "characterEdit/setCharacterAbilityDeltaEducation",
+      input
+    );
   }
 
   diceStrength() {
