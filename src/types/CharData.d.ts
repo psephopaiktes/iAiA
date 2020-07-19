@@ -43,6 +43,7 @@ export default interface CharData {
     ];
   };
   ability?: Ability;
+  abilityDelta?: Ability;
   status?: {
     // キャラクターの状態 stausから導き出されるもの
     HP?: number;

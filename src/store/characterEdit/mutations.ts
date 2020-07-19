@@ -1,45 +1,39 @@
 import { MutationTree } from "vuex";
 import firebase from "firebase";
 import CharacterEditState from "@/types/CharacterEditState";
+import { defaultCharData } from "@/store/characterEdit";
 import CharData from "@/types/CharData";
-import { Ability } from "@/types/CharData";
 import Timestamp = firebase.firestore.Timestamp;
+
+function fillAbilityDelta(data: CharData | null): CharData {
+  if (data == null) {
+    return defaultCharData;
+  } else if (data.abilityDelta === undefined) {
+    data.abilityDelta = {
+      STR: 0,
+      CON: 0,
+      POW: 0,
+      DEX: 0,
+      APP: 0,
+      SIZ: 0,
+      INT: 0,
+      EDU: 0
+    };
+    return data;
+  }
+  return data;
+}
 
 const mutations: MutationTree<CharacterEditState> = {
   setCharData: function(state, data: CharData) {
     if (data.ability === undefined) {
-      const ability: Ability = {
-        STR: 0,
-        CON: 0,
-        POW: 0,
-        DEX: 0,
-        APP: 0,
-        SIZ: 0,
-        INT: 0,
-        EDU: 0
-      };
-      data.ability = ability;
+      data.ability = defaultCharData.ability;
     }
-    state.charData = data;
+    state.charData = fillAbilityDelta(data);
   },
 
   resetCharData: function(state) {
-    state.charData = {
-      ability: {
-        STR: 0,
-        CON: 0,
-        POW: 0,
-        DEX: 0,
-        APP: 0,
-        SIZ: 0,
-        INT: 0,
-        EDU: 0
-      },
-      profile: {
-        weapons: [{}],
-        belongings: [{}]
-      }
-    };
+    state.charData = defaultCharData;
   },
 
   setCharacterProfileName: function(state, name: string) {
@@ -147,6 +141,55 @@ const mutations: MutationTree<CharacterEditState> = {
   setCharacterAbilityEducation: function(state, input: number) {
     if (state.charData != null && state.charData.ability != null) {
       state.charData.ability.EDU = input;
+    }
+  },
+
+  setCharacterAbilityDeltaStrength: function(state, input: number) {
+    state.charData = fillAbilityDelta(state.charData);
+    if (state.charData != null && state.charData.abilityDelta != null) {
+      state.charData.abilityDelta.STR = input;
+    }
+  },
+  setCharacterAbilityDeltaConstitution: function(state, input: number) {
+    state.charData = fillAbilityDelta(state.charData);
+    if (state.charData != null && state.charData.abilityDelta != null) {
+      state.charData.abilityDelta.CON = input;
+    }
+  },
+  setCharacterAbilityDeltaPower: function(state, input: number) {
+    state.charData = fillAbilityDelta(state.charData);
+    if (state.charData != null && state.charData.abilityDelta != null) {
+      state.charData.abilityDelta.POW = input;
+    }
+  },
+  setCharacterAbilityDeltaDexterity: function(state, input: number) {
+    state.charData = fillAbilityDelta(state.charData);
+    if (state.charData != null && state.charData.abilityDelta != null) {
+      state.charData.abilityDelta.DEX = input;
+    }
+  },
+  setCharacterAbilityDeltaAppearance: function(state, input: number) {
+    state.charData = fillAbilityDelta(state.charData);
+    if (state.charData != null && state.charData.abilityDelta != null) {
+      state.charData.abilityDelta.APP = input;
+    }
+  },
+  setCharacterAbilityDeltaSize: function(state, input: number) {
+    state.charData = fillAbilityDelta(state.charData);
+    if (state.charData != null && state.charData.abilityDelta != null) {
+      state.charData.abilityDelta.SIZ = input;
+    }
+  },
+  setCharacterAbilityDeltaIntelligence: function(state, input: number) {
+    state.charData = fillAbilityDelta(state.charData);
+    if (state.charData != null && state.charData.abilityDelta != null) {
+      state.charData.abilityDelta.INT = input;
+    }
+  },
+  setCharacterAbilityDeltaEducation: function(state, input: number) {
+    state.charData = fillAbilityDelta(state.charData);
+    if (state.charData != null && state.charData.abilityDelta != null) {
+      state.charData.abilityDelta.EDU = input;
     }
   }
 };

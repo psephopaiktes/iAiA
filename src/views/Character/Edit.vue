@@ -49,28 +49,6 @@ export default class CharacterEdit extends Vue {
   // data
   showSampleModal: boolean = false;
   db = firebase.firestore();
-  public CharData: CharData = {
-    userId: localStorage.uid,
-    profile: {
-      name: "",
-      isDead: false,
-      avatarUrl: "",
-      occupation: "",
-      backstory: "",
-      heightCentimeter: null,
-      age: null,
-      weightKilogram: null,
-      sex: "",
-      nationality: "",
-      money: null,
-      moneyUnit: ""
-    }
-  };
-
-  setCharData(cd: CharData) {
-    this.CharData = cd;
-    this.CharData.userId = localStorage.uid;
-  }
 
   createCharacter() {
     const now = Timestamp.now();
@@ -124,6 +102,7 @@ export default class CharacterEdit extends Vue {
   public beforeMount() {
     const charId = this.$route.query.charId as string;
     if (charId == undefined) {
+      this.$store.commit("characterEdit/resetCharData");
       return;
     }
     this.db
@@ -135,7 +114,6 @@ export default class CharacterEdit extends Vue {
         if (data == undefined) {
           throw Error("undefined data. charId=" + charId);
         }
-        this.setCharData(data as CharData);
         this.$store.commit("characterEdit/setCharData", data as CharData);
       })
       .catch(err => {
