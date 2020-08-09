@@ -13,15 +13,17 @@ section#weapons.rightGradationCover
       th 装弾数
       th 耐久力
       th 備考
-    tr
-      td: input(type='text' placeholder='ナイフ')
-      td: input(type='number' placeholder='50')
-      td: input(type='text' placeholder='1D4')
-      td: input(type='text' placeholder='近接')
-      td: input(type='number' placeholder='1')
-      td: input(type='number' placeholder='1')
-      td: input(type='number' placeholder='9')
-      td: input(type='text' placeholder='護身用の小型ナイフ')
+    tr(
+      v-for='(weapon, i) in getWeapons()'
+    )
+      td: input(type='text' placeholder='ナイフ' :value="weapon.name", @input="setName($event.target.value, i)")
+      td: input(type='number' placeholder='50' :value="weapon.probability", @input="setProbability($event.target.value, i)")
+      td: input(type='text' placeholder='1D4' :value="weapon.damage", @input="setDamage($event.target.value, i)")
+      td: input(type='text' placeholder='近接' :value="weapon.range", @input="setRange($event.target.value, i)")
+      td: input(type='number' placeholder='1' :value="weapon.numberOfAttack", @input="setNumberOfAttack($event.target.value, i)")
+      td: input(type='number' placeholder='1' :value="weapon.numberOfBullets", @input="setNumberOfBullets($event.target.value, i)")
+      td: input(type='number' placeholder='9' :value="weapon.durability", @input="setDurability($event.target.value, i)")
+      td: input(type='text' placeholder='護身用の小型ナイフ' :value="weapon.note", @input="setNote($event.target.value, i)")
 
 
   ul.rowBtns
@@ -38,9 +40,55 @@ section#weapons.rightGradationCover
 import { Component, Prop, Vue } from "vue-property-decorator";
 import firebase from "firebase";
 import { storage, User } from "firebase";
+import { Weapon } from "@/types/CharData";
 
 @Component
-export default class CharacterEditSectionWeapons extends Vue {}
+export default class CharacterEditSectionWeapons extends Vue {
+  getWeapons(): Array<Weapon> {
+    return this.$store.state.characterEdit.charData.profile?.weapons;
+  }
+
+  setName(input: string, i: number) {
+    let weapons = this.getWeapons();
+    weapons[i].name = input;
+    this.$store.commit("characterEdit/setCharacterProfileWeapons", weapons);
+  }
+  setProbability(input: number, i: number) {
+    let weapons = this.getWeapons();
+    weapons[i].probability = input;
+    this.$store.commit("characterEdit/setCharacterProfileWeapons", weapons);
+  }
+  setDamage(input: string, i: number) {
+    let weapons = this.getWeapons();
+    weapons[i].damage = input;
+    this.$store.commit("characterEdit/setCharacterProfileWeapons", weapons);
+  }
+  setRange(input: string, i: number) {
+    let weapons = this.getWeapons();
+    weapons[i].range = input;
+    this.$store.commit("characterEdit/setCharacterProfileWeapons", weapons);
+  }
+  setNumberOfAttack(input: number, i: number) {
+    let weapons = this.getWeapons();
+    weapons[i].numberOfAttack = input;
+    this.$store.commit("characterEdit/setCharacterProfileWeapons", weapons);
+  }
+  setNumberOfBullets(input: number, i: number) {
+    let weapons = this.getWeapons();
+    weapons[i].numberOfBullets = input;
+    this.$store.commit("characterEdit/setCharacterProfileWeapons", weapons);
+  }
+  setDurability(input: number, i: number) {
+    let weapons = this.getWeapons();
+    weapons[i].durability = input;
+    this.$store.commit("characterEdit/setCharacterProfileWeapons", weapons);
+  }
+  setNote(input: string, i: number) {
+    let weapons = this.getWeapons();
+    weapons[i].note = input;
+    this.$store.commit("characterEdit/setCharacterProfileWeapons", weapons);
+  }
+}
 </script>
 
 <style scoped lang="scss">

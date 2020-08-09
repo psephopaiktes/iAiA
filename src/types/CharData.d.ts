@@ -21,19 +21,7 @@ export default interface CharData {
     nationality?: string; // 国籍
     money?: number | null; // 所持金
     moneyUnit?: string; // 所持金の単位
-    weapons?: [
-      // 武器
-      {
-        name?: string; // 名称
-        probability?: number; // 成功率
-        damage?: string; // ダメージ
-        range?: string; // 射程
-        numberOfAttack?: number; // 攻撃回数
-        numberOfBullets?: number; // 装弾数
-        durability?: number; // 耐久力
-        note?: string; // 備考
-      }
-    ];
+    weapons?: Array<Weapon>;
     belongings?: [
       // 所持品
       {
@@ -45,7 +33,7 @@ export default interface CharData {
   ability?: Ability;
   abilityDelta?: Ability;
   status?: {
-    // キャラクターの状態 stausから導き出されるもの
+    // キャラクターの状態statusから導き出されるもの
     HP?: number;
     MAXHP?: number;
     MP?: number;
@@ -76,4 +64,15 @@ export interface Ability {
   SIZ: number;
   INT: number;
   EDU: number;
+}
+
+export interface Weapon {
+  name?: string; // 名称
+  probability?: number; // 成功率
+  damage?: string; // ダメージ
+  range?: string; // 射程
+  numberOfAttack?: number; // 攻撃回数
+  numberOfBullets?: number; // 装弾数
+  durability?: number; // 耐久力
+  note?: string; // 備考
 }

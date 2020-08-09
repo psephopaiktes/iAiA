@@ -2,7 +2,7 @@ import { MutationTree } from "vuex";
 import firebase from "firebase";
 import CharacterEditState from "@/types/CharacterEditState";
 import { defaultCharData } from "@/store/characterEdit";
-import CharData from "@/types/CharData";
+import CharData, { Weapon } from "@/types/CharData";
 import Timestamp = firebase.firestore.Timestamp;
 
 function fillAbilityDelta(data: CharData | null): CharData {
@@ -190,6 +190,11 @@ const mutations: MutationTree<CharacterEditState> = {
     state.charData = fillAbilityDelta(state.charData);
     if (state.charData != null && state.charData.abilityDelta != null) {
       state.charData.abilityDelta.EDU = input;
+    }
+  },
+  setCharacterProfileWeapons: function(state, input: Array<Weapon>) {
+    if (state.charData != null && state.charData.profile != null) {
+      state.charData.profile.weapons = input;
     }
   }
 };
